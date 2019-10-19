@@ -13,7 +13,10 @@ def initialise_application(configuration):
     app = Flask(__name__)
     toolbar.init_app(app)
 
-    from .nav import admin_blueprint, auth_blueprint, nuser_blueprint
+    from .admin import admin as admin_blueprint
+    from .auth import auth as auth_blueprint
+    from .nuser import nuser as nuser_blueprint
+
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     app.register_blueprint(nuser_blueprint, url_prefix='/user')
