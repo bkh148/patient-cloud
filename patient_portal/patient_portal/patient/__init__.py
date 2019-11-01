@@ -2,6 +2,6 @@
 
 from flask import Blueprint
 
-patient = Blueprint('nuser', __name__)
+patient = Blueprint('patient', __name__, template_folder='templates')
 
 from . import routes
