@@ -8,5 +8,6 @@ from flask import render_template
 @admin.route('/dashboard', methods=['GET'])
 def dashboard():
     """Handle the admin dashboard"""
-    return render_template('admin/index.html')
+    return render_template('admin/index.html', title='Dashboard - Admin', static_folder='admin.static', style_paths=
+                           ['css/main.css'])
 
