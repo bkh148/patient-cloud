@@ -6,5 +6,6 @@ from flask import render_template
 @local_admin.route('/', methods=['GET'])
 @local_admin.route('/dashboard', methods=['GET'])
 def dashboard():
-    """Handling the local admin's dashboard"""
-    return render_template('local_admin/index.html')
+    """Handle the local admin dashboard"""
+    return render_template('local_admin/index.html', title='Dashboard - Local Admin', static_folder='local_admin.static', style_paths=
+                           ['css/main.css'])
