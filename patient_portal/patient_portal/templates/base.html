@@ -3,14 +3,35 @@
 	<head>
 		<title>{{title}}</title>
 		{% block style_paths %}
+			<link rel="stylesheet" type=text/css href="/static/css/base.css">
 			{% for style_name in style_paths %}
 			<link rel="stylesheet" type=text/css href="{{ url_for(static_folder, filename=style_name) }}">
 			{% endfor %}
 		{% endblock %}
 	</head>
 	<body>
-		{% block body %}
-		{% endblock %}
+		<div id="dashboard-sidebar" class="dashboard-sidebar">
+			<div class="dashboard-sidebar-body">
+
+			</div>
+			<div class="dashboard-sidebar-footer">
+
+			</div>
+		</div>
+		<nav id="navbar" class="dashboard-nav">
+			<div class="dashboard-nav-links-container">
+				<ul id="dashboad-nav-links">
+					<li><a>Dashboard</a></li>
+					<div id="dashboard-nav-links-right">
+						<li>
+							<form method="GET" action="/">
+								<button class="button dashboard-btn" type="submit">Logout</button>
+							</form>
+						</li>
+					</div>
+				</ul>
+			</div>
+		</nav>
 	</body>
 
 	{% block script_paths %}
