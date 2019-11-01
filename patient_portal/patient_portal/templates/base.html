@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{{Title}}</title>
+		{% block style_paths %}
+			{% for style_path in style_paths %}
+				<link rel="stylesheet" href="{{ style_path }}">
+			{% endfor %}
+		{% endblock %}
+	</head>
+	<body>
+		{% block body %}
+		{% endblock %}
+	</body>
+
+	{% block script_paths %}
+		{% for script_path in script_paths %}
+			<script src="{{ script_path }}"></script>
+		{% endfor %}
+	{% endblock %}
+</html>
