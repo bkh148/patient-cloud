@@ -6,5 +6,6 @@ from flask import render_template
 @patient.route('/', methods=['GET'])
 @patient.route('/dashboard', methods=['GET'])
 def dashboard():
-    """Handling the normal patient dashboard"""
-    return render_template('patient/index.html')
+    """Handle the patient dashboard"""
+    return render_template('patient/index.html', title='Dashboard - Patient', static_folder='patient.static', style_paths=
+                           ['css/main.css'])
