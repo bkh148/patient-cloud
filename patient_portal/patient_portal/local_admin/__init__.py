@@ -2,6 +2,6 @@
 
 from flask import Blueprint
 
-local_admin = Blueprint('local_admin', __name__)
+local_admin = Blueprint('local_admin', __name__, template_folder='templates')
 
 from . import routes
