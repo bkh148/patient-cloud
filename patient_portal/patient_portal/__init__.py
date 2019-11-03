@@ -11,13 +11,17 @@ def initialise_application(configuration):
         configuration: A configuration object for settings various server settings.
     """
     app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'secret!'
+
     toolbar.init_app(app)
 
+    from .auth import auth as auth_blueprint
     from .admin import admin as admin_blueprint
     from .local_admin import local_admin as local_admin_blueprint
     from .clinician import clinician as clinician_blueprint
     from .patient import patient as patient_blueprint
 
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
     app.register_blueprint(local_admin_blueprint, url_prefix="/local_admin")
     app.register_blueprint(clinician_blueprint, url_prefix='/clinician')
