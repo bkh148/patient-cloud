@@ -11,9 +11,9 @@ def login():
     """Endpoint for handling user login."""
     return "Hello, login!"
 
-@auth.route('/signup', methods=['GET', 'POST'])
-def signup():
-    """Endpoint for handling user sign up."""
+@auth.route('/register', methods=['GET', 'POST'])
+def register():
+    """Endpoint for handling user registration."""
     return "Hello, sign up!"
 
 @auth.route('/logout', methods=['GET', 'POST'])
