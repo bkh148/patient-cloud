@@ -1,0 +1,11 @@
+{% extends "base_secondary.html" %}
+
+{% block body %}
+ <div class="container">
+  <div id="centered-container-wrapper" class="row">
+		<img id="centered-container-logo" src="/static/images/patient_portal_secondary_icon.svg" width="600" height="600" class="d-inline-block align-center" alt="">
+		<img id="centered-container-doctor" src="{{ payload.logo_doctor }}" width="300" height="300" class="d-inline-block align-left" alt="">
+		{% block centered_container_content %}
+		{% endblock %}
+ </div>
+ {% endblock %}
