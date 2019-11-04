@@ -1,0 +1,30 @@
+<!-- Sidebar  -->
+<nav id="sidebar">
+	<div class="sidebar-header">
+		<a href="/">
+			<img src="/static/images/patient_portal_icon.svg" width="50" height="50" class="d-inline-block align-center" alt="">
+			<span class="ml-2">Patient Portal</span>
+		</a>
+	</div>
+	<div class="sidebar-body">
+		<ul class="list-unstyled components">
+			{% for link in nav_links %}
+  			{% include "side_bar_link.html" %}
+			{% endfor %}
+		</ul>
+	  <ul class="list-unstyled components">
+	  	<li>
+		  	<a href="#Settings">
+			  	<i class="fas fa-cog"></i>
+					<span>Settings</span>
+				</a>
+	  	</li>
+			<li id="sidebarCollapse">
+				<a href="#">
+				 <i id="sidebar-collapse-icon" class="fas fa-angle-double-left"></i>
+				 <span>Collapse</span>
+				</a>
+			</li>
+	  </ul>
+	</div>
+</nav>
