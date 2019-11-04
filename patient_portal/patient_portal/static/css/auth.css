@@ -13,45 +13,6 @@ html, body {
     max-width: 800px;
 }
 
-#welcome-logo {
-    left: -100px;
-    top: -200px;
-}
-
-#welcome-doctor {
-    top: 45px;
-}
-
-#welcome-wrapper {
-    position: relative;
-    overflow: hidden;
-}
-
-#welcome-wrapper img {
-    position: absolute;
-}
-
-#welcome-wrapper h1 {
-    font-weight: bold;
-}
-
-#welcome-wrapper p {
-    text-align: justify;
-    max-width: 300px;
-}
-
-#welcome-wrapper h1, p {
-    color: #323445;
-}
-
-#welcome-wrapper.row {
-    flex-direction: column;
-    background: white;
-    min-height: 400px;
-    padding: 20px;
-    border-radius: 5px;
-}
-
 #welcome-panel.row {
     justify-content: flex-end;
     margin-right: 0px;
@@ -115,44 +76,15 @@ html, body {
 }
 
 
-@media only screen and (min-width: 400px) {
-
-
-  #welcome-logo {
-      left: -250px;
-  }
-
-  #welcome-doctor {
-      left: -65px;
-  }
-
-}
-
 /* Media queries */
 @media only screen and (max-width: 400px) {
  #welcome-panel button {
       max-width: 200px;
       min-width: 200px;
   }
-
-  #welcome-logo {
-      left: -250px;
-  }
-
-  #welcome-doctor {
-      left: -65px;
-  }
 }
 
 @media only screen and (min-width: 600px) {
-   #welcome-logo {
-       left: -200px;
-   }
-
-   #welcome-doctor {
-       left: -40px;
-   }
-
    #welcome-panel button {
       max-width: 300px;
       min-width: 300px;
