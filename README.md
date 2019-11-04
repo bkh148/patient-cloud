@@ -1,4 +1,8 @@
 ## Coursework Part 2
 ---
 
-Initial Heartbeat : Arch ❤
+
+**Screen Shots :** <br />
+
+Welcome Page: <br />
+![alt text](./public/welcome_page.png "Welcome Page") <br />
