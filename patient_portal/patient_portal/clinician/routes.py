@@ -7,5 +7,18 @@ from flask import render_template
 @clinician.route('/dashboard', methods=['GET'])
 def dashboard():
     """Handle the clincian dashboard"""
+
+    patients = {
+        "text": "Patients",
+        "style": "active",
+        "url": "",
+        "icon": "fas fa-procedures"}
+
+    appointments = {
+        "text": "Appointments",
+        "style": "",
+        "url": "",
+        "icon": "fas fa-calendar-check"}
+
     return render_template('clinician/index.html', title='Dashboard - Clinician', static_folder='clinician.static', style_paths=
-                           ['css/main.css'])
+                           ['css/main.css'], nav_links=[patients, appointments])
