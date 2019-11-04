@@ -1,9 +1,24 @@
 {% extends "base_secondary.html" %}
 
-{% include "navigation_bar.html" %}
 {% block body %}
-<div class="container-fluid bg-danger">
-	<!-- <h1>Hello, world!</h1> -->
-</div>
+ <div class="container">
+  <div id="welcome-wrapper" class="row">
+    <img id="welcome-logo" src="/static/images/patient_portal_secondary_icon.svg" width="600" height="600" class="d-inline-block align-center" alt="">
+    <img id="welcome-doctor" src="/static/images/doctor_lady_single.svg" width="300" height="300" class="d-inline-block align-left" alt="">
+   <div id="welcome-panel" class="row col-6 align-self-end flex-fill">
+    <div id="welcome-panel-header" class="row align-items-start justify-content-start">
+     <h1>Patient Portal</h1>
+     <p>{{ welcome_message }}</p>
+    </div>
+    <div id="welcome-panel-footer" class="row flex-fill justify-content-end">
+     <button class="btn btn-custom">Login</button>
+     <p>{{ version_number }}</p>
+    </div>
+   </div>
+  </div>
+   <div id="welcome-panel-help" class="row">
+    <p class="flex-fill">Looking to register ? See here for help.</p>
+   </div>
+ </div>
 {% endblock %}
 

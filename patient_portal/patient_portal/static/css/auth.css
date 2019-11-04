@@ -1,6 +1,93 @@
 html, body {
-	margin: 0px;
-	height: 100%;
-	font-weight: normal;
+   background: #323545;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin: 0px;
+   height: 100%;
+   font-weight: normal;
+   font-family: Comfortaa;
 }
 
+#welcome-logo {
+    left: -100px;
+    top: -200px;
+}
+
+#welcome-doctor {
+    top: 45px;
+}
+
+#welcome-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+#welcome-wrapper img {
+    position: absolute;
+}
+
+#welcome-wrapper h1 {
+    font-weight: bold;
+}
+
+#welcome-wrapper h1 p {
+    color: #323445;
+}
+
+#welcome-wrapper.row {
+    flex-direction: column;
+    background: white;
+    min-height: 400px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#welcome-panel.row {
+    justify-content: flex-end;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#welcome-panel-header.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#welcome-panel-header h1 {
+    color: #323545;
+}
+
+#welcome-panel-footer.row {
+    flex-direction: column;
+}
+
+#welcome-panel-footer p {
+    display: flex;
+    align-self: flex-end;
+    margin-top: 10px;
+    font-size: 0.6em;
+    color: #FE4284;
+}
+
+#welcome-panel-help p {
+    padding: 10px;
+    margin: 0px;
+    text-align: end;
+    color: whitesmoke;
+}
+
+.btn-custom {
+    color: #fff;
+    background-color: #FE4284;
+    border-color: #FE4284;
+    -webkit-box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
+    -moz-box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
+    box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
+}
+
+.btn-custom:hover {
+    color: #fff;
+    background-color: #ea3f7b;
+    border-color: #ea3f7b;
+}

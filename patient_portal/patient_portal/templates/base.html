@@ -18,8 +18,13 @@
 
 	</head>
   <body>
-		{% block body %}
-	  {% endblock body %}
+		<div class="wrapper">
+       {% include "dashboard_sidebar.html" %}
+       <div id="content">
+				{% block body %}
+				{% endblock %}
+       </div>
+     </div>
   </body>
     {% block script_paths %}
       {% for script_path in script_paths %}

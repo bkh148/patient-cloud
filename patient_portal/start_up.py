@@ -22,7 +22,13 @@ def home_page():
         'url': 'auth.register',
         'style': 'nav-link btn btn-danger text-white text-center rounded m-2'}
 
-    return render_template('welcome.html', title='Welcome to Patient Portal', static_folder='static', style_paths=['css/auth.css'], nav_links=[login, register])
+    return render_template('welcome.html',
+            title='Welcome to Patient Portal',
+            welcome_message="Wether you’re a local admin, clininian, or a patient - patient portal allows you to manage all of your medical data in one simple, intuitive and real-time application.",
+            version_number="v. 1.0.0",
+            static_folder='static',
+            style_paths=['css/auth.css'],
+            nav_links=[login, register])
 
 @app.errorhandler(404)
 def not_found_error(error):
