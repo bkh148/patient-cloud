@@ -8,10 +8,16 @@ from flask import render_template
 def dashboard():
     """Handle the local admin dashboard"""
 
+    dashboard = {
+        "text": "Dashboard",
+        "style": "active",
+        "url": "",
+        "icon": "fas fa-home"}
+
     clinicians = {
         "text": "Clinicians",
         "url": "",
-        "style": "active",
+        "style": "",
         "icon": "fas fa-user-md"}
 
     appointments = {
@@ -21,4 +27,4 @@ def dashboard():
         "icon": "fas fa-calendar-check"}
 
     return render_template('local_admin/index.html', title='Dashboard - Local Admin', static_folder='local_admin.static', style_paths=
-                           ['css/main.css'], nav_links=[clinicians, appointments])
+                           ['css/main.css'], nav_links=[dashboard, clinicians, appointments])

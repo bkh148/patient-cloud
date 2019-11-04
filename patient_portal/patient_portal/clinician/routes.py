@@ -8,9 +8,15 @@ from flask import render_template
 def dashboard():
     """Handle the clincian dashboard"""
 
+    dashboard = {
+        "text": "Dashboard",
+        "style": "active",
+        "url": "",
+        "icon": "fas fa-home"}
+
     patients = {
         "text": "Patients",
-        "style": "active",
+        "style": "",
         "url": "",
         "icon": "fas fa-procedures"}
 
@@ -21,4 +27,4 @@ def dashboard():
         "icon": "fas fa-calendar-check"}
 
     return render_template('clinician/index.html', title='Dashboard - Clinician', static_folder='clinician.static', style_paths=
-                           ['css/main.css'], nav_links=[patients, appointments])
+                           ['css/main.css'], nav_links=[dashboard, patients, appointments])
