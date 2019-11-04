@@ -9,6 +9,10 @@ html, body {
    font-family: Comfortaa;
 }
 
+.container {
+    max-width: 800px;
+}
+
 #welcome-logo {
     left: -100px;
     top: -200px;
@@ -31,7 +35,12 @@ html, body {
     font-weight: bold;
 }
 
-#welcome-wrapper h1 p {
+#welcome-wrapper p {
+    text-align: justify;
+    max-width: 300px;
+}
+
+#welcome-wrapper h1, p {
     color: #323445;
 }
 
@@ -47,6 +56,7 @@ html, body {
     justify-content: flex-end;
     margin-right: 0px;
     margin-left: 0px;
+    padding-left: 40px;
 }
 
 #welcome-panel-header.row {
@@ -54,12 +64,19 @@ html, body {
     margin-left: 0px;
 }
 
+#welcome-panel-footer.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
 #welcome-panel-header h1 {
     color: #323545;
+    text-align: right;
 }
 
 #welcome-panel-footer.row {
     flex-direction: column;
+    align-content: flex-end;
 }
 
 #welcome-panel-footer p {
@@ -77,6 +94,11 @@ html, body {
     color: whitesmoke;
 }
 
+#welcome-panel button {
+    min-width: 300px;
+    max-width: 300px;
+}
+
 .btn-custom {
     color: #fff;
     background-color: #FE4284;
@@ -90,4 +112,64 @@ html, body {
     color: #fff;
     background-color: #ea3f7b;
     border-color: #ea3f7b;
+}
+
+
+@media only screen and (min-width: 400px) {
+
+
+  #welcome-logo {
+      left: -250px;
+  }
+
+  #welcome-doctor {
+      left: -65px;
+  }
+
+}
+
+/* Media queries */
+@media only screen and (max-width: 400px) {
+ #welcome-panel button {
+      max-width: 200px;
+      min-width: 200px;
+  }
+
+  #welcome-logo {
+      left: -250px;
+  }
+
+  #welcome-doctor {
+      left: -65px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+   #welcome-logo {
+       left: -200px;
+   }
+
+   #welcome-doctor {
+       left: -40px;
+   }
+
+   #welcome-panel button {
+      max-width: 300px;
+      min-width: 300px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
 }
