@@ -23,17 +23,25 @@ def home_page():
         'style': 'nav-link btn btn-danger text-white text-center rounded m-2'}
 
     return render_template('welcome.html',
-            title='Welcome to Patient Portal',
-            welcome_message="Wether you’re a local admin, clininian, or a patient - patient portal allows you to manage all of your medical data in one simple, intuitive and real-time application.",
-            version_number="v. 1.0.0",
-            static_folder='static',
-            style_paths=['css/auth.css'],
-            nav_links=[login, register])
+                           title='Welcome to Patient Portal',
+                           payload={
+                "welcome_message": "Wether you’re a local admin, clininian, or a patient - patient portal allows you to manage all of your medical data in one simple, intuitive and real-time application.",
+                "logo_doctor": "/static/images/doctor_lady_single.svg",
+                "version_number": "ver. 1.3.0"},
+                           static_folder='static',
+                           style_paths=['css/auth.css'],
+                           nav_links=[login, register])
 
 @app.errorhandler(404)
 def not_found_error(error):
     """Handling 404 errors"""
-    return render_template('404.html', title="Page Not Found", static_folder='static', style_paths=
+    return render_template('404.html',
+                           title="Page Not Found",
+                           payload={
+                               "logo_doctor": "/static/images/doctor_lady_single.svg"
+                           },
+                           static_folder='static',
+                           style_paths=
                            ['css/auth.css', 'css/error_page.css']), 404
 
 @app.errorhandler(500)
