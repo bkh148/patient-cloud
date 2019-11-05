@@ -1,5 +1,6 @@
 """Module representing the authentication routes"""
 
+from flask import render_template
 from . import auth
 
 # If authenticated, navigated to appropriate view (admin / norm)
@@ -9,7 +10,7 @@ from . import auth
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     """Endpoint for handling user login."""
-    return "Hello, login!"
+    return render_template('auth/index.html', title='Login', static_folder='auth.static', style_paths=[])
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
