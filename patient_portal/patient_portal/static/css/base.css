@@ -1,3 +1,18 @@
+html, body {
+   background: #323545;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin: 0px;
+   height: 100%;
+   font-weight: normal;
+   font-family: Comfortaa;
+}
+
+.container {
+    max-width: 800px;
+}
+
 .navbar-custom {
     background: #323545;
     margin-bottom: 0px;
@@ -80,6 +95,22 @@
     border-radius: 5px;
 }
 
+.btn-custom {
+    color: #fff;
+    background-color: #FE4284;
+    border-color: #FE4284;
+    -webkit-box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
+    -moz-box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
+    box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
+}
+
+.btn-custom:hover {
+    color: #fff;
+    background-color: #ea3f7b;
+    border-color: #ea3f7b;
+}
+
+
 
 /* Media Queries */
 @media only screen and (min-width: 400px) {
@@ -94,10 +125,6 @@
 }
 
 @media only screen and (max-width: 400px) {
- #welcome-panel button {
-      max-width: 200px;
-      min-width: 200px;
-  }
 
   #centered-container-logo {
       left: -250px;
