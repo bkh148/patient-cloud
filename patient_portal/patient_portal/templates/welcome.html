@@ -7,7 +7,9 @@
      <p>{{ payload.welcome_message }}</p>
     </div>
     <div id="welcome-panel-footer" class="row flex-fill justify-content-end">
+     <form action="{{ url_for('auth.login') }}" method="GET">
       <button class="btn btn-custom">Login</button>
+     </form>
       <p>{{ payload.version_number }}</p>
     </div>
    </div>
