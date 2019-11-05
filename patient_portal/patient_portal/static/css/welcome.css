@@ -1,0 +1,76 @@
+#welcome-panel.row {
+    justify-content: flex-end;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-left: 40px;
+}
+
+#welcome-panel-header.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#welcome-panel-footer.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#welcome-panel-header h1 {
+    color: #323545;
+    text-align: right;
+}
+
+#welcome-panel-footer.row {
+    flex-direction: column;
+    align-content: flex-end;
+}
+
+#welcome-panel-footer p {
+    display: flex;
+    align-self: flex-end;
+    margin-top: 10px;
+    font-size: 0.6em;
+    color: #FE4284;
+}
+
+#welcome-panel-help p {
+    padding: 10px;
+    margin: 0px;
+    text-align: end;
+    color: whitesmoke;
+}
+
+#welcome-panel button {
+    min-width: 300px;
+    max-width: 300px;
+}
+
+/* Media queries */
+@media only screen and (max-width: 400px) {
+ #welcome-panel button {
+      max-width: 200px;
+      min-width: 200px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+   #welcome-panel button {
+      max-width: 300px;
+      min-width: 300px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
