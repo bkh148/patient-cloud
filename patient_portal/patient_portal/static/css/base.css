@@ -52,15 +52,6 @@ html, body {
     background-color: rgba(255,255,255,.5);
 }
 
-
-
-
-/*   Centered containers   */
-#centered-container-logo {
-    left: -100px;
-    top: -200px;
-}
-
 #centered-container-doctor {
     top: 45px;
 }
@@ -93,6 +84,10 @@ html, body {
     min-height: 400px;
     padding: 20px;
     border-radius: 5px;
+    background-image: url('/static/images/patient_portal_secondary_icon.svg');
+    background-repeat: no-repeat;
+    background-size: 650px;
+    background-position: -220px -180px;
 }
 
 .btn-custom {
@@ -110,14 +105,8 @@ html, body {
     border-color: #ea3f7b;
 }
 
-
-
 /* Media Queries */
 @media only screen and (min-width: 400px) {
-  #centered-container-logo {
-      left: -250px;
-  }
-
   #centered-container-doctor {
       left: -65px;
   }
@@ -125,21 +114,12 @@ html, body {
 }
 
 @media only screen and (max-width: 400px) {
-
-  #centered-container-logo {
-      left: -250px;
-  }
-
   #centered-container-doctor {
       left: -65px;
   }
 }
 
 @media only screen and (min-width: 600px) {
-   #centered-container-logo {
-       left: -200px;
-   }
-
    #centered-container-doctor {
        left: -40px;
    }
@@ -149,6 +129,3 @@ html, body {
       min-width: 300px;
   }
 }
-
-
-
