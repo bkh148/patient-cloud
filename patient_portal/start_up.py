@@ -29,7 +29,7 @@ def home_page():
                 "logo_doctor": "/static/images/doctor_lady_single.svg",
                 "version_number": "ver. 1.3.0"},
                            static_folder='static',
-                           style_paths=['css/auth.css'],
+                           style_paths=['css/welcome.css'],
                            nav_links=[login, register])
 
 @app.errorhandler(404)
@@ -37,17 +37,14 @@ def not_found_error(error):
     """Handling 404 errors"""
     return render_template('404.html',
                            title="Page Not Found",
-                           payload={
-                               "logo_doctor": "/static/images/doctor_lady_single.svg"
-                           },
                            static_folder='static',
                            style_paths=
-                           ['css/auth.css', 'css/error_page.css']), 404
+                           ['css/error_page.css']), 404
 
 @app.errorhandler(500)
 def internal_server_error(error):
     """Handling 500 errors"""
     return render_template('500.html', title="Internal Server Error", static_folder='static', style_paths=
-                           ['css/auth.css', 'css/error_page.css']), 500
+                           ['css/error_page.css']), 500
 
 
