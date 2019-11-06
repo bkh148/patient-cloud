@@ -4,4 +4,4 @@ from flask import Blueprint
 
 local_admin = Blueprint('local_admin', __name__, template_folder='templates', static_folder='static')
 
-from . import routes
+from . import routes, sockets
