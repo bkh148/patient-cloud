@@ -9,6 +9,12 @@ from flask import render_template
 def dashboard():
     """Handle the admin dashboard"""
 
+
+    socket_config = {
+        "host": "127.0.0.1",
+        "port": "5000",
+        "namespace": "admin"}
+
     dashboard = {
         "text": "Dashboard",
         "style": "active",
@@ -27,6 +33,8 @@ def dashboard():
         "url": "",
         "icon": "fas fa-chart-line"}
 
-    return render_template('admin/index.html', title='Dashboard - Admin', static_folder='admin.static', style_paths=
-                           ['css/main.css'], nav_links=[dashboard, care_locations, data_analytics])
+    return render_template('admin/index.html', title='Dashboard - Admin', static_folder='admin.static',
+                           style_paths=['css/main.css'],
+                           nav_links=[dashboard, care_locations, data_analytics],
+                           configurations=socket_config)
 
