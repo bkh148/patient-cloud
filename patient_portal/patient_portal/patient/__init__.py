@@ -4,4 +4,4 @@ from flask import Blueprint
 
 patient = Blueprint('patient', __name__, template_folder='templates', static_folder='static')
 
-from . import routes
+from . import routes, sockets
