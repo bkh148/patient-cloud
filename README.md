@@ -10,3 +10,7 @@ Welcome Page: <br />
 
 Login Page: <br />
 ![alt text](./public/login_page.png "Login Page") <br />
+
+
+Dashboard (WIP): <br />
+![alt text](./public/empty_dashboard.png "Empty Dashboard") <br />
