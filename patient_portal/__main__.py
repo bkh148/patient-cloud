@@ -3,7 +3,7 @@
 from flask import render_template
 from patient_portal import initialise_application
 
-from start_up import app
+from start_up import app, socket_io
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port='5000')
+    socket_io.run(app, log_output=True)

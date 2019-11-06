@@ -1,7 +1,7 @@
 from flask import render_template
 from patient_portal import initialise_application
 
-app = initialise_application("development")
+app, socket_io = initialise_application("development")
 
 @app.route('/', methods=['GET'])
 @app.route('/welcome', methods=['GET'])

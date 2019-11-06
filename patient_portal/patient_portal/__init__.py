@@ -1,8 +1,12 @@
 """Module responsible for setting up app defintion rules"""
+#import eventlet
+#eventlet.monkey_patch()
 
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_socketio import SocketIO
 
+socket_io = SocketIO()
 toolbar = DebugToolbarExtension()
 
 def initialise_application(configuration):
@@ -27,4 +31,6 @@ def initialise_application(configuration):
     app.register_blueprint(clinician_blueprint, url_prefix='/clinician')
     app.register_blueprint(patient_blueprint, url_prefix='/patient')
 
-    return app
+    socket_io.init_app(app, logger=True, engineio_logger=True)
+
+    return app, socket_io
