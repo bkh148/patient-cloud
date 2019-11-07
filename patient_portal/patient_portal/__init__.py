@@ -5,7 +5,9 @@
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_socketio import SocketIO
+from patient_portal.containers import Services
 
+services = Services()
 socket_io = SocketIO()
 toolbar = DebugToolbarExtension()
 
