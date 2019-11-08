@@ -25,7 +25,7 @@ class IAppointmentRepository(metaclass=abc.ABCMeta):
 
 
     @abc.abstractmethod
-    def get_appointments_created_for(self, user_id):
+    def get_appointments_for(self, user_id):
         """ Get appointments created for a user.
 
         Args:

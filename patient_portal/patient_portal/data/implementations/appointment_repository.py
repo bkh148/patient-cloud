@@ -1,5 +1,7 @@
 from ..interfaces import IAppointmentRepository
 
+from datetime import datetime
+
 class AppointmentRepository(IAppointmentRepository):
     """ Some docstring """
 
@@ -27,13 +29,23 @@ class AppointmentRepository(IAppointmentRepository):
         """ Checks if an appointment exists. """
         return "has appointment"
 
-    def get_appointments_created_for(self, user_id):
+    def get_appointments_for(self, user_id):
         """ Get appointments created for a user.
 
         Args:
             user_id: id of the user the appointments are for
         """
-        return "get appointment created for"
+        return [{
+            "appointment_id" : "aacb69b0-a5f9-4300-9ea5-1713b079ddf5",
+            "created_by" : "327d5c97-0c0b-4e3d-86c3-a90f64edb72d",
+            "created_for" : "5814ca5c-417c-45db-b6bd-598939b48d75",
+            "location_id" : "8ba069ce-a1dc-4687-81b6-8c101e44ade3",
+            "created_on_utc": datetime.utcnow(),
+            "appointment_date_utc": datetime.utcnow(),
+            "appointment_type": "Ultrasound Scan",
+            "appointment_notes": "Please make sure to bring the medical records from your last appointment.",
+            "is_cancelled": 0,
+            "is_attended": 0}]
 
     def get_appointments_created_by(self, user_id):
         """ Get appointments create by a user.
