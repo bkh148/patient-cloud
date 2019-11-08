@@ -3,26 +3,44 @@
 from dependency_injector import containers, providers
 from patient_portal.core import *
 from patient_portal.data import *
+from patient_portal.config import *
+from patient_portal.sqlite import SQLiteDatabase
+
+class DataStores(containers.DeclarativeContainer):
+
+    development_database = providers.Singleton(
+        SQLiteDatabase,
+        config = DevelopmentConfig()
+    )
+
+    production_database = providers.Singleton(
+        SQLiteDatabase,
+        config = ProductionConfig()
+    )
+
+    # 🚨: temp until environments are fixed
+    mode = "development"
+    database = development_database if mode == 'development' else production_database
 
 class Repositories(containers.DeclarativeContainer):
 
     appointment_repo = providers.Singleton(
-        AppointmentRepository, connection=dict(uid='2354', message='Hello, world!'))
+        AppointmentRepository, db=DataStores.database)
 
     log_repo = providers.Singleton(
-        LogRepository, connection=dict(uid='2345', message='Hello, world!')
+        LogRepository, db=DataStores.database
     )
 
     session_repo = providers.Singleton(
-        SessionRepository, connection=dict()
+        SessionRepository, db=DataStores.database
     )
 
     invite_repo = providers.Singleton(
-        InviteRepository, connection=dict()
+        InviteRepository, db=DataStores.database
     )
 
     location_repo = providers.Singleton(
-        LocationRepository, connection=dict()
+        LocationRepository, db=DataStores.database
     )
 
 class Services(containers.DeclarativeContainer):
