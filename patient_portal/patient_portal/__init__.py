@@ -1,15 +1,17 @@
 """Module responsible for setting up app defintion rules"""
-#import eventlet
-#eventlet.monkey_patch()
+import eventlet
+eventlet.monkey_patch()
 
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_socketio import SocketIO
-from patient_portal.containers import Services
+from patient_portal.containers import Services, DataStores
+from patient_portal.sqlite import SQLiteDatabase
 
 services = Services()
 socket_io = SocketIO()
 toolbar = DebugToolbarExtension()
+
 
 def initialise_application(configuration):
     """Create an instance of the flask application
@@ -18,6 +20,10 @@ def initialise_application(configuration):
     """
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'secret!'
+
+    # if debug / prod /test
+    database = DataStores.database()
+    database.initialise_database()
 
     toolbar.init_app(app)
 
