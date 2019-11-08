@@ -10,3 +10,7 @@ class IAppointmentService(metaclass=abc.ABCMeta):
         Args:
             appointment_id: id of the app. to retrieve.
         """
+
+    @abc.abstractmethod
+    def get_appointments_for(self, user_id):
+        """ Get all the appointments for a given patient        """

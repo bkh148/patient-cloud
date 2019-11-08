@@ -19,3 +19,7 @@ class AppointmentService(IAppointmentService):
             appointment_id: id of the app. to retrieve.
         """
         return self._appointment_repository.get_appointments_created_for(appointment_id)
+
+    def get_appointments_for(self, user_id):
+        """ Get all the appointments for a given user """
+        return self._appointment_repository.get_appointments_for(user_id)
