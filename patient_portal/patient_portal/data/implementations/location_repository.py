@@ -2,8 +2,8 @@ from ..interfaces import ILocationRepository
 
 class LocationRepository(ILocationRepository):
 
-    def __init__(self, connection):
-        self._connection = connection
+    def __init__(self, db):
+        self._db = db
 
     def upsert_location(self, location):
         """update or insert a new location"""

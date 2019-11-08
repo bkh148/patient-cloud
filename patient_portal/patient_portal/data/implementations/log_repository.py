@@ -2,8 +2,8 @@ from ..interfaces import ILogRepository
 
 class LogRepository(ILogRepository):
 
-    def __init__(self, connection):
-        self._connection = connection
+    def __init__(self, db):
+        self._db = db
 
     def get_exceptions_by_session_id(self, session_id):
         """get all exceptions from a given user session

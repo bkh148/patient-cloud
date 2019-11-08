@@ -2,8 +2,8 @@ from ..interfaces import ISessionRepository
 
 class SessionRepository(ISessionRepository):
 
-    def __init__(self, connection):
-        self._connection = connection
+    def __init__(self, db):
+        self._db = db
 
     def get_session(self, user_id):
         """get a session by the user id"""

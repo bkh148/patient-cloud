@@ -1,13 +1,15 @@
 from ..interfaces import IAppointmentRepository
 
+
+from pprint import pprint as pp
 from datetime import datetime
 
 class AppointmentRepository(IAppointmentRepository):
     """ Some docstring """
 
-    def __init__(self, connection):
+    def __init__(self, db):
         """Initialise"""
-        self._connection = connection
+        self._db = db
 
     def upsert_appointment(self, payload):
         """ Updates or inserts a new appointment into the datastore.
@@ -35,6 +37,9 @@ class AppointmentRepository(IAppointmentRepository):
         Args:
             user_id: id of the user the appointments are for
         """
+
+        pp(self._db.connection())
+
         return [{
             "appointment_id" : "aacb69b0-a5f9-4300-9ea5-1713b079ddf5",
             "created_by" : "327d5c97-0c0b-4e3d-86c3-a90f64edb72d",

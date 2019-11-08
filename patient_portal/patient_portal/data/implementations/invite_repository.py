@@ -3,8 +3,8 @@ from ..interfaces import IInviteRepository
 
 class InviteRepository(IInviteRepository):
 
-    def __init__(self, connection):
-        self._connection = connection
+    def __init__(self, db):
+        self._db = db
 
     def upsert_invite(self, invite):
         """ update or insert a new invite into the table"""
