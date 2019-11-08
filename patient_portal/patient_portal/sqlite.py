@@ -32,7 +32,7 @@ class SQLiteDatabase(object):
             self.create_exception_table()
             self.create_exception_type_table()
 
-            print('Database initialiase successfully... 🎉')
+            print('{} initialised successfully... 🎉'.format(self._config.MODE))
         except Exception as e:
             print('An error has occurred whilst setting up the database: {}'.format(e))
 
