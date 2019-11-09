@@ -35,7 +35,6 @@ class SQLiteDatabase(object):
 
 
     def create_user_table(self):
-        print('Create user table')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS user(
         user_id TEXT PRIMARY KEY NOT NULL,
@@ -48,7 +47,6 @@ class SQLiteDatabase(object):
         """)
 
     def create_user_role_table(self):
-        print('Create user role table')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS user_role (
         user_role_id TEXT PRIMARY KEY NOT NULL,
@@ -58,7 +56,6 @@ class SQLiteDatabase(object):
         """)
 
     def create_user_role_map_table(self):
-        print('Create user role map')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS user_role_map (
         user_role_map_id TEXT PRIMARY KEY NOT NULL,
@@ -69,7 +66,6 @@ class SQLiteDatabase(object):
         """)
 
     def create_password_table(self):
-        print('Create password table')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS passwords(
         password_id TEXT PRIMARY KEY NOT NULL,
@@ -81,7 +77,6 @@ class SQLiteDatabase(object):
         """)
 
     def create_session_table(self):
-        print('Create session table')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS session(
         session_id TEXT PRIMARY KEY NOT NULL,
@@ -93,7 +88,6 @@ class SQLiteDatabase(object):
         """)
 
     def create_location_table(self):
-        print('Create location table')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS location(
         location_id TEXT PRIMARY KEY NOT NULL,
@@ -105,9 +99,7 @@ class SQLiteDatabase(object):
         CONSTRAINT unique_location_id UNIQUE (location_id))
         """)
 
-    # TODO: Relations + constraints
     def create_appointments_table(self):
-        print('Create appointments table')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS appointments(
         appointment_id TEXT PRIMARY KEY NOt NULL,
@@ -127,7 +119,6 @@ class SQLiteDatabase(object):
         """)
 
     def create_invite_table(self):
-        print('Create invite table')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS invite(
         invite_id TEXT PRIMARY KEY NOT NULL,
@@ -143,7 +134,6 @@ class SQLiteDatabase(object):
         """)
 
     def create_activity_table(self):
-        print('Create activity table')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS activity_log(
         activity_log_id TEXT PRIMARY KEY NOT NULL,
@@ -155,7 +145,6 @@ class SQLiteDatabase(object):
         """)
 
     def create_exception_table(self):
-        print('Create exception table')
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS exception_log(
         exception_log_id TEXT PRIMARY KEY NOT NULL,
