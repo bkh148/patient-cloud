@@ -27,9 +27,7 @@ class SQLiteDatabase(object):
             self.create_appointments_table()
             self.create_invite_table()
             self.create_activity_table()
-            self.create_activity_type_table()
             self.create_exception_table()
-            self.create_exception_type_table()
 
             print('{} initialised successfully... 🎉'.format(self._config.MODE))
         except Exception as e:
@@ -100,8 +98,8 @@ class SQLiteDatabase(object):
         CREATE TABLE IF NOT EXISTS location(
         location_id TEXT PRIMARY KEY NOT NULL,
         location_name TEXT NOT NULL,
-        location_coord_x DOUBLE NOT NULL,
-        location_coord_y DOUBLE NOT NULL,
+        location_coord_x REAL NOT NULL,
+        location_coord_y REAL NOT NULL,
         location_postcode TEXT NOT NULL,
         location_address TEXT NOT NULL,
         CONSTRAINT unique_location_id UNIQUE (location_id))
@@ -149,21 +147,11 @@ class SQLiteDatabase(object):
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS activity_log(
         activity_log_id TEXT PRIMARY KEY NOT NULL,
-        activity_log_type_id TEXT NOT NULL,
+        activity_log_type TEXT NOT NULL,
         session_id TEXT NOT NULL,
         occurred_on_utc TEXT NOT NULL,
         CONSTRAINT unique_activity_log_id UNIQUE (activity_log_id),
-        FOREIGN KEY (activity_log_type_id) REFERENCES activity_log_type(activity_log_type_id),
         FOREIGN KEY (session_id) REFERENCES session(session_id))
-        """)
-
-    def create_activity_type_table(self):
-        print('Create activty type table')
-        self.connection().execute("""
-        CREATE TABLE IF NOT EXISTS activity_log_type (
-        activity_log_type_id TEXT PRIMARY KEY NOT NULL,
-        activity_log_type TEXT NOT NULL,
-        CONSTRAINT unique_activity_log_type UNIQUE (activity_log_type_id))
         """)
 
     def create_exception_table(self):
@@ -171,20 +159,12 @@ class SQLiteDatabase(object):
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS exception_log(
         exception_log_id TEXT PRIMARY KEY NOT NULL,
-        exception_log_type_id TEXT NOT NULL,
+        exception_log_type TEXT NOT NULL,
         session_id TEXT NOT NULL,
         occurred_on_utc TEXT NOT NULL,
         is_handled BIT DEFAULT 0,
         stack_trace TEXT NOT NULL,
         CONSTRAINT unique_exception_log_id UNIQUE (exception_log_id),
-        FOREIGN KEY (exception_log_type_id) REFERENCES exception_log_type(exception_log_type_id),
         FOREIGN KEY (session_id) REFERENCES session(session_id))
         """)
 
-    def create_exception_type_table(self):
-        self.connection().execute("""
-        CREATE TABLE IF NOT EXISTS exception_log_type (
-        exception_log_type_id TEXT PRIMARY KEY NOT NULL,
-        exception_log_type TEXT NOT NULL,
-        CONSTRAINT unique_exception_log_type UNIQUE (exception_log_type_id))
-        """)
