@@ -1,9 +1,4 @@
 html, body {
-   background: #323545;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   margin: 0px;
    height: 100%;
    font-weight: normal;
    font-family: Comfortaa;
