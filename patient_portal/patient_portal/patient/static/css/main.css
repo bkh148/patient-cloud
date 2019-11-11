@@ -1,1 +1,92 @@
+.appointments-container {
+  flex-direction: column;
+  -webkit-box-shadow: 1px 17px 55px -15px rgba(0,0,0,0.64);
+  -moz-box-shadow: 1px 17px 55px -15px rgba(0,0,0,0.64);
+  box-shadow: 1px 17px 55px -15px rgba(0,0,0,0.64);
+  border-radius: 20px
+}
 
+.appointments-container-header p {
+  display: flex;
+  align-items: center;
+  margin: 0px 20px;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.appointments-container-body-header {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #333333;
+}
+
+.appointments-container-header {
+  max-height: 60px;
+  min-height: 60px;
+  background-color: #323546;
+  border-radius: 20px 20px 0px 0px;
+  margin: 0px;
+}
+
+.appointments-container-body {
+  flex-direction: column;
+  min-height: 100px;
+  border-radius: 0px 0px 20px 20px;
+}
+
+.appointment-item .row {
+  margin: 0px;
+}
+
+.appointment-item {
+  margin-bottom: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #e3e3e3;
+}
+
+.appointment-item-header {
+  padding: 5px 0px;
+  font-size: .9rem;
+}
+
+.appointment-item-header .col {
+  margin: 0px;
+  padding: 0px;
+}
+
+.appointment-item-header span {
+  color: #FE4284;
+  padding: 0px 10px;
+}
+
+.appointment-item-header .time {
+  text-align: end;
+}
+
+.appointment-item-header .separator {
+  min-height: 2px;
+  background-color: #FE4284;
+  margin: 0px 10px;
+}
+
+.location-container, .reason-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.appointment-item-body {
+  padding-bottom: 15px;
+  font-size: .9rem;
+}
+
+.appointment-item-body .key {
+  color: #7B7B7B;
+}
+
+.appointment-item-body .value {
+  color: #333333;
+  font-size: 0.9rem;
+  padding: 0px 10px;
+  text-align: justify;
+}
