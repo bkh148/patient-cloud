@@ -14,3 +14,6 @@ Login Page: <br />
 
 Dashboard (WIP): <br />
 ![alt text](./public/empty_dashboard.png "Empty Dashboard") <br />
+
+Appointments (WIP): <br />
+![alt text](./public/appointments.png "Appointments") <br />
