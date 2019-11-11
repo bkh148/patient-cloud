@@ -5,13 +5,14 @@ eventlet.monkey_patch()
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_socketio import SocketIO
+from flask_moment import Moment
 from patient_portal.containers import Services, DataStores
 from patient_portal.sqlite import SQLiteDatabase
 
 services = Services()
 socket_io = SocketIO()
 toolbar = DebugToolbarExtension()
-
+moment = Moment()
 
 def initialise_application(configuration):
     """Create an instance of the flask application
@@ -26,6 +27,7 @@ def initialise_application(configuration):
     database.initialise_database()
 
     toolbar.init_app(app)
+    moment.init_app(app)
 
     from .auth import auth as auth_blueprint
     from .admin import admin as admin_blueprint
