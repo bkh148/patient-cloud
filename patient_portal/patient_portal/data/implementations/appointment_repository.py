@@ -38,19 +38,58 @@ class AppointmentRepository(IAppointmentRepository):
             user_id: id of the user the appointments are for
         """
 
-        pp(self._db.connection())
-
-        return [{
-            "appointment_id" : "aacb69b0-a5f9-4300-9ea5-1713b079ddf5",
-            "created_by" : "327d5c97-0c0b-4e3d-86c3-a90f64edb72d",
-            "created_for" : "5814ca5c-417c-45db-b6bd-598939b48d75",
-            "location_id" : "8ba069ce-a1dc-4687-81b6-8c101e44ade3",
-            "created_on_utc": datetime.utcnow(),
-            "appointment_date_utc": datetime.utcnow(),
-            "appointment_type": "Ultrasound Scan",
-            "appointment_notes": "Please make sure to bring the medical records from your last appointment.",
-            "is_cancelled": 0,
-            "is_attended": 0}]
+        return [
+            {"appointment_id": "b7693c90-6009-4141-96be-a94cf62f3b84",
+             "created_by": "d2623b0a-2b48-49b9-82e3-8743f9254f78",
+             "created_for": "e1bbb1b3-9dfc-496d-a62c-c003646b9a46",
+             "location_name": "Astley Ainslie Hospital",
+             "location_coord_x": "1.21",
+             "location_coord_y": "1.21",
+             "location_postcode": "EH9 2HL",
+             "location_address": "Grange Loan",
+             "location_city": "Edinburgh",
+             "created_on_utc": datetime.utcnow(),
+             "appointment_date_utc": datetime.utcnow(),
+             "appointment_type": "Some check-up",
+             "appointment_notes": """
+             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+             """,
+             "is_cancelled": 0,
+             "is_attended": 0},
+            {"appointment_id": "",
+             "created_by": "d2623b0a-2b48-49b9-82e3-8743f9254f78",
+             "created_for": "e1bbb1b3-9dfc-496d-a62c-c003646b9a46",
+             "location_name": "Chalmers Hospital",
+             "location_coord_x": "1.21",
+             "location_coord_y": "1.21",
+             "location_postcode": "EH3 9HQ",
+             "location_address": "Chalmers Street",
+             "location_city": "Edinburgh",
+             "created_on_utc": datetime.utcnow(),
+             "appointment_date_utc": datetime.utcnow(),
+             "appointment_type": "Some check-up",
+             "appointment_notes": """
+             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+             """,
+             "is_cancelled": 0,
+             "is_attended": 0} ,
+           {"appointment_id": "",
+             "created_by": "d2623b0a-2b48-49b9-82e3-8743f9254f78",
+             "created_for": "e1bbb1b3-9dfc-496d-a62c-c003646b9a46",
+             "location_name": "Lauriston Building",
+             "location_coord_x": "1.21",
+             "location_coord_y": "1.21",
+             "location_postcode": "EH3 9EN",
+             "location_address": "Lauriston Place",
+             "location_city": "Edinburgh",
+             "created_on_utc": datetime.utcnow(),
+             "appointment_date_utc": datetime.utcnow(),
+             "appointment_type": "Some check-up",
+             "appointment_notes": """
+             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+             """,
+             "is_cancelled": 0,
+             "is_attended": 0} ]
 
     def get_appointments_created_by(self, user_id):
         """ Get appointments create by a user.
