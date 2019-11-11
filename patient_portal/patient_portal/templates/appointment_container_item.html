@@ -1,0 +1,39 @@
+<div class="appointment-item">
+	<div class="row appointment-item-header">
+		<span class="col">{{ moment(appointment.appointment_date_utc).format('dddd Do MMM YYYY') }}</span>
+		<span class="col time">{{ moment(appointment.appointment_date_utc).format('h:mm a') }}</span>
+		<div class="w-100"></div>
+		<span class="col separator"></span>
+	</div>
+	<div class="row appointment-item-body">
+		<div class="col location-container">
+		 <div class="key">
+			 Location
+		 </div>
+		 <div class="value">
+				{{ appointment.location_name }}, <br />
+				{{ appointment.location_address }}, <br />
+				{{ appointment.location_postcode }}, <br />
+				{{ appointment.location_city }} <br />
+		 </div>
+		</div>
+		<div class="w-100 d-none d-sm-block d-md-none"></div>
+		<div class="col reason-container">
+		 <div class="key">
+			 Reason
+		 </div>
+		 <div class="value">
+			 {{ appointment.appointment_type }}
+		 </div>
+		</div>
+		<div class="w-100"></div>
+		<div class="col notes-container">
+		 <div class="key">
+			 Notes
+		 </div>
+		 <div class="value">
+			{{ appointment.appointment_notes }}
+		 </div>
+		</div>
+	</div>
+</div>

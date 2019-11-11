@@ -1,0 +1,15 @@
+<div class="row m-2 appointments-container">
+	<div class="row appointments-container-header">
+		<p>Your appointments</p>
+	</div>
+	<div class="row appointments-container-body m-3">
+	 <p class="appointments-container-body-header">Upcoming Appointments</p>
+		{% for appointment in metadata['appointments']['upcoming'] %}
+			{% include "appointment_container_item.html" %}
+		{% endfor %}
+	 <p class="appointments-container-body-header">Previous Appointments</p>
+	 {% for appointment in metadata['appointments']['past'] %}
+		  {% include "appointment_container_item.html" %}
+	 {% endfor %}
+	</div>
+</div>
