@@ -2,37 +2,50 @@
 
 from . import local_admin
 from flask import render_template
+from .. import services
 
 @local_admin.route('/', methods=['GET'])
 @local_admin.route('/dashboard', methods=['GET'])
 def dashboard():
     """Handle the local admin dashboard"""
 
-    socket_config = {
+    metadata = {}
+    metadata['clinicians'] = []
+
+    # Get the following from the session when authentication is setup
+    metadata['settings'] = {}
+    metadata['configurations'] = {}
+    metadata['components'] = []
+
+    try:
+        
+        # Pull from session object
+        metadata['clinicians'] = []
+        metadata['components'] = ['clinicians', 'settings']
+        metadata['settings'] = {
+            "forename": "Local admin",
+            "surname": "admin",
+            "email": "some.admin@admin.co.uk",
+            "active_account": 1,
+            "stay_logged_in": 1}
+        
+        metadata['configurations'] = {
         "host": "127.0.0.1",
         "port": "5000",
-        "namespace": "local_admin"}
-
-    dashboard = {
-        "text": "Dashboard",
-        "style": "active",
-        "url": "",
-        "icon": "fas fa-home"}
+        "namespace": "patient"}
+        
+    except Exception as e:
+        # Log error
+        print('Some exception')
 
     clinicians = {
         "text": "Clinicians",
-        "url": "",
-        "style": "",
+        "style": "active",
+        "context": metadata['components'][0],
         "icon": "fas fa-user-md"}
-
-    appointments = {
-        "text": "Appointments",
-        "url": "",
-        "style": "",
-        "icon": "fas fa-calendar-check"}
 
     return render_template('local_admin/index.html', title='Dashboard - Local Admin',
                            static_folder='local_admin.static',
                            style_paths=['css/main.css'],
-                           nav_links=[dashboard, clinicians, appointments],
-                           configurations=socket_config)
+                           nav_links=[clinicians],
+                           metadata=metadata)
