@@ -42,6 +42,10 @@ class Repositories(containers.DeclarativeContainer):
     location_repo = providers.Singleton(
         LocationRepository, db=DataStores.database
     )
+    
+    user_repo = providers.Singleton(
+        UserRepository, db=DataStores.database
+    )
 
 class Services(containers.DeclarativeContainer):
 
@@ -67,5 +71,11 @@ class Services(containers.DeclarativeContainer):
 
     location_service = providers.Singleton(
         LocationService,
-        repo=Repositories.location_repo
+        loc_repo=Repositories.location_repo
+    )
+    
+    user_service = providers.Singleton(
+        UserService,
+        user_repo=Repositories.user_repo,
+        log_service=log_service
     )
