@@ -1,15 +1,17 @@
-import sqlite3
+import sqlite3, uuid
 from pprint import pprint as pp
 
 class SQLiteDatabase(object):
 
     def __init__(self, config):
         self._config = config
+        sqlite3.register_adapter(uuid.UUID, lambda u: u.bytes_le)
 
 
     def connection(self):
         try:
-            return sqlite3.connect(self._config.DATABASE_URI)
+            connection = sqlite3.connect(self._config.DATABASE_URI)
+            return connection
         except Exception as e:
             print('Connection issue: {}'.format(e))
             raise e
@@ -21,6 +23,7 @@ class SQLiteDatabase(object):
             self.create_user_table()
             self.create_user_role_table()
             self.create_user_role_map_table()
+            self.create_patient_clinician_map_table()
             self.create_password_table()
             self.create_session_table()
             self.create_location_table()
@@ -65,6 +68,15 @@ class SQLiteDatabase(object):
         FOREIGN KEY (location_id) REFERENCES location(location_id))
         """)
 
+    def create_patient_clinician_map_table(self):
+        self.connection().execute("""
+        CREATE TABLE IF NOT EXISTS patient_clinician_map (
+        patient_map_id TEXT PRIMARY KEY NOT NULL,
+        clinician_id TEXT NOT NULL,
+        patient_id TEXT NOT NULL,
+        FOREIGN KEY (clinician_id) REFERENCES user(user_id),
+        FOREIGN KEY (patient_id) REFERENCES user(user_id))""")
+
     def create_password_table(self):
         self.connection().execute("""
         CREATE TABLE IF NOT EXISTS passwords(
@@ -96,6 +108,7 @@ class SQLiteDatabase(object):
         location_coord_y REAL NOT NULL,
         location_postcode TEXT NOT NULL,
         location_address TEXT NOT NULL,
+        location_city TEXT NOT NULL,
         CONSTRAINT unique_location_id UNIQUE (location_id))
         """)
 
