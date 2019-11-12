@@ -17,3 +17,7 @@ class ILocationRepository(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def get_location_by_id(self, location_id):
         """ return a given location object by its id """
+        
+    @abc.abstractmethod
+    def get_all_locations(self):
+        """ returns all care location """

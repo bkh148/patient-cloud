@@ -16,3 +16,10 @@ class LocationRepository(ILocationRepository):
 
     def get_location_by_id(self, location_id):
         """ return a given location object by its id """
+        connection = self._db.connection()
+        return connection.execute("SELECT * FROM location WHERE location_id=?", (location_id, )).fetchone()
+    
+    def get_all_locations(self):
+        """ return all care locations currently in SQLite"""
+        connection = self._db.connection()
+        return connection.execute("SELECT * FROM location;").fetchall()
