@@ -1,7 +1,7 @@
-<li class="{{ link.style }}">
-	<a href="{{ link.url }}">
+<li id="sidebar_button_{{ link.context }}" onclick="context_manager.switch_context('{{ link.context }}')" class="{{ link.style }}">
+	<a>
 	 <i class="{{ link.icon }} fa-1x"></i>
 	 <span>{{ link.text }}</span>
-	</a>
+	</a> 
 </li>
 
