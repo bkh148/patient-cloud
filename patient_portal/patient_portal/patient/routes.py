@@ -13,36 +13,41 @@ def dashboard():
     metadata = {}
     metadata['appointments'] = {}
 
+    # Get the following from the session when authentication is setup
+    metadata['settings'] = {}
+    metadata['configurations'] = {}
+    metadata['carelocation'] = {}
+    metadata['settings'] = {
+        "care_location": "8cb58fa5-1a6c-484b-ac9a-98cadb53064b",
+        "forename": "Liam",
+        "surname": "Lamb",
+        "email": "liam.j.lamb@gmail.com",
+        "active_account": 1,
+        "stay_logged_in": 1}
+
     try:
         appointments = services.appointment_service().get_appointments_for('0f837187-be84-4c4d-a3b6-745598174959')
         metadata['appointments']['upcoming'] = appointments
-
-        print(metadata)
-
-    except Exception as e:
-        print("Some exception..")
-        raise e
-
-    socket_config = {
+        metadata['components'] = ['appointments', 'settings']
+        # Get from session
+        metadata['carelocation'] = services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b')
+        metadata['configurations'] = {
         "host": "127.0.0.1",
         "port": "5000",
         "namespace": "patient"}
 
-    dashboard = {
-        "text": "Dashboard",
-        "style": "active",
-        "url": "",
-        "icon": "fas fa-home"}
+    except Exception as e:
+        # Log error
+        print("Some exception.. {}", e)
 
     appointments = {
         "text": "Appointments",
-        "style": "",
-        "url": "",
+        "style": "active",
+        "context": metadata['components'][0],
         "icon": "fas fa-calendar-check"}
 
     return render_template('patient/index.html', title='Dashboard - Patient',
                            static_folder='patient.static',
                            style_paths=['css/main.css'],
-                           nav_links=[dashboard, appointments],
-                           configurations=socket_config,
+                           nav_links=[appointments],
                            metadata=metadata)
