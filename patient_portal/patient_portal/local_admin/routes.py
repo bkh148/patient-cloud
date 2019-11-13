@@ -9,14 +9,14 @@ from .. import services
 def dashboard():
     """Handle the local admin dashboard"""
 
-    metadata = {}
-    metadata['clinicians'] = []
-
-    # Get the following from the session when authentication is setup
-    metadata['settings'] = {}
-    metadata['configurations'] = {}
-    metadata['components'] = []
-
+    metadata = {
+        'clinicians': [],
+        'configurations': {},
+        'templates': {},
+        'components': ['clinicians', 'settings'],
+        'settings': {}
+    }
+    
     try:
         
         # Pull from session object
@@ -36,13 +36,16 @@ def dashboard():
         
     except Exception as e:
         # Log error
-        print('Some exception')
+        print('Some exception {}'.format(e))
 
     clinicians = {
         "text": "Clinicians",
         "style": "active",
         "context": metadata['components'][0],
         "icon": "fas fa-user-md"}
+
+    metadata['templates']['clinicians'] = 'Hello, clinicians'
+    metadata['templates']['settings'] = render_template('local_admin/settings.html', context=metadata['settings'])
 
     return render_template('local_admin/index.html', title='Dashboard - Local Admin',
                            static_folder='local_admin.static',
