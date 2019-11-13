@@ -1,22 +1,22 @@
 {% extends "centered_container.html" %}
 
 {% block centered_container_content %}
-   <img id="centered-container-doctor" src="{{ payload.logo_doctor }}" width="300" height="300" class="d-inline-block align-left" alt="">
-   <div id="welcome-panel" class="row col-8 col-sm-8 col-md-10 align-self-end flex-fill">
-    <div id="welcome-panel-header" class="row align-items-start justify-content-end">
-     <h1>Patient Portal</h1>
-     <p>{{ payload.welcome_message }}</p>
-    </div>
-    <div id="welcome-panel-footer" class="row flex-fill justify-content-end">
-     <form action="{{ url_for('auth.login') }}" method="GET">
-      <button class="btn btn-custom">Login</button>
-     </form>
-      <p>{{ payload.version_number }}</p>
-    </div>
-   </div>
+<img id="centered-container-doctor" src="{{ payload.logo_doctor }}" width="300" height="300"
+  class="d-inline-block align-left" alt="">
+<div id="welcome-panel" class="row col-8 col-sm-8 col-md-10 align-self-end flex-fill">
+  <div id="welcome-panel-header" class="row align-items-start justify-content-end">
+    <h1>Patient Portal</h1>
+    <p>{{ payload.welcome_message }}</p>
   </div>
-   <div id="welcome-panel-help" class="row">
-    <p class="flex-fill">Looking to register ? See here for help.</p>
-   </div>
- {% endblock %}
-
+  <div id="welcome-panel-footer" class="row flex-fill justify-content-end">
+    <form action="{{ url_for('auth.login') }}" method="GET">
+      <button class="btn btn-custom">Login</button>
+    </form>
+    <p>{{ payload.version_number }}</p>
+  </div>
+</div>
+</div>
+<div id="welcome-panel-help" class="row">
+  <p class="flex-fill">Looking to register ? See here for help.</p>
+</div>
+{% endblock %}
