@@ -11,10 +11,19 @@ class SQLiteDatabase(object):
     def connection(self):
         try:
             connection = sqlite3.connect(self._config.DATABASE_URI)
+            connection.row_factory = sqlite3.Row
             return connection
         except Exception as e:
             print('Connection issue: {}'.format(e))
             raise e
+
+    def get_all(self, query, params = ()):
+        cursor = self.connection().cursor();
+        return [dict(x) for x in cursor.execute(query, params).fetchall()]
+
+    def get_single(self, query, params = ()):
+        cursor = self.connection().cursor();
+        return dict(cursor.execute(query, params).fetchone())
 
     def initialise_database(self):
         """Initialise the databse"""
