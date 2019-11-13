@@ -1,0 +1,10 @@
+.settings-submit {
+    display: flex;
+}
+
+.settings-submit button {
+    font-size: .8rem;
+    min-width: 90px;
+    margin-left: 10px;
+    margin-left: 10px;   
+}

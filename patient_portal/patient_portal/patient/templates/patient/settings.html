@@ -1,0 +1,79 @@
+{% extends "settings_container.html" %}
+
+{% block body %}
+<div class="component-container-section-header">Account Settings</div>
+<div class=" col component-container-section-body">
+    <form>
+        <div class="form-group row">
+            <label for="user_email" class="col-sm-2 col-form-label">Email :</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" id="user_email" placeholder="{{ context.user_email }}"
+                    readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="user_forname" class="col-sm-2 col-form-label">Forname :</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" id="user_forname" placeholder="{{ context.user_forname }}"
+                    readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="user_surname" class="col-sm-2 col-form-label">Surname :</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" id="user_surname" placeholder="{{ context.user_surname }}"
+                    readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">Remember me :</div>
+            <div class="col-sm-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="remember_me">
+                    <label class="form-check-label" for="remember_me">
+                        Keep me logged in
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 settings-submit justify-content-end">
+                <button class="btn btn-custom-danger">Reset</button>
+                <button class="btn btn-custom-success">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="component-container-section-header">Personal Care Settings</div>
+<div class="col component-container-section-body">
+    <form>
+        <div class="form-group row">
+            <label for="care_location" class="col-sm-2 col-form-label">Care Location :</label>
+            <div id="care_location" class="col-sm-6">
+                <p> {{ context.care_location.location_name }}, </p>
+                <p> {{ context.care_location.location_address }}, </p>
+                <p> {{ context.care_location.location_postcode }}, </p>
+                <p> {{ context.care_location.location_city }}, </p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="user_clinician" class="col-sm-2 col-form-label">Clinician :</label>
+            <div class="col-sm-6">
+                <p id="user_clinician"> Dr. {{ context.clinician.user_lastname }}, {{ context.clinician.user_forname }} </p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="user_clinician_mail" class="col-sm-2 col-form-label">Email :</label>
+            <div class="col-sm-6">
+                <p id="user_clinician_mail"> {{ context.clinician.user_email }} </p>
+            </div>
+        </div>
+        <div class="form-group row">
+                <label for="user_days_in_care" class="col-sm-2 col-form-label">Days in care :</label>
+                <div class="col-sm-6">
+                    <p id="user_days_in_care"> 25 days 13 hr 12 min </p> <!-- Temp until feature -->
+                </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

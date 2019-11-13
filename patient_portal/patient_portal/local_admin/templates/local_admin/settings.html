@@ -1,0 +1,12 @@
+{% extends "settings_container.html" %}
+
+{% block body %}
+    {% for params in context.sections %}
+        <div class="component-container-section-header">
+                {{ params.section.header }}
+            </div>
+            <div class="component-container-section-body">
+            {{ params.data }}
+        </div>  
+    {% endfor %}
+{% endblock %}
