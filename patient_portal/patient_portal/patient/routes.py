@@ -10,35 +10,41 @@ from .. import services
 def dashboard():
     """Handle the patient dashboard"""
 
-    metadata = {}
-    metadata['appointments'] = {}
-
-    # Get the following from the session when authentication is setup
-    metadata['settings'] = {}
-    metadata['configurations'] = {}
-    metadata['carelocation'] = {}
-    metadata['settings'] = {
-        "care_location": "8cb58fa5-1a6c-484b-ac9a-98cadb53064b",
-        "forename": "Liam",
-        "surname": "Lamb",
-        "email": "liam.j.lamb@gmail.com",
-        "active_account": 1,
-        "stay_logged_in": 1}
+    metadata = {
+        'appointments': {},
+        'configurations': {},
+        'templates': {},
+        'components': ['appointments', 'settings'],
+        'settings': {}
+    }
 
     try:
-        appointments = services.appointment_service().get_appointments_for('0f837187-be84-4c4d-a3b6-745598174959')
-        metadata['appointments']['upcoming'] = appointments
-        metadata['components'] = ['appointments', 'settings']
+        metadata['appointments']['upcoming'] = services.appointment_service().get_appointments_for('0f837187-be84-4c4d-a3b6-745598174959')
+        
         # Get from session
-        metadata['carelocation'] = services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b')
         metadata['configurations'] = {
         "host": "127.0.0.1",
         "port": "5000",
         "namespace": "patient"}
+        
+        # Get the following from the session when authentication is setup
+        metadata['settings'] = {
+            'user_email': 'liam.j.lamb@gmail.com',
+            'user_forname': 'Liam',
+            'user_surname': 'Lamb',
+            'remember_me': 0,
+            'care_location': services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b'),
+            'clinician': services.user_service().get_patient_clinician('c5739269-355b-497e-8249-ce4ffce8b020'),
+            'days_in_care': ''
+        }
+
+        metadata['templates']['appointments'] = render_template('appointments_container.html', context=metadata['appointments'])
+        metadata['templates']['settings'] = render_template('patient/settings.html', context=metadata['settings'])
 
     except Exception as e:
         # Log error
         print("Some exception.. {}", e)
+        raise
 
     appointments = {
         "text": "Appointments",
