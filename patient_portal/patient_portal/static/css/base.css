@@ -34,19 +34,6 @@ html, body {
     color: #ffffff;
 }
 
-/* for dropdown only - change the color of droodown */
-.navbar-custom .dropdown-menu {
-    background-color: #ff5500;
-}
-.navbar-custom .dropdown-item {
-    color: #ffffff;
-}
-.navbar-custom .dropdown-item:hover,
-.navbar-custom .dropdown-item:focus {
-    color: #333333;
-    background-color: rgba(255,255,255,.5);
-}
-
 #centered-container-doctor {
     top: 45px;
 }
@@ -95,10 +82,36 @@ html, body {
     box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
 }
 
+.btn-custom-danger {
+    color: #fff;
+    background-color: #db3445;
+    border-color: #db3445;
+    border-radius: 10px;
+}
+
+.btn-custom-success {
+    color: #fff;
+    background-color: #27a545;
+    border-color: #27a545;
+    border-radius: 10px;
+}
+
 .btn-custom:hover {
     color: #fff;
     background-color: #ea3f7b;
     border-color: #ea3f7b;
+}
+
+.btn-custom-success:hover {
+    color: #fff;
+    background-color: #23893b;
+    border-color: #23893b;
+}
+
+.btn-custom-danger:hover {
+    color: #fff;
+    background-color: #bc2b39;
+    border-color: #bc2b39;
 }
 
 /* Media Queries */
@@ -124,4 +137,77 @@ html, body {
       max-width: 300px;
       min-width: 300px;
   }
+}
+
+/*
+        Shared component css
+*/
+
+.component-container {
+    flex-direction: column;
+    -webkit-box-shadow: 1px 17px 55px -15px rgba(0,0,0,0.64);
+    -moz-box-shadow: 1px 17px 55px -15px rgba(0,0,0,0.64);
+    box-shadow: 1px 17px 55px -15px rgba(0,0,0,0.64);
+    border-radius: 20px
+}
+
+.component-container-section-header {
+    background: #F2F2F2;
+    padding: 20px;
+    border: 1px solid #e3e3e3;
+    color: #FE4284;
+}
+
+.component-container-section-body {
+    padding: 20px;
+}
+
+.component-container-section-body .form-group {
+    justify-content: space-around;
+}
+
+.component-container-footer {
+    justify-content: flex-end;
+    margin: 0px;
+    padding: 25px;
+    border-top: 1px solid #e3e3e3;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.component-container-header p {
+    display: flex;
+    align-items: center;
+    margin: 0px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.component-container-body-header {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #333333;
+}
+
+.component-container-header {
+    max-height: 60px;
+    min-height: 60px;
+    border-radius: 20px 20px 0px 0px;
+    margin: 0px;
+    border-bottom: 1px solid #E3E3E3;
+}
+
+.hd-light div p {
+    color:#323546;
+}
+
+.hd-dark div p {
+    background-color: #323546;
+    color: #fff;
+}
+
+.component-container-body {
+    flex-direction: column;
+    min-height: 100px;
+    border-radius: 0px 0px 20px 20px;
 }
