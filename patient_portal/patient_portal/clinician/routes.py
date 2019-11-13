@@ -8,27 +8,25 @@ from .. import services
 @clinician.route('/dashboard', methods=['GET'])
 def dashboard():
     """Handle the clincian dashboard"""
-
-    metadata = {}
-    metadata['appointments'] = {}
-
-    # Get the following from the session when authentication is setup
-    metadata['settings'] = {}
-    metadata['configurations'] = {}
-    metadata['components'] = []
-    metadata['patients'] = []
+    
+    metadata = {
+        'appointments': {},
+        'patients': '',
+        'configurations': {},
+        'templates': {},
+        'components': ['patients', 'appointments', 'settings'],
+        'settings': {}
+    }
 
     try:
         appointments = []
         metadata['appointments']['upcoming'] = appointments
         metadata['patients'] = services.user_service().get_all_users_patients('b587e97b-5ccc-4f4d-ae65-c507a268e1bb')
-        metadata['components'] = ['patients', 'appointments', 'settings']
         metadata['settings'] = {
             "forename": "Clinician",
             "surname": "A",
             "email": "clinician@hospital.co.uk",
-            "care_location": "Chalmers Hospital",
-            "care_location_id": "some_id",
+            "care_location": services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b'),
             "active_account": 1,
             "stay_logged_in": 1}
         
@@ -36,6 +34,10 @@ def dashboard():
         "host": "127.0.0.1",
         "port": "5000",
         "namespace": "clinician"}
+        
+        metadata['templates']['patients'] = 'Hello, patients' #Todo: Create a clinician's patient view
+        metadata['templates']['appointments'] = 'Hello, appointments' #Todo: Create a clinician appointment view
+        metadata['templates']['settings'] = render_template('clinician/settings.html', context=metadata['settings'])
         
     except Exception as e:
         # Log this through the log service..
