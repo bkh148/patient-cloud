@@ -21,6 +21,10 @@ class IUserService(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def get_all_users_patients(self, clinician_id):
         """ get all patients for a clinician """
+    
+    @abc.abstractmethod
+    def get_patient_clinician(self, patient_id): 
+        """return the clinician overlooking this patient's care"""    
         
     @abc.abstractmethod
     def get_all_users_in_location(self, location_id):

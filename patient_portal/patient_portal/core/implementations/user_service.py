@@ -25,7 +25,17 @@ class UserService(IUserService):
     
     def get_user_role_by_email(self, user_mail):
         """ get a user's role by their email """
-        
+    
+    def get_patient_clinician(self, patient_id): 
+        """return the clinician overlooking this patient's care"""
+        try:
+            #Todo: log activity
+            return self._user_repo.get_patient_clinician(patient_id)
+        except Exception as e:
+            #Todo: log exception
+            print("Service Exception {} : {}".format(__name__, e))
+            
+    
     def get_all_users_patients(self, clinician_id):
         """ get all patients for a clinician """
         try :
@@ -36,5 +46,6 @@ class UserService(IUserService):
             print("Service Exception {} : {}".format(__name__, e))
         
         return None;
+    
     def get_all_users_in_location(self, location_id):
         """ get all users in a given location """

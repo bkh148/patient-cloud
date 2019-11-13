@@ -25,5 +25,12 @@ class UserRepository(IUserRepository):
     def get_user_role_by_email(self, user_mail):
         """ get a user's role by their email """
         
+    def get_patient_clinician(self, patient_id): 
+        """return the clinician overlooking this patient's care"""    
+        return self._db.get_single("""
+        SELECT user_id, user_email, user_forname, user_lastname FROM user t1
+        LEFT JOIN patient_clinician_map t2 ON t1.user_id = t2.clinician_id
+        WHERE patient_id = ?""", (patient_id, ))
+        
     def get_all_users_in_location(self, location_id):
         """ get all users in a given location """
