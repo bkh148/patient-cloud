@@ -11,11 +11,10 @@ class UserRepository(IUserRepository):
     
     def get_all_users_patients(self, clinician_id):
         """ get all patients for a clinician """
-        connection = self._db.connection()
-        return connection.execute("""
+        return self._db.get_all("""
         SELECT user_id, user_email, user_forname, user_lastname FROM user t1
         LEFT JOIN patient_clinician_map t2 ON t1.user_id = t2.patient_id
-        WHERE clinician_id = ?""", (clinician_id, )).fetchall()
+        WHERE clinician_id = ?""", (clinician_id, ))
 
     def get_user_by_email(self, user_mail):
         """ get a user object by the id """

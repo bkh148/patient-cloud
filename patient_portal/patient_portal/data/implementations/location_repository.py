@@ -1,4 +1,5 @@
 from ..interfaces import ILocationRepository
+import json
 
 class LocationRepository(ILocationRepository):
 
@@ -16,10 +17,8 @@ class LocationRepository(ILocationRepository):
 
     def get_location_by_id(self, location_id):
         """ return a given location object by its id """
-        connection = self._db.connection()
-        return connection.execute("SELECT * FROM location WHERE location_id=?", (location_id, )).fetchone()
+        return self._db.get_single("SELECT * FROM location WHERE location_id=?", (location_id, ))
     
     def get_all_locations(self):
         """ return all care locations currently in SQLite"""
-        connection = self._db.connection()
-        return connection.execute("SELECT * FROM location;").fetchall()
+        return self._db.get_all("SELECT * FROM location;")
