@@ -59,6 +59,20 @@ ComponentFactory.prototype.create_component = function(type) {
 };
 
 /*
+  Component Utilities
+*/
+
+function removeFadeOut(element, speed) {
+  $(element).fadeOut(speed, 
+    function() { $(element).remove(); 
+    });
+}
+
+function addFadeIn(element, parent, speed) {
+  $(element).hide().appendTo(parent).fadeIn(speed);
+}
+
+/*
   Patient Component
 */
 
@@ -74,11 +88,28 @@ PatientsComponent.prototype.subscriptions = ['patients']
 PatientsComponent.prototype.name = "not_set"
 
 PatientsComponent.prototype.show = function() {
-  console.log('Show the patients component.')
-};
+  try {
+    let patient_component = document.createElement('div');
+    patient_component.setAttribute('id', `${PatientsComponent.prototype.name}-component`)
+
+    let patient_markup = context_manager._cache.templates[PatientsComponent.prototype.name];
+    patient_component.innerHTML = patient_markup;
+
+    addFadeIn(patient_component, '#content', 600);
+    
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error showing the patient component: ${err}`)
+  }
+}
 
 PatientsComponent.prototype.hide = function() {
-  console.log('Hide the patients component.')
+  try {
+    removeFadeOut(`#${PatientsComponent.prototype.name}-component`, 200);
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error hiding the patient component: ${err}`)
+  }
 }
 
 PatientsComponent.prototype.update = function() {
@@ -128,11 +159,28 @@ AppointmentComponent.prototype.subscriptions = ['appointments']
 AppointmentComponent.prototype.name = "not_set"
 
 AppointmentComponent.prototype.show = function() {
-  $('#appointments-component').removeClass('d-none');
+  try {
+    let appointment_component = document.createElement('div');
+    appointment_component.setAttribute('id', `${AppointmentComponent.prototype.name}-component`)
+
+    let appointments_markdown = context_manager._cache.templates[AppointmentComponent.prototype.name];
+    appointment_component.innerHTML = appointments_markdown;
+
+    addFadeIn(appointment_component, '#content', 600);
+    
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error showing the appointments component: ${err}`)
+  }
 }
 
 AppointmentComponent.prototype.hide = function() {
-  $('#appointments-component').addClass('d-none');
+  try {
+    removeFadeOut(`#${AppointmentComponent.prototype.name}-component`, 200);
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error hiding the appointments component: ${err}`)
+  }
 }
 
 AppointmentComponent.prototype.update = function() {
@@ -155,11 +203,28 @@ ClinicianComponent.prototype.subscriptions = ['clinicians']
 ClinicianComponent.prototype.name = "not_set"
 
 ClinicianComponent.prototype.show = function() {
-  console.log('Show the care location component.')
+  try {
+    let clinician_component = document.createElement('div');
+    clinician_component.setAttribute('id', `${ClinicianComponent.prototype.name}-component`)
+
+    let clinician_markdown = context_manager._cache.templates[ClinicianComponent.prototype.name];
+    clinician_component.innerHTML = clinician_markdown;
+
+    addFadeIn(clinician_component, '#content', 600);
+    
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error showing the clinician component: ${err}`)
+  }
 }
 
 ClinicianComponent.prototype.hide = function() {
-  console.log('Hide the care location components')
+  try {
+    removeFadeOut(`#${ClinicianComponent.prototype.name}-component`, 200);
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error hiding the clinician component: ${err}`)
+  }
 }
 
 ClinicianComponent.prototype.update = function() {
@@ -181,12 +246,30 @@ CareLocationsComponent.prototype.constructor = CareLocationsComponent;
 CareLocationsComponent.prototype.subscriptions = ['care_locations']
 CareLocationsComponent.prototype.name = "not_set"
 
+
 CareLocationsComponent.prototype.show = function() {
-  console.log('Show the care location component.')
+  try {
+    let care_location_component = document.createElement('div');
+    care_location_component.setAttribute('id', `${CareLocationsComponent.prototype.name}-component`)
+
+    let care_location_markup = context_manager._cache.templates[CareLocationsComponent.prototype.name];
+    care_location_component.innerHTML = care_location_markup;
+
+    addFadeIn(care_location_component, '#content', 600);
+    
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error showing the care location component: ${err}`)
+  }
 }
 
 CareLocationsComponent.prototype.hide = function() {
-  console.log('Hide the care location components')
+  try {
+    removeFadeOut(`#${CareLocationsComponent.prototype.name}-component`, 200);
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error hiding the care location component: ${err}`)
+  }
 }
 
 CareLocationsComponent.prototype.update = function() {
@@ -209,12 +292,30 @@ DataAnalyticsComponent.prototype.subscriptions = ['data_analytics']
 DataAnalyticsComponent.prototype.name = "not_set"
 
 DataAnalyticsComponent.prototype.show = function() {
-  console.log('Show the data analytics component.')
+  try {
+    let data_analytics_component = document.createElement('div');
+    data_analytics_component.setAttribute('id', `${DataAnalyticsComponent.prototype.name}-component`)
+
+    let data_analytics_markup = context_manager._cache.templates[DataAnalyticsComponent.prototype.name];
+    data_analytics_component.innerHTML = data_analytics_markup;
+
+    addFadeIn(data_analytics_component, '#content', 600);
+    
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error showing the data analytics component: ${err}`)
+  }
 }
 
 DataAnalyticsComponent.prototype.hide = function() {
-  console.log('Hide the data analytics components')
+  try {
+    removeFadeOut(`#${DataAnalyticsComponent.prototype.name}-component`, 200);
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error hiding the data analytics component: ${err}`)
+  }
 }
+
 
 DataAnalyticsComponent.prototype.update = function() {
   console.log('Update the data analytics components')
@@ -235,15 +336,29 @@ SettingsComponent.prototype.constructor = SettingsComponent;
 SettingsComponent.prototype.subscriptions = ['settings']
 
 SettingsComponent.prototype.show = function() {
-  console.log('Show the settings component')
+  try {
+    let settings_component = document.createElement('div');
+    settings_component.setAttribute('id', `${SettingsComponent.prototype.name}-component`)
+
+    let settings_markdown = context_manager._cache.templates[SettingsComponent.prototype.name];
+    settings_component.innerHTML = settings_markdown;
+
+    addFadeIn(settings_component, '#content', 600);
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error showing the settings component: ${err}`)
+  }
 }
 
 SettingsComponent.prototype.hide = function() {
-  console.log('Hide the settings component')
+  try {
+    removeFadeOut(`#${SettingsComponent.prototype.name}-component`, 200);
+  } catch (err) {
+    // Push exception to API endpoint
+    console.log(`Error hiding the settings component: ${err}`)
+  }
 }
 
 SettingsComponent.prototype.update = function() {
-  console.log('Update the settings component')
+  console.log('Update the settings component.')
 }
-
-
