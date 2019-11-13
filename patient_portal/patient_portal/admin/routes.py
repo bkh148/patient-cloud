@@ -10,17 +10,20 @@ from .. import services
 def dashboard():
     """Handle the admin dashboard"""
 
-    metadata = {}
-    metadata['care_locations'] = []
-    metadata['data_analytics'] = {}
-    metadata['components'] = []
-    metadata['settings'] = {}
+    metadata = {
+        'data_analytics': {},
+        'care_locations': [],
+        'configurations': {},
+        'templates': {},
+        'components': ['care_locations', 'data_analytics', 'settings'],
+        'settings': {}
+    }
 
     try:
-        data_analysis = []
         metadata['care_locations'] = services.location_service().get_all_locations()
-        metadata['data_analytics'] = data_analysis
+        metadata['data_analytics'] = []
         metadata['components'] = ['care_locations', 'data_analytics', 'settings']
+        
         metadata['settings'] = {
             "forename": "Admin",
             "surname": "AdminSur",
@@ -49,6 +52,12 @@ def dashboard():
     "style": "",
     "context": metadata['components'][1],
         "icon": "fas fa-chart-line"}
+    
+    
+    metadata['templates']['care_locations'] = 'Hello, care locations'
+    metadata['templates']['data_analytics'] = 'Hello, data analytics'
+    metadata['templates']['settings'] = render_template('admin/settings.html', context=metadata['settings'])
+
 
     return render_template('admin/index.html', title='Dashboard - Admin', static_folder='admin.static',
                            style_paths=['css/main.css'],
