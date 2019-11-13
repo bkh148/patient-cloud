@@ -79,6 +79,10 @@ $(document).ready(function(){
 			component = context_manager.components[i];
 			component.update();
 		}
+
+		// Initialise the first component
+		context_manager.components[0].show();
+
 	} catch (err) {
 		console.log(`An error has occurred whilst loading the context manager: ${err}`);
 	}
