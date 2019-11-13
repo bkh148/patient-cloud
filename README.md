@@ -17,3 +17,6 @@ Dashboard (WIP): <br />
 
 Appointments (WIP): <br />
 ![alt text](./public/appointments.png "Appointments") <br />
+
+Settings (WIP): <br />
+![alt text](./public/settings.png "Settings") <br/>
