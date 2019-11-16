@@ -1,3 +1,44 @@
-h1 {
-	color: red
+html,
+body {
+    background: #323545;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#centered-container-doctor {
+    top: 85px;
+}
+
+#centered-container-wrapper h1 {
+    font-size: 2rem;
+}
+
+.row {
+    margin: 0px;
+}
+
+
+/* Media Queries */
+
+@media only screen and (min-width: 400px) {
+    #centered-container-doctor {
+        left: 30px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #centered-container-doctor {
+        left: 30px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    #centered-container-doctor {
+        left: 40px;
+    }
+    #welcome-panel button {
+        max-width: 300px;
+        min-width: 300px;
+    }
 }

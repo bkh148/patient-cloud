@@ -1,5 +1,16 @@
-{% extends "centered_container.html"  %}
-
-{% block centered_container_content %}
-<h1>404!!</h1>
+{% extends "centered_container.html" %} {% block centered_container_content %}
+<img id="centered-container-doctor" src="{{ payload.logo_doctor }}" width="300" height="300" class="d-inline-block align-left" alt="">
+<div id="welcome-panel" class="row col-8 col-sm-8 col-md-10 align-self-end flex-fill">
+    <div id="welcome-panel-header" class="col offset-md-4 align-items-start justify-content-end">
+        <h1>Oops.. Looks like you got lost there!</h1>
+        <p>{{ payload.message }}</p>
+    </div>
+    <div id="welcome-panel-footer" class="row flex-fill justify-content-end">
+        <form action="{{ url_for('home_page') }}" method="GET">
+            <button class="btn btn-custom">Back to safety</button>
+        </form>
+        <p>{{ payload.version_number }}</p>
+    </div>
+</div>
+</div>
 {% endblock %}
