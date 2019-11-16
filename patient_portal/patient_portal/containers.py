@@ -49,6 +49,9 @@ class Repositories(containers.DeclarativeContainer):
 
 class Services(containers.DeclarativeContainer):
 
+    config = providers.Configuration('config')
+    mail_server = config.mail_server
+
     appointment_service = providers.Singleton(
         AppointmentService,
         repo=Repositories.appointment_repo
@@ -78,4 +81,11 @@ class Services(containers.DeclarativeContainer):
         UserService,
         user_repo=Repositories.user_repo,
         log_service=log_service
+    )
+    
+    email_service = providers.Singleton(
+        EmailService,
+        mail_server = mail_server,
+        invite_repo = Repositories.invite_repo,
+        log_service = log_service
     )
