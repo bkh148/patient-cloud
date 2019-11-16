@@ -1,7 +1,8 @@
-html, body {
-   height: 100%;
-   font-weight: normal;
-   font-family: Comfortaa;
+html,
+body {
+    height: 100%;
+    font-weight: normal;
+    font-family: Comfortaa;
 }
 
 .container {
@@ -17,18 +18,24 @@ html, body {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+
 /* change the brand and text color */
+
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, .8);
 }
+
 
 /* change the link color */
+
 .navbar-custom .navbar-nav .nav-link {
-    color: rgba(255,255,255,.5);
+    color: rgba(255, 255, 255, .5);
 }
 
+
 /* change the color of active or hovered links */
+
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:hover .nav-link {
     color: #ffffff;
@@ -38,7 +45,7 @@ html, body {
     top: 45px;
 }
 
-#centered-container-wrapper{
+#centered-container-wrapper {
     position: relative;
     overflow: hidden;
 }
@@ -47,7 +54,7 @@ html, body {
     position: absolute;
 }
 
-#centered-container-wrapper  h1 {
+#centered-container-wrapper h1 {
     font-weight: bold;
 }
 
@@ -56,7 +63,8 @@ html, body {
     max-width: 300px;
 }
 
-#centered-container-wrapper h1, p {
+#centered-container-wrapper h1,
+p {
     color: #323445;
 }
 
@@ -77,9 +85,9 @@ html, body {
     background-color: #FE4284;
     border-color: #FE4284;
     border-radius: 20px;
-    -webkit-box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
-    -moz-box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
-    box-shadow: -13px 15px 36px -13px rgba(254,66,132,0.97);
+    -webkit-box-shadow: -13px 15px 36px -13px rgba(254, 66, 132, 0.97);
+    -moz-box-shadow: -13px 15px 36px -13px rgba(254, 66, 132, 0.97);
+    box-shadow: -13px 15px 36px -13px rgba(254, 66, 132, 0.97);
 }
 
 .btn-custom-danger {
@@ -114,30 +122,31 @@ html, body {
     border-color: #bc2b39;
 }
 
-/* Media Queries */
-@media only screen and (min-width: 400px) {
-  #centered-container-doctor {
-      left: -65px;
-  }
 
+/* Media Queries */
+
+@media only screen and (min-width: 400px) {
+    #centered-container-doctor {
+        left: -65px;
+    }
 }
 
 @media only screen and (max-width: 400px) {
-  #centered-container-doctor {
-      left: -65px;
-  }
+    #centered-container-doctor {
+        left: -65px;
+    }
 }
 
 @media only screen and (min-width: 600px) {
-   #centered-container-doctor {
-       left: -40px;
-   }
-
-   #welcome-panel button {
-      max-width: 300px;
-      min-width: 300px;
-  }
+    #centered-container-doctor {
+        left: -40px;
+    }
+    #welcome-panel button {
+        max-width: 300px;
+        min-width: 300px;
+    }
 }
+
 
 /*
         Shared component css
@@ -145,9 +154,9 @@ html, body {
 
 .component-container {
     flex-direction: column;
-    -webkit-box-shadow: 1px 17px 55px -15px rgba(0,0,0,0.64);
-    -moz-box-shadow: 1px 17px 55px -15px rgba(0,0,0,0.64);
-    box-shadow: 1px 17px 55px -15px rgba(0,0,0,0.64);
+    -webkit-box-shadow: 1px 17px 55px -15px rgba(0, 0, 0, 0.64);
+    -moz-box-shadow: 1px 17px 55px -15px rgba(0, 0, 0, 0.64);
+    box-shadow: 1px 17px 55px -15px rgba(0, 0, 0, 0.64);
     border-radius: 20px
 }
 
@@ -198,7 +207,7 @@ html, body {
 }
 
 .hd-light div p {
-    color:#323546;
+    color: #323546;
 }
 
 .hd-dark div p {
