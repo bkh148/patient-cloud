@@ -8,15 +8,14 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>{{title}}</title>
+  <link rel="stylesheet" type=text/css href="/static/css/base.css">
+  <link rel="stylesheet" type=text/css href="/static/css/settings.css">
+  <link rel="stylesheet" type=text/css href="/static/css/sidebar.css">
   {% block style_paths %}
   {% for style_name in style_paths %}
   <link rel="stylesheet" type=text/css href="{{ url_for(static_folder, filename=style_name) }}">
   {% endfor %}
   {% endblock %}
-  <link rel="stylesheet" type=text/css href="/static/css/base.css">
-  <link rel="stylesheet" type=text/css href="/static/css/settings.css">
-  <link rel="stylesheet" type=text/css href="/static/css/sidebar.css">
-
   <!-- Socket IO -->
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 
@@ -39,8 +38,6 @@
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-  <!-- Moment Js -->
-  {{ moment.include_moment() }}
 
   <script src="/static/js/sidebar.js"></script>
   <script src="/static/js/components.js"></script>

@@ -7,12 +7,12 @@
   <title>{{title}}</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/static/css/base.css">
   {% block style_paths %}
   {% for style_name in style_paths %}
   <link rel="stylesheet" type=text/css href="{{ url_for(static_folder, filename=style_name) }}">
   {% endfor %}
   {% endblock %}
-  <link rel="stylesheet" type="text/css" href="/static/css/base.css">
 </head>
 
 <body>
