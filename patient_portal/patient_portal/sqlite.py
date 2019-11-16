@@ -5,30 +5,46 @@ class SQLiteDatabase(object):
 
     def __init__(self, config):
         self._config = config
-        sqlite3.register_adapter(uuid.UUID, lambda u: u.bytes_le)
+        self._connection = None
 
-
-    def connection(self):
+    def connect(self):
         try:
-            connection = sqlite3.connect(self._config.DATABASE_URI)
-            connection.row_factory = sqlite3.Row
-            return connection
+            self._connection = sqlite3.connect(self._config.DATABASE_URI)
+            self._connection.row_factory = sqlite3.Row
+            sqlite3.register_adapter(uuid.UUID, lambda u: u.bytes_le)
+            return self._connection
         except Exception as e:
             print('Connection issue: {}'.format(e))
             raise e
-
+        
+    def connection(self):
+        return self._connection
+        
+    def disconnect(self):
+        try:
+            self.connection().close()
+        except Exception as e:
+            print('Disconnection issue: {}'.format(e))
+    
     def get_all(self, query, params = ()):
-        cursor = self.connection().cursor();
-        return [dict(x) for x in cursor.execute(query, params).fetchall()]
+        self.connect()
+        cursor = self.connection().cursor()
+        result = [dict((cursor.description[idx][0], value) for idx, value in enumerate(row)) for row in cursor.execute(query, params).fetchall()]
+        self.disconnect()
+        return result
 
     def get_single(self, query, params = ()):
-        cursor = self.connection().cursor();
-        return dict(cursor.execute(query, params).fetchone())
+        connection = self.connect()
+        cursor = self.connection().cursor()
+        result = [dict((cursor.description[idx][0], value) for idx, value in enumerate(row)) for row in cursor.execute(query, params).fetchall()]
+        self.disconnect()
+        return result[0] if result else None
 
     def initialise_database(self):
-        """Initialise the databse"""
+        """Initialise the database"""
         try:
 
+            self.connect()
             self.create_user_table()
             self.create_user_role_table()
             self.create_user_role_map_table()
@@ -40,6 +56,7 @@ class SQLiteDatabase(object):
             self.create_invite_table()
             self.create_activity_table()
             self.create_exception_table()
+            self.disconnect()
 
             print('{} initialised successfully... 🎉'.format(self._config.MODE))
         except Exception as e:
