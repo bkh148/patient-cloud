@@ -6,6 +6,8 @@ from . session_repository import SessionRepository
 from . invite_repository import InviteRepository
 from . location_repository import LocationRepository
 from . user_repository import UserRepository
+from . password_repository import PasswordRepository
 
 __all__ = ['AppointmentRepository', 'LogRepository', 'SessionRepository',
-           'InviteRepository', 'LocationRepository', 'UserRepository']
+           'InviteRepository', 'LocationRepository', 'UserRepository',
+           'PasswordRepository']

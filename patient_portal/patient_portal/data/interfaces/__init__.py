@@ -6,7 +6,8 @@ from . session_repository_interface import ISessionRepository
 from . invite_repository_interface import IInviteRepository
 from . location_repository_interface import ILocationRepository
 from . user_repository_interface import IUserRepository
+from . password_repository_interface import IPasswordRepository
 
 __all__ = ['IAppointmentRepository', 'ILogRepository', 'ISessionRepository',
-           'IInviteRepository', 'ILocationRepository', 'IUserRepository']
+           'IInviteRepository', 'ILocationRepository', 'IUserRepository', 'IPasswordRepository']
 
