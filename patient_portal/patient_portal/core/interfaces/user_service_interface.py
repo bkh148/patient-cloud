@@ -7,6 +7,10 @@ class IUserService(metaclass=abc.ABCMeta):
         """ get a user object by the the user id """
     
     @abc.abstractmethod
+    def validate_user(self, user_mail, user_password):
+        """ validate a user authentication request """
+    
+    @abc.abstractmethod
     def get_user_by_email(self, user_mail):
         """ get a user object by the id """
     
