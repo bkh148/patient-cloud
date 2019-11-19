@@ -46,6 +46,10 @@ class Repositories(containers.DeclarativeContainer):
     user_repo = providers.Singleton(
         UserRepository, db=DataStores.database
     )
+    
+    password_repo = providers.Singleton(
+        PasswordRepository, db=DataStores.database
+    )
 
 class Services(containers.DeclarativeContainer):
 
@@ -67,6 +71,12 @@ class Services(containers.DeclarativeContainer):
         repo=Repositories.session_repo
     )
 
+    password_service = providers.Singleton(
+        PasswordService,
+        repo=Repositories.password_repo,
+        log_service = log_service
+    )
+
     invite_service = providers.Singleton(
         InviteService,
         repo=Repositories.invite_repo
@@ -80,6 +90,7 @@ class Services(containers.DeclarativeContainer):
     user_service = providers.Singleton(
         UserService,
         user_repo=Repositories.user_repo,
+        password_service=password_service,
         log_service=log_service
     )
     
