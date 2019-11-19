@@ -18,6 +18,8 @@ class UserRepository(IUserRepository):
 
     def get_user_by_email(self, user_mail):
         """ get a user object by the id """
+        return self._db.get_single("""
+        SELECT * FROM user WHERE user_email = ?""", (user_mail, ))
     
     def get_user_role_by_id(self, user_id):
         """ get a user's role by their id """
