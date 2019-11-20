@@ -2,6 +2,7 @@
 
 from functools import wraps
 from .user_roles import UserRole
+from flask_socketio import disconnect
 from flask import request, redirect, url_for, session
 
 def anonymous_required(function):
@@ -32,3 +33,13 @@ def login_required(role):
             return function(*args, **kwargs)
         return wrapper
     return check_role
+
+
+def authenticated_socket(function):
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        if 'user' not in session:
+            disconnect()
+        else:
+            return function(*args, **kwargs)
+    return wrapper
