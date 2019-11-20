@@ -3,10 +3,12 @@
 from . import admin
 from flask import render_template
 from .. import services
+from ..core import login_required
 
 # Route guarding requied
 @admin.route('/', methods=['GET'])
 @admin.route('/dashboard', methods=['GET'])
+@login_required('ADMIN')
 def dashboard():
     """Handle the admin dashboard"""
 
