@@ -3,9 +3,11 @@
 from . import local_admin
 from flask import render_template
 from .. import services
+from ..core import login_required
 
 @local_admin.route('/', methods=['GET'])
 @local_admin.route('/dashboard', methods=['GET'])
+@login_required('LOCAL_ADMIN')
 def dashboard():
     """Handle the local admin dashboard"""
 
