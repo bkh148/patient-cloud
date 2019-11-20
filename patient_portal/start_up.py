@@ -1,7 +1,6 @@
 import os
-from flask import render_template, send_from_directory
-from patient_portal import initialise_application
-
+from flask import render_template, session, redirect, request, url_for, send_from_directory
+from patient_portal.core.models import anonymous_required
 app, socket_io = initialise_application("development")
 
 
@@ -13,13 +12,9 @@ def favicon():
 
 @app.route('/', methods=['GET'])
 @app.route('/welcome', methods=['GET'])
+@anonymous_required
 def home_page():
-    """First point of contact into the site.
-
-    Todo:
-        Route guarding is needed to redirect in case of authentication status (i.e. dashboard)
-    """
-
+    """First point of contact into the site."""
     login = {
         'text': 'Login',
         'url': 'auth.login',
