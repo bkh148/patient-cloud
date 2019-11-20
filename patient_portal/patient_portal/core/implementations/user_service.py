@@ -25,6 +25,7 @@ class UserService(IUserService):
         
             if user:
                 password = self._password_service.get_password_hash(user['user_id'])
+                user['role'] = self._user_repo.get_user_role_by_id(user['user_id'])["user_role"]
                 if password and check_password_hash(password['password_hash'], user_password):
                     return user
                 else:

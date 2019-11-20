@@ -23,6 +23,11 @@ class UserRepository(IUserRepository):
     
     def get_user_role_by_id(self, user_id):
         """ get a user's role by their id """
+        return self._db.get_single("""
+        SELECT user_role FROM user t1
+        LEFT JOIN user_role_map t2 ON t1.user_role_map_id = t2.user_role_map_id
+        LEFT JOIN user_role t3 ON t2.user_role_id = t3.user_role_id
+        WHERE user_id = ?""", (user_id, ))
     
     def get_user_role_by_email(self, user_mail):
         """ get a user's role by their email """
