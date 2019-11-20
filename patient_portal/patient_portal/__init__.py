@@ -34,12 +34,14 @@ def initialise_application(configuration):
     from .local_admin import local_admin as local_admin_blueprint
     from .clinician import clinician as clinician_blueprint
     from .patient import patient as patient_blueprint
+    from .api import api_blueprint
 
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
     app.register_blueprint(local_admin_blueprint, url_prefix="/local_admin")
     app.register_blueprint(clinician_blueprint, url_prefix='/clinician')
     app.register_blueprint(patient_blueprint, url_prefix='/patient')
+    app.register_blueprint(api_blueprint, url_prefix='/api')
 
     socket_io.init_app(app, logger=True, engineio_logger=True)
 
