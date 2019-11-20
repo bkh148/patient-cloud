@@ -9,7 +9,8 @@ ContextManager.prototype.components = []
 
 ContextManager.prototype.initialise_socket = function() {
 	try {
-		let socket = io.connect(`http://${this._cache["configurations"]["host"]}:${this._cache["configurations"]["port"]}/${this._cache["configurations"]["namespace"]}`);
+		// Sets a global socket object
+		socket = io.connect(`http://${this._cache["configurations"]["host"]}:${this._cache["configurations"]["port"]}/${this._cache["configurations"]["namespace"]}`);
 
 		socket.on('connect', function() {
 			socket.emit('load_dashboard', {});
@@ -17,6 +18,15 @@ ContextManager.prototype.initialise_socket = function() {
 
 	} catch (err) {
 		console.log(`Exception occurred whilst setting up socket: ${err}`)
+	}
+}
+
+ContextManager.prototype.logout = function() {
+	try {
+		socket.emit('logout', {})
+	} catch (err) {
+		console.log(`Exception occurred whilst setting up socket: ${err}`)
+		// Push error to log api
 	}
 }
 
@@ -57,6 +67,7 @@ ContextManager.prototype.switch_context = function(target) {
 		}
 	} catch(err) {
 		console.log(`An error has occurred whilst switching the context: ${err}`);
+		// Push error to log api
 	}
 }
 
@@ -85,6 +96,7 @@ $(document).ready(function(){
 
 	} catch (err) {
 		console.log(`An error has occurred whilst loading the context manager: ${err}`);
+		// Push error to log api
 	}
 	 console.log('Context manager initialized successfully.');
 	 
