@@ -2,11 +2,12 @@
 
 from . import patient
 from flask import render_template
-
 from .. import services
+from ..core import login_required
 
 @patient.route('/', methods=['GET'])
 @patient.route('/dashboard', methods=['GET'])
+@login_required('PATIENT')
 def dashboard():
     """Handle the patient dashboard"""
 
