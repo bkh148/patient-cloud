@@ -40,6 +40,15 @@ def home_page():
                            style_paths=['css/welcome.css'],
                            nav_links=[login, register])
 
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    """Log the user out from the session, and clear session"""
+    if 'user' in session:
+        session.clear()
+        return redirect(url_for('home_page'))
+
+
 @app.errorhandler(404)
 def not_found_error(error):
     """Handling 404 errors"""
