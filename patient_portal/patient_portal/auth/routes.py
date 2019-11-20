@@ -1,37 +1,43 @@
 """Module representing the authentication routes"""
 
-from flask import render_template, flash, request, redirect, url_for, json
+from flask import render_template, flash, session, request, redirect, url_for, json
 from . import auth
 from .. import services
+from ..core.models import UserRole, anonymous_required
 
 # If authenticated, navigated to appropriate view (admin / norm)
 # @auth.routes('/', methods=['GET', 'POST'])
 
 # If user is already logged in, redirect to dashboard
 @auth.route('/login', methods=['GET', 'POST'])
+@anonymous_required
 def login():
     """Endpoint for handling user login."""
 
-    validation_errors = []
+    validation_error = {}
 
     if request.method == "POST":
+        
         user_mail = request.form.get('email', None)
         user_pwd = request.form.get('password', None)
         user = services.user_service().validate_user(user_mail, user_pwd)
-        
-        print("User: {}".format(user))
 
-        if user_mail == 'liam.j.lamb@gmail.com' and user_pwd == 'Password1':
-            return redirect('/admin')
+        if user:
+            session['user'] = user
+            for role in UserRole:
+                if user['role'] == role.value:
+                    return redirect(url_for('{}.dashboard'.format(role.value.lower())))
+                else:
+                    validation_error['authentication_error'] = 'An error has occurred logging you in.'
         else:
-            validation_errors = ['Unrecognised authentication combination.']
-
+            validation_error['authentication_error'] = 'Unrecognized e-mail & password combination.'
+            
     return render_template('auth/login.html', 
                            title='Login', 
                            static_folder='auth.static', 
                            script_paths=['js/auth.js'], 
                            style_paths=['css/auth.css'], 
-                           errors=validation_errors)
+                           error=validation_error)
 
 
 @auth.route('/register', methods=['GET', 'POST'])
