@@ -3,10 +3,11 @@
 from . import clinician
 from flask import render_template
 from .. import services
-
+from ..core import login_required
 
 @clinician.route('/', methods=['GET'])
 @clinician.route('/dashboard', methods=['GET'])
+@login_required('CLINICIAN')
 def dashboard():
     """Handle the clincian dashboard"""
 
