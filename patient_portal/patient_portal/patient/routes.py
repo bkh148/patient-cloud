@@ -1,7 +1,7 @@
 """Module for handling normal user routes"""
 
 from . import patient
-from flask import render_template
+from flask import render_template, session
 from .. import services
 from ..core import login_required
 
@@ -20,7 +20,7 @@ def dashboard():
     }
 
     try:
-        metadata['appointments']['upcoming'] = services.appointment_service().get_appointments_for('0f837187-be84-4c4d-a3b6-745598174959')
+        metadata['appointments']['upcoming'] = services.appointment_service().get_appointments_for(session['user']['user_id'])
         
         # Get from session
         metadata['configurations'] = {
