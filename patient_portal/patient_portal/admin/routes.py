@@ -37,8 +37,8 @@ def dashboard():
         metadata['configurations'] = {
         "host": "127.0.0.1",
         "port": "5000",
-        "namespace": "admin"}
-
+        "namespace": "admin",
+        "session_id": session['session_id'],
     except Exception as e:
         # Log error
         print('Some exception {}'.format(e))

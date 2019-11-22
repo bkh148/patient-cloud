@@ -47,7 +47,8 @@ def dashboard():
         metadata['configurations'] = {
             "host": "127.0.0.1",
             "port": "5000",
-            "namespace": "clinician"}
+            "namespace": "clinician",
+            "session_id": session['session_id']}
 
         # Todo: Create a clinician's patient view
         metadata['templates']['patients'] = 'Hello, patients'
