@@ -5,6 +5,19 @@ class UserRepository(IUserRepository):
     def __init__(self, db):
         self._db = db
     
+    def upsert_user(self, user):
+        """ Create or update a user model """
+        if self.has_user(user['user_id']):
+            self._db.update('user', user)
+        else:
+            self._db.insert('user', user)
+        
+    def has_user(self, user_id):
+        """ Evaluate if a user exists in datastore """
+        return self._db.count("""
+            SELECT COUNT() FROM user
+            WHERE user_id = ?""", (user_id, )) > 0
+    
     def get_user_by_id(self, user_id):
         """ get a user object by the the user id """
         return db.execute("SELECT * FROM user;")
