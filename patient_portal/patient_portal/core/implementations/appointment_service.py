@@ -33,8 +33,7 @@ class AppointmentService(IAppointmentService):
             appointment_id: id of the app. to retrieve.
         """
         try:
-            raise Exception("Test exception!!")
-            return self._appointment_repository.get_appointments_created_for(appointment_id)
+            return self._appointment_repository.get_appointments_for(appointment_id)
         except Exception as e:
             self._log_service.log_exception(e)
             raise
