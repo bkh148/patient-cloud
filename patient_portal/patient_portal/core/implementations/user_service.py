@@ -8,13 +8,20 @@ class UserService(IUserService):
         self._password_service = password_service
         self._log_service = log_service
         
+    
+    def upsert_user(self, user):
+        try:
+            print("")
+        except Exception as e:
+            self._log_service.log_exception(e)
+            raise
+    
     def get_user_by_id(self, user_id):
         try :
             # TODO: log service call
             return self._user_repo.get_user_by_id(user_id);
         except Exception as e:
-            # TODO: logging
-            print("Service Exception {} : {}".format(__name__, e))
+            self._log_service.log_exception(e)
         
         return None;
     
@@ -33,7 +40,7 @@ class UserService(IUserService):
             else:
                 return None
         except Exception as e:
-            print("Service Exception {} : {}".format(__name__, e))
+            self._log_service.log_exception(e)
             
         return None
             
@@ -43,7 +50,7 @@ class UserService(IUserService):
         try :
             return self._user_repo.get_user_by_email(user_mail)
         except Exception as e:
-            print("Service Exception {}: {}".format(__name__, e))
+            self._log_service.log_exception(e)
         return None;
     
     def get_user_role_by_id(self, user_id):
@@ -58,8 +65,8 @@ class UserService(IUserService):
             #Todo: log activity
             return self._user_repo.get_patient_clinician(patient_id)
         except Exception as e:
-            #Todo: log exception
-            print("Service Exception {} : {}".format(__name__, e))
+            self._log_service.log_exception(e)
+            raise
             
     
     def get_all_users_patients(self, clinician_id):
@@ -68,8 +75,7 @@ class UserService(IUserService):
             #TODO: log service call
             return self._user_repo.get_all_users_patients(clinician_id);
         except Exception as e:
-            #TODO: log exception
-            print("Service Exception {} : {}".format(__name__, e))
+            self._log_service.log_exception(e)
         
         return None;
     
