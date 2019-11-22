@@ -56,19 +56,21 @@ class Services(containers.DeclarativeContainer):
     config = providers.Configuration('config')
     mail_server = config.mail_server
 
-    appointment_service = providers.Singleton(
-        AppointmentService,
-        repo=Repositories.appointment_repo
-    )
-
     log_service = providers.Singleton(
         LogService,
         repo=Repositories.log_repo
     )
 
+    appointment_service = providers.Singleton(
+        AppointmentService,
+        repo=Repositories.appointment_repo,
+        log_service=log_service
+    )
+
     session_service = providers.Singleton(
         SessionService,
-        repo=Repositories.session_repo
+        repo=Repositories.session_repo,
+        log_service=log_service
     )
 
     password_service = providers.Singleton(
@@ -79,12 +81,14 @@ class Services(containers.DeclarativeContainer):
 
     invite_service = providers.Singleton(
         InviteService,
-        repo=Repositories.invite_repo
+        repo=Repositories.invite_repo,
+        log_service=log_service
     )
 
     location_service = providers.Singleton(
         LocationService,
-        loc_repo=Repositories.location_repo
+        loc_repo=Repositories.location_repo,
+        log_service=log_service
     )
     
     user_service = providers.Singleton(
