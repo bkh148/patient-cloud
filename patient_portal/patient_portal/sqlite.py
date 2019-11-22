@@ -30,6 +30,7 @@ class SQLiteDatabase(object):
         self.connect()
         cursor = self.connection().cursor()
         result = [dict((cursor.description[idx][0], value) for idx, value in enumerate(row)) for row in cursor.execute(query, params).fetchall()]
+        cursor.close()
         self.disconnect()
         return result
 
@@ -37,8 +38,57 @@ class SQLiteDatabase(object):
         connection = self.connect()
         cursor = self.connection().cursor()
         result = [dict((cursor.description[idx][0], value) for idx, value in enumerate(row)) for row in cursor.execute(query, params).fetchall()]
+        cursor.close()
         self.disconnect()
         return result[0] if result else None
+    
+    def count(self, query, params = ()):
+        connection = self.connect()
+        cursor = self.connection().cursor()
+        result = cursor.execute(query, params).fetchone()
+        cursor.close()
+        self.disconnect()
+        return result['COUNT()']
+    
+    def update(self, table_name, json_object):
+        connection = self.connect()
+        cursor = self.connection().cursor()
+        
+        object_id = list(json_object.keys())[0]
+        keys = [key for key in json_object.keys() if json_object[key] and '_id' not in key]
+        update_fields = ["{} = ?".format(key) for key in keys]
+        
+        query = """
+            UPDATE {table}
+            SET {columns}
+            WHERE {id} = ?""".format(table=table_name, 
+                                    columns=', '.join(update_fields),
+                                    id=object_id)
+        
+        values = [json_object[key] for key in keys]
+        values.append(json_object[object_id])
+        
+        cursor.execute(query, values)
+        connection.commit()
+        cursor.close()
+        self.disconnect()
+
+    def insert(self, table_name, json_object):
+        connection = self.connect()
+        cursor = self.connection().cursor()
+        
+        keys = [key for key in json_object.keys()]
+        values = [json_object[key] for key in keys]
+        
+        query = """
+            INSERT INTO {table} {columns}
+            VALUES ({values})""".format(table=table_name, columns=tuple(keys), values=', '.join('?' * len(keys)))
+        
+        cursor.execute(query, tuple(values))
+        connection.commit()
+        cursor.close()
+        self.disconnect()
+
 
     def initialise_database(self):
         """Initialise the database"""
