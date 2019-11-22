@@ -5,6 +5,10 @@ import abc
 class ILogService(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
+    def log_exception(self, error):
+        """build the exception object and log it"""
+
+    @abc.abstractmethod
     def get_exceptions_by_session_id(self, session_id):
         """get all exceptions between two dates"""
 
@@ -19,6 +23,10 @@ class ILogService(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def get_activities_by_session_id(self, session_id):
         """get all activities by session id"""
+
+    @abc.abstractmethod
+    def log_activity(self, activity):
+        """build the activity object and log it"""
 
     @abc.abstractmethod
     def upsert_activity(self, activity_log):

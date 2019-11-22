@@ -3,6 +3,10 @@ import abc
 class IUserService(metaclass=abc.ABCMeta):
     
     @abc.abstractmethod
+    def upsert_user(self, user):
+        """ Create or update a user model """
+    
+    @abc.abstractmethod
     def get_user_by_id(self, user_id):
         """ get a user object by the the user id """
     
