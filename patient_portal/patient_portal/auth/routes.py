@@ -1,7 +1,8 @@
 """Module representing the authentication routes"""
 
-from flask import render_template, flash, session, request, redirect, url_for, json
+from flask import render_template, flash, session, request, redirect, url_for, json, make_response
 from . import auth
+import uuid
 from .. import services
 from ..core.models import UserRole, anonymous_required
 
@@ -26,6 +27,7 @@ def login():
             session['user'] = user
             for role in UserRole:
                 if user['role'] == role.value:
+                    session['session_id'] = str(uuid.uuid4())
                     return redirect(url_for('{}.dashboard'.format(role.value.lower())))
                 else:
                     validation_error['authentication_error'] = 'An error has occurred logging you in.'
