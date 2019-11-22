@@ -3,6 +3,14 @@ import abc
 class IUserRepository(metaclass=abc.ABCMeta):
     
     @abc.abstractmethod
+    def upsert_user(self, user):
+        """ Create or update a user model """
+        
+    @abc.abstractmethod
+    def has_user(self, user_id):
+        """ Evaluate if a user exists in datastore """
+    
+    @abc.abstractmethod
     def get_user_by_id(self, user_id):
         """ get a user object by the the user id """
     

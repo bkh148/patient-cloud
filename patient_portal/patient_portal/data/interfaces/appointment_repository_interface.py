@@ -4,11 +4,11 @@ class IAppointmentRepository(metaclass=abc.ABCMeta):
     """Abstract interface of the appointment repository. This should be used as part of a decoupling process to improve testability and growth of the code."""
 
     @abc.abstractmethod
-    def upsert_appointment(self, payload):
+    def upsert_appointment(self, appointment):
         """ Updates or inserts a new appointment into the datastore.
 
         Args:
-            payload: the appointment object.
+            appointment: the appointment object.
         """
 
     @abc.abstractmethod
