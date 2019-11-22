@@ -11,10 +11,6 @@ class IInviteService(metaclass=abc.ABCMeta):
         """ remove an invite from the table """
 
     @abc.abstractmethod
-    def has_invite(self, invite_id):
-        """ evaluate if an invite is in the table """
-
-    @abc.abstractmethod
     def get_invites_created_by(self, user_id):
         """ get all invites created by a user"""
 
