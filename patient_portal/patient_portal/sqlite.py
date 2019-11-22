@@ -96,6 +96,15 @@ class SQLiteDatabase(object):
         cursor.close()
         self.disconnect()
 
+    def execute(self, query, params= ()):
+        connection = self.connect()
+        cursor = self.connection().cursor()
+        
+        cursor.execute(query, params)
+        
+        cursor.close()
+        self.disconnect()
+
     def initialise_database(self):
         """Initialise the database"""
         try:
