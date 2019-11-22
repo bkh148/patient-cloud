@@ -14,8 +14,9 @@ class LogRepository(ILogRepository):
         Returns:
             empty [] or [] of exceptions.
         """
-        # SQL Query
-        return []
+        return self._db.get_all("""
+            SELECT * FROM exception_log
+            WHERE session_id = ?""", (session_id, ))
 
 
     def upsert_exception(self, exception_log):
@@ -25,23 +26,23 @@ class LogRepository(ILogRepository):
             exception_log: a full log object to either insert or update appropriately.
 
         """
-
-        has_log = self.has_exception(exception_log["exception_log_id"])
-        if has_log:
-            print('has log')
-            # Update query
+        if self.has_exception(exception_log["exception_log_id"]):
+            self._db.update('exception_log', exception_log)
         else:
-            print('doesn\'t have log')
-            # Insert query
+            self._db.insert('exception_log', exception_log)
 
     def has_exception(self, exception_log_id):
-        """evaluates if an exception log is in the data store
-        """
-        # scalar query to evaluate presence of log.
+        """evaluates if an exception log is in the data store"""
+        return self._db.count("""
+            SELECT COUNT() FROM exception_log
+            WHERE exception_log_id = ?""", (exception_log_id, )) > 0
+        
 
     def delete_exception(self, exception_log_id):
         """removes an exception log from the data store"""
-        # query to delete a lof from exception table
+        self._db.execute("""
+            DELETE FROM exception_log
+            WHERE exception_log_id = ?""", (exception_log_id, ))
 
     def get_activities_by_session_id(self, session_id):
         """get all activities from a given user session
@@ -52,26 +53,25 @@ class LogRepository(ILogRepository):
         Returns:
             empty [] or [] of activities.
         """
-        # SQL Query
-        return []       #
+        return self._db.get_all("""
+            SELECT * FROM activity_log
+            WHERE session_id = ?""", (session_id, ))
 
     def upsert_activity(self, activity_log):
         """insert of update an activity log"""
-
-        has_activity = self.has_activity(activity_log["activity_log_id"])
-
-        if has_activity:
-            print('has')
-            # update a log
+        if self.has_activity(activity_log["activity_log_id"]):
+            self._db.update('activity_log', activity_log)
         else:
-            print('hasn\'t')
-            # insert a log
+            self._db.insert('activity_log', activity_log)
 
     def has_activity(self, activity_log_id):
         """evaluates if an activity log is in the data store"""
-        #scalar to assess if log is in the activity table
-
+        return self._db.count("""
+            SELECT COUNT() FROM exception_log
+            WHERE activity_log = ?""", (activity_log_id, )) > 0
 
     def delete_activity(self, activity_log_id):
         """removes an activity log from the data store"""
-        #query to remove the log by id
+        self._db.execute("""
+            DELETE FROM exception_log
+            WHERE activity_log = ?""", (activity_log_id, ))
