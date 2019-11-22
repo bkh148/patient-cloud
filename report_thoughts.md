@@ -28,3 +28,10 @@ This demands a better design of how roles are managed in the projects, and raise
 It's quite easy when developing to have a few bad when using git. As 3rd year students, it's important that we start moving towards getting our hands a bit dirty with git and really trying to enforce good habits. One of the issues that this project had was a bad habit around branching strategies. Generally, I find it's good to keep master completely and utterly clean. This means, that only code that has been tested and reviewed should actually every be merge back into master. 
 
 Furthermore, in terms of history of work, and feature management, it's generally a wise idea to add features by branch. This means that whenever a chunk of work has just been finished, tested and merged back into master, we will create a new branch off the latest master snapshot when we intend to develop a new feature. Commits would therefore be pushed to that branch, and this really allows a good overview of a particular features progress before it being pulled into the master branch. This allows for a final read of the work, and another opportunity to spot any bugs or inconsistencies.
+
+**Swagger Documentation :** <br />
+Discussion on the importance of swagger within teams but also on open APIS
+
+
+**Service / Repository Abstractions :** <br />
+Discussion on the use of the core, and data layers for abstractions.
