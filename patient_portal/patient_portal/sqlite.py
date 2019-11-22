@@ -1,5 +1,7 @@
-import sqlite3, uuid
+import sqlite3
+import uuid
 from pprint import pprint as pp
+
 
 class SQLiteDatabase(object):
 
@@ -16,58 +18,61 @@ class SQLiteDatabase(object):
         except Exception as e:
             print('Connection issue: {}'.format(e))
             raise e
-        
+
     def connection(self):
         return self._connection
-        
+
     def disconnect(self):
         try:
             self.connection().close()
         except Exception as e:
             print('Disconnection issue: {}'.format(e))
-    
-    def get_all(self, query, params = ()):
+
+    def get_all(self, query, params=()):
         self.connect()
         cursor = self.connection().cursor()
-        result = [dict((cursor.description[idx][0], value) for idx, value in enumerate(row)) for row in cursor.execute(query, params).fetchall()]
+        result = [dict((cursor.description[idx][0], value) for idx, value in enumerate(
+            row)) for row in cursor.execute(query, params).fetchall()]
         cursor.close()
         self.disconnect()
         return result
 
-    def get_single(self, query, params = ()):
+    def get_single(self, query, params=()):
         connection = self.connect()
         cursor = self.connection().cursor()
-        result = [dict((cursor.description[idx][0], value) for idx, value in enumerate(row)) for row in cursor.execute(query, params).fetchall()]
+        result = [dict((cursor.description[idx][0], value) for idx, value in enumerate(
+            row)) for row in cursor.execute(query, params).fetchall()]
         cursor.close()
         self.disconnect()
         return result[0] if result else None
-    
-    def count(self, query, params = ()):
+
+    def count(self, query, params=()):
         connection = self.connect()
         cursor = self.connection().cursor()
         result = cursor.execute(query, params).fetchone()
         cursor.close()
         self.disconnect()
         return result['COUNT()']
-    
+
     def update(self, table_name, json_object):
         connection = self.connect()
         cursor = self.connection().cursor()
-        
+
         object_id = list(json_object.keys())[0]
-        keys = [key for key in json_object.keys() if json_object[key] and '_id' not in key]
+        keys = [key for key in json_object.keys() if json_object[key]
+                and '_id' not in key]
         update_fields = ["{} = ?".format(key) for key in keys]
-        
+
         query = """
             UPDATE {table}
             SET {columns}
-            WHERE {id} = ?""".format(table=table_name, 
-                                    columns=', '.join(update_fields),
-                                    id=object_id)
-        
+            WHERE {id} = ?""".format(table=table_name,
+                                     columns=', '.join(update_fields),
+                                     id=object_id)
+
         values = [json_object[key] for key in keys]
         values.append(json_object[object_id])
-        
+
         cursor.execute(query, values)
         connection.commit()
         cursor.close()
@@ -76,19 +81,20 @@ class SQLiteDatabase(object):
     def insert(self, table_name, json_object):
         connection = self.connect()
         cursor = self.connection().cursor()
-        
+
         keys = [key for key in json_object.keys()]
         values = [json_object[key] for key in keys]
-        
+
         query = """
             INSERT INTO {table} {columns}
-            VALUES ({values})""".format(table=table_name, columns=tuple(keys), values=', '.join('?' * len(keys)))
-        
+            VALUES ({values})""".format(table=table_name,
+                                        columns=tuple(keys),
+                                        values=', '.join('?' * len(keys)))
+
         cursor.execute(query, tuple(values))
         connection.commit()
         cursor.close()
         self.disconnect()
-
 
     def initialise_database(self):
         """Initialise the database"""
@@ -111,7 +117,6 @@ class SQLiteDatabase(object):
             print('{} initialised successfully... 🎉'.format(self._config.MODE))
         except Exception as e:
             print('An error has occurred whilst setting up the database: {}'.format(e))
-
 
     def create_user_table(self):
         self.connection().execute("""
@@ -245,4 +250,3 @@ class SQLiteDatabase(object):
         CONSTRAINT unique_exception_log_id UNIQUE (exception_log_id),
         FOREIGN KEY (session_id) REFERENCES session(session_id))
         """)
-
