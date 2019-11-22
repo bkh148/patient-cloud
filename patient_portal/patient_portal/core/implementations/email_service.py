@@ -32,6 +32,5 @@ class EmailService(IEmailService):
             
             # Log activity: email
         except Exception as e:
-            # Log exception to the log service
-            print('Service error: {} : '.format(__name__, e))
+            self._log_service.log_exception(e)
             raise
