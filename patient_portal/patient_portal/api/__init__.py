@@ -1,11 +1,7 @@
-"""Init module for the REST API"""
+from .appointments import nsp as appointment_nsp
+from .locations import nsp as location_nsp
+from .authentication import nsp as authentication_nsp
+from .invites import nsp as invitation_nsp
+from .logs import nsp as log_nsp
 
-from flask import Blueprint
-from flask_restful import Api, Resource, url_for
-from .appointments import Appointment, AppointmentCollection
-
-api_blueprint = Blueprint('api', __name__)
-api = Api(api_blueprint)
-
-api.add_resource(Appointment, '/appointments/<uuid:appointment_id>')
-api.add_resource(AppointmentCollection, '/appointments')
+__all__ = ['appointment_nsp', 'location_nsp', 'authentication_nsp', 'invitation_nsp', 'log_nsp']
