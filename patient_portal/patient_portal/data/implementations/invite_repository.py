@@ -8,12 +8,20 @@ class InviteRepository(IInviteRepository):
 
     def upsert_invite(self, invite):
         """ update or insert a new invite into the table"""
+        
+        if self.has_invite(invite['invite_id']):
+            self._db.update('invite', invite)
+        else:
+            self._db.insert('invite', invite)
 
     def delete_invite(self, invite_id):
         """ remove an invite from the table """
 
     def has_invite(self, invite_id):
         """ evaluate if an invite is in the table """
+        return self._db.count("""
+        SELECT COUNT() FROM invite
+        WHERE invite_id = ? """, (invite_id, )) > 0
 
     def get_invites_created_by(self, user_id):
         """ get all invites created by a user"""

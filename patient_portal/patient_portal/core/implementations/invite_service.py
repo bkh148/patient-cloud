@@ -12,7 +12,11 @@ class InviteService(IInviteService):
 
     def upsert_invite(self, invite):
         """ update or insert a new invite into the table"""
-        self._repo.upsert_invite(invite)
+        try:
+            self._repo.upsert_invite(invite)
+        except Exception as e:
+            print('Service Exception: {} : {}'.format(__name__, e))
+            raise
 
     def delete_invite(self, invite_id):
         """ remove an invite from the table """
