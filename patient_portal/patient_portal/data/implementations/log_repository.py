@@ -67,8 +67,8 @@ class LogRepository(ILogRepository):
     def has_activity(self, activity_log_id):
         """evaluates if an activity log is in the data store"""
         return self._db.count("""
-            SELECT COUNT() FROM exception_log
-            WHERE activity_log = ?""", (activity_log_id, )) > 0
+            SELECT COUNT() FROM activity_log
+            WHERE activity_log_id = ?""", (activity_log_id, )) > 0
 
     def delete_activity(self, activity_log_id):
         """removes an activity log from the data store"""
