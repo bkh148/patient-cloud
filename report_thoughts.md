@@ -1,6 +1,10 @@
 ## Thoughts for report
 ---
 
+**Jinja Templates and Client side rendering :** <br />
+A core feature in flask applications is to use Jinja template rendering. Jinja is fairly easy to use and in most you don't really need to do much more than what is suggested in the documentation. When developing the appointments page for patient, an unexpected issue was encountered, that is that I just didn't plan ahead as much as I should have. Initially, the server would render the appointments templates on page load. It would go through the services to pull out any appointments, and then render an appointments template which ready to go data. Once the page loaded, the context manager would simply take that template html and place it into the relevant container to be rendered on the DOM. 
+
+The initial idea was ok, but I soon realized that I needed a way to have these templates available on the client, too. This is because when a clinician makes a new appointment, if the target patient is online, they will receive an instant notification about this appointment. The context manager therefore receives the appointment meta data, and would then render a new DOM element in the appropriate appointments container element. However, because the appointments were pre-rendered on the server, I would have to write a JavaScript template for new appointments and load them on page load in order to be able to build my new appointment object - which means duplication of code. To get around this, I decided that on the initial load of a user's dashboard, the server will send all of the necessary templates the client will need for any dynamic logic. This is done by using Jinja2, which will all required render templates with placeholder values. Once the client loads the dashboard, the context manager will get any required templates from the context managers cache (location: context_manager._cache.templates). This optimizes code re-use and prevent me from needing to write client side logic for building the appointments html element.
 
 **Application Cron Jobs :**<br />
 Some features that are currently sitting in the code base, don't actually need to be part of the project.
