@@ -20,3 +20,6 @@ Appointments (WIP): <br />
 
 Settings (WIP): <br />
 ![alt text](./public/settings.png "Settings") <br/>
+
+Swagger API Docs (WIP): <br />
+![alt text](./public/swagger.png "Swagger") <br/>
