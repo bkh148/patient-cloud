@@ -29,6 +29,15 @@ class LocationService(ILocationService):
         
         return None
     
+    def get_locations_by_ids(self, id_list):
+        """ return an array of locations """
+        try:
+            return self._location_repo.get_locations_by_ids(id_list)
+        except Exception as e:
+            self._log_service.log_exception(e)
+            
+        return []
+    
     def get_all_locations(self):
         """ returns all care location """
         try:

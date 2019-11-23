@@ -25,6 +25,15 @@ class LocationRepository(ILocationRepository):
             DELETE FROM location
             WHERE location_id = ?""", (location_id, ))
 
+    def get_locations_by_ids(self, id_list):
+        """ return an array of locations """
+        
+        query = """
+        SELECT * FROM location
+            WHERE location_id IN ({})""".format(','.join('?' * len(id_list)))
+        
+        return self._db.get_all(query, id_list)
+
     def get_location_by_id(self, location_id):
         """ return a given location object by its id """
         return self._db.get_single("SELECT * FROM location WHERE location_id=?", (location_id, ))

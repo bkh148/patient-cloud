@@ -15,6 +15,10 @@ class ILocationRepository(metaclass=abc.ABCMeta):
         """ remove a location from the datastor """
 
     @abc.abstractmethod
+    def get_locations_by_ids(self, id_list):
+        """ return an array of locations """
+
+    @abc.abstractmethod
     def get_location_by_id(self, location_id):
         """ return a given location object by its id """
         
