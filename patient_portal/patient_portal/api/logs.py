@@ -11,7 +11,7 @@ nsp = Namespace('logs', description='Accessing patient portal\'s log api.')
 exception_field = nsp.model('Exception', {
     'exception_log_id': fields.String(required=True),
     'exception_log_type': fields.String(required=True),
-    'occurred_on_utc': fields.DateTime(required=True),
+    'occurred_on_utc': fields.String(required=True),
     'is_handled': fields.Boolean(required=True),
     'stack_trace': fields.String(required=True)
 })
@@ -50,7 +50,6 @@ class Exception(Resource):
         """Insert a new exception log"""
         try:
             exception = request.json
-            #TODO: push in session id
             services.log_service().upsert_exception(exception), 201
         except Exception as e:
             nsp.abort(500, "An internal error has occurred: {}".format(e))
