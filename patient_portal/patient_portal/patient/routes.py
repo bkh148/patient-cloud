@@ -20,7 +20,11 @@ def dashboard():
     }
 
     try:
-        metadata['appointments']['upcoming'] = services.appointment_service().get_appointments_for(session['user']['user_id'])
+        metadata['appointments'] = services.appointment_service().get_appointments_for(session['user']['user_id'])
+        
+        location_ids = []
+        [location_ids.append(appointment['location_id']) for appointment in metadata['appointments'] if appointment['location_id'] not in location_ids]
+        metadata['locations'] = services.location_service().get_locations_by_ids(location_ids)
         
         # Get from session
         metadata['configurations'] = {
@@ -36,6 +40,7 @@ def dashboard():
             'user_surname': 'Lamb',
             'remember_me': 0,
             'care_location': services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b'),
+            # Clinicin id should be in the session...
             'clinician': services.user_service().get_patient_clinician('c5739269-355b-497e-8249-ce4ffce8b020'),
             'days_in_care': ''
         }
