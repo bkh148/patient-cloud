@@ -1,7 +1,7 @@
 <div class="appointment-item">
 	<div class="row appointment-item-header">
-		<span class="col">{{ appointment.appointment_date_utc.strftime('%A %-d %b %Y') }}</span>
-		<span class="col time">{{ appointment.appointment_date_utc.strftime('%I:%M %p') }}</span>
+		<span id="appointment_date_left" class="col">PLACEHOLDER_DATE_LEFT</span>
+		<span id="appointment_date_right" class="col time">PLACEHOLDER_DATE_RIGHT</span>
 		<div class="w-100"></div>
 		<span class="col separator"></span>
 	</div>
@@ -11,10 +11,10 @@
 				Location
 			</div>
 			<div class="value">
-				{{ appointment.location_name }}, <br />
-				{{ appointment.location_address }}, <br />
-				{{ appointment.location_postcode }}, <br />
-				{{ appointment.location_city }} <br />
+				<span id="appointment_location_name">PLACEHOLDER_LOC_NAME</span> <br/>
+				<span id="appointment_location_address">PLACEHOLDER_LOC_ADR</span> <br />
+				<span id="appointment_location_postcode">PLACEHOLDER_LOC_POS</span> <br />
+				<span id="appointment_location_city">PLACEHOLDER_LOC_CITY</span> <br />
 			</div>
 		</div>
 		<div class="w-100 d-none d-sm-block d-md-none"></div>
@@ -23,7 +23,7 @@
 				Reason
 			</div>
 			<div class="value">
-				{{ appointment.appointment_type }}
+				<span id="appointment_reason">PLACEHOLDER_REASON</span>
 			</div>
 		</div>
 		<div class="w-100"></div>
@@ -32,7 +32,7 @@
 				Notes
 			</div>
 			<div class="value">
-				{{ appointment.appointment_notes }}
+				<span id="appointment_notes">PLACEHOLDER_NOTES</span>
 			</div>
 		</div>
 	</div>

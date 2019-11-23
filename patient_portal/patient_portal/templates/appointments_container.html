@@ -4,12 +4,12 @@
 	</div>
 	<div class="row component-container-body m-3">
 		<p class="component-container-body-header">Upcoming Appointments</p>
-		{% for appointment in context['upcoming'] %}
-		{% include "appointment_container_item.html" %}
-		{% endfor %}
+		<div id="upcoming_appointments_container">
+			<!-- Appointments items will go here -->
+		</div>
 		<p class="component-container-body-header">Previous Appointments</p>
-		{% for appointment in context['past'] %}
-		{% include "appointment_container_item.html" %}
-		{% endfor %}
+		<div id="past_appointments_container">
+			<!-- Appointments items will go here -->
+		</div>
 	</div>
 </div>
