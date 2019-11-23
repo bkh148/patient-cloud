@@ -1,7 +1,7 @@
 """Module for handling the clinician's content in the applciation"""
 
 from . import clinician
-from flask import render_template
+from flask import render_template, session
 from .. import services
 from ..core import login_required
 
@@ -34,8 +34,7 @@ def dashboard():
 
         appointments = []
         metadata['appointments']['upcoming'] = appointments
-        metadata['patients'] = services.user_service().get_all_users_patients(
-            'b587e97b-5ccc-4f4d-ae65-c507a268e1bb')
+        metadata['patients'] = services.user_service().get_all_users_patients(session['user']['user_id'])
         metadata['settings'] = {
             "forename": "Clinician",
             "surname": "A",
