@@ -5,7 +5,7 @@ nsp = Namespace('locations', description="All location stored within the patient
 
 
 location_fields = nsp.model('Location', {
-    'id': fields.String(required=True, attribute='location_id', description="Unique identifier of the location."),
+    'location_id': fields.String(required=True, description="Unique identifier of the location."),
     'name': fields.String(attribute='location_name', required=True, description="Name of the building."),
     'x_coord': fields.Float(attribute='location_coord_x', required=True, description="X coordinate of the location."),
     'y_coord': fields.Float(attribute='location_coord_y', required=True, description="Y coordinate of the location."),
