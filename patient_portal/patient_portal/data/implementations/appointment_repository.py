@@ -34,6 +34,11 @@ class AppointmentRepository(IAppointmentRepository):
             SELECT COUNT() FROM appointments
             WHERE appointment_id = ?""", (appointment_id, )) > 0
 
+    def get_all(self):
+        """ Get all appointments in the system """
+        return self._db.get_all("""
+            SELECT * FROM appointments""")
+
     def get_appointments_for(self, user_id):
         """ Get appointments created for a user.
 

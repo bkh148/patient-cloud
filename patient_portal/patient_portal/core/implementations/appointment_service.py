@@ -8,13 +8,13 @@ class AppointmentService(IAppointmentService):
 
     def __init__(self, repo, log_service):
         """ Some constructor """
-        self._appointment_repository = repo
+        self._repo = repo
         self._log_service = log_service
 
     def upsert_appointment(self, appointment):
         """ Create or Update an appointment """
         try:
-            return []
+            self._repo.upsert_appointment(appointment)
         except Exception as e:
             self._log_service.log_exception(e)
             raise
@@ -27,13 +27,21 @@ class AppointmentService(IAppointmentService):
             self._log_service.log_exception(e)
             raise
 
+    def get_all(self):
+        """ Get all appointments in the system """
+        try:
+            return self._repo.get_all()
+        except Exception as e:
+            self._log_service.log_exception(e)
+            raise
+
     def get_appointment(self, appointment_id):
         """ Get an appointment through the service
         Args:
             appointment_id: id of the app. to retrieve.
         """
         try:
-            return self._appointment_repository.get_appointments_for(appointment_id)
+            return self._repo.get_appointments_for(appointment_id)
         except Exception as e:
             self._log_service.log_exception(e)
             raise
@@ -43,7 +51,7 @@ class AppointmentService(IAppointmentService):
     def get_appointments_for(self, user_id):
         """ Get all the appointments for a given user """
         try:
-            return self._appointment_repository.get_appointments_for(user_id)
+            return self._repo.get_appointments_for(user_id)
         except Exception as e:
             self._log_service.log_exception(e)
             raise
@@ -52,7 +60,7 @@ class AppointmentService(IAppointmentService):
     def get_appointments_created_by(self, user_id):
         """ Get all the appointments for a given clinician"""
         try:
-            return []
+            return self._repo.get_appointments_created_by(user_id)
         except Exception as e:
             self._log_service.log_exception(e)
             raise

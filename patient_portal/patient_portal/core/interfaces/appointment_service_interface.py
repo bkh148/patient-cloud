@@ -12,6 +12,10 @@ class IAppointmentService(metaclass=abc.ABCMeta):
         """Delete an existing appointment"""
 
     @abc.abstractmethod
+    def get_all(self):
+        """ Get all appointments in the system """
+
+    @abc.abstractmethod
     def get_appointment(self, appointment_id):
         """ Get an appointment through the service
 

@@ -23,6 +23,9 @@ class IAppointmentRepository(metaclass=abc.ABCMeta):
     def has_appointment(self, appointment_id):
         """ Checks if an appointment exists. """
 
+    @abc.abstractmethod
+    def get_all(self):
+        """ Get all appointments in the system """
 
     @abc.abstractmethod
     def get_appointments_for(self, user_id):

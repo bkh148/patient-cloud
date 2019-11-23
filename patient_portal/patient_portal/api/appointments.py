@@ -58,9 +58,10 @@ class Appointments(Resource):
     @nsp.marshal_list_with(appointment_field)
     def get(self):
         """ Get all appointments """
-        current_user = get_jwt_identity()
-        print("User: {}".format(current_user))
-        return appointments, 200
+        try:
+            return services.appointment_service().get_all(), 200
+        except Exception as e:
+            nsp.abort(500, "An internal error has occurred: {}".format(e))
     
     @nsp.doc(body=appointment_field, response={201: 'Appointment successfully created.'})
     def post(self):
