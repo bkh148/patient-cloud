@@ -160,13 +160,27 @@ AppointmentComponent.prototype.name = "not_set"
 
 AppointmentComponent.prototype.show = function() {
   try {
-    let appointment_component = document.createElement('div');
-    appointment_component.setAttribute('id', `${AppointmentComponent.prototype.name}-component`)
+    let appointments_container = document.createElement('div');
+    appointments_container.setAttribute('id', `${AppointmentComponent.prototype.name}-component`)
 
-    let appointments_markdown = context_manager._cache.templates[AppointmentComponent.prototype.name];
-    appointment_component.innerHTML = appointments_markdown;
+    let appointment_container_markdown = context_manager._cache.templates['appointments_container'];
+    appointments_container.innerHTML = appointment_container_markdown;
 
-    addFadeIn(appointment_component, '#content', 600);
+    let upcoming_appointments = $(appointments_container).find('#upcoming_appointments_container')
+    let past_appointments = $(appointments_container).find('#past_appointments_container')
+
+    for (let i = 0; i < context_manager._cache.appointments.length; i++) {
+      let appointment = context_manager._cache.appointments[i];
+      let appointment_element = build_appointment(appointment);
+      
+      if (moment() > moment(appointment['appointment_date_utc'])) {
+        $(past_appointments).append(appointment_element)
+      } else {
+        $(upcoming_appointments).append(appointment_element)
+      }
+    }
+
+    addFadeIn(appointments_container, '#content', 600);
     
   } catch (err) {
     // Push exception to API endpoint
