@@ -35,10 +35,7 @@ def dashboard():
         
         # Get the following from the session when authentication is setup
         metadata['settings'] = {
-            'user_email': 'liam.j.lamb@gmail.com',
-            'user_forname': 'Liam',
-            'user_surname': 'Lamb',
-            'remember_me': 0,
+            'user': session['user'],
             'care_location': services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b'),
             # Clinicin id should be in the session...
             'clinician': services.user_service().get_patient_clinician('c5739269-355b-497e-8249-ce4ffce8b020'),
