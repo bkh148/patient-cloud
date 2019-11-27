@@ -39,3 +39,6 @@ Discussion on the importance of swagger within teams but also on open APIS
 
 **Service / Repository Abstractions :** <br />
 Discussion on the use of the core, and data layers for abstractions.
+
+
+**Observer pattern around the online users :** <br />
