@@ -37,9 +37,7 @@ def dashboard():
         metadata['appointments']['upcoming'] = appointments
         metadata['patients'] = services.user_service().get_all_users_patients(session['user']['user_id'])
         metadata['settings'] = {
-            "forename": "Clinician",
-            "surname": "A",
-            "email": "clinician@hospital.co.uk",
+            'user': session['user'],
             "care_location": services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b'),
             "active_account": 1,
             "stay_logged_in": 1}
