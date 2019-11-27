@@ -16,6 +16,18 @@ ContextManager.prototype.initialise_socket = function () {
 			socket.emit('load_dashboard', {});
 		});
 
+		socket.on('on_load', function (data) {
+			context_manager._cache['online_users'] = data['online_users']
+		});
+
+		socket.on('on_user_login', function(data) {
+			context_manager._cache['online_users'][data['user_id']] = data['user_sid']
+		});
+
+		socket.on('on_user_logout', function(data) {
+			delete context_manager._cache['online_users'][data['user_id']];
+		});
+
 	} catch (err) {
 		console.log(`Exception occurred whilst setting up socket: ${err}`)
 	}
