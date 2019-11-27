@@ -12,7 +12,10 @@ from patient_portal.sqlite import SQLiteDatabase
 services = Services()
 socket_io = SocketIO()
 toolbar = DebugToolbarExtension()
-moment = Moment()
+online_patients = {}
+online_clinicians = {}
+online_admins = {}
+online_local_admins = {}
 
 def initialise_application(configuration):
     """Create an instance of the flask application
