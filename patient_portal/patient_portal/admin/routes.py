@@ -19,7 +19,8 @@ def dashboard():
         'configurations': {},
         'templates': {},
         'components': ['care_locations', 'data_analytics', 'settings'],
-        'settings': {}
+        'settings': {},
+        'online_users': {}
     }
 
     try:

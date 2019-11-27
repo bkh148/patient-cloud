@@ -16,7 +16,8 @@ def dashboard():
         'configurations': {},
         'templates': {},
         'components': ['clinicians', 'settings'],
-        'settings': {}
+        'settings': {},
+        'online_users': {}
     }
     
     try:
