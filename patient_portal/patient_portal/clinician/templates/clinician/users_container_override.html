@@ -1,54 +1,51 @@
 {% extends "users_container.html" %}
 
-{% block patient_invitation %}
-<form class="needs-validation" novalidate>
-    <div class="form-row">
-        <div class="col-md-6 mb-3">
-            <label for="validationCustom01">First name</label>
-            <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark"
-                required>
-            <div class="valid-feedback">
-                Looks good!
+{% block invitation_body %}
+
+<form id="invite-form" action="#" onsubmit="submit_invite(this)" novalidate>
+    <div class="modal-body">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="invite-first-name">First name</label>
+                <input type="text" class="form-control" id="invite-first-name" placeholder="First name" required>
+                <div id="firstname-validator"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="invite-last-name">Last name</label>
+                <input type="text" class="form-control" id="invite-last-name" placeholder="Last name" required>
+                <div id="lastname-validator"></div>
             </div>
         </div>
-        <div class="col-md-6 mb-3">
-            <label for="validationCustom02">Last name</label>
-            <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto"
-                required>
-            <div class="valid-feedback">
-                Looks good!
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label for="invite-email">E-mail address</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="email-addon">@</span>
+                    </div>
+                    <input type="email" id="invite-email" class="form-control" placeholder="Enter e-mail"
+                        aria-describedby="email-addon" required>
+                    <div id="email-validator"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label for="invite-confirm-email">Confirm e-mail address</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="confirm-addon">@</span>
+                    </div>
+                    <input type="email" id="invite-confirm-email" class="form-control" placeholder="Confirm e-mail"
+                        aria-describedby="confirm-addon" required>
+                    <div id="confirm-email-validator"></div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="form-row">
-        <div class="col-md-12 mb-3">
-            <label for="validationCustom02">E-mail address</label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="email-addon">@</span>
-                </div>
-                <input type="email" class="form-control" placeholder="Enter e-mail" aria-describedby="email-addon"
-                    required>
-            </div>
-            <div class="invalid-feedback">
-                Please enter the patient's e-mail.
-            </div>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="col-md-12 mb-3">
-            <label for="validationCustom03">Confirm e-mail address</label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="confirm-addon">@</span>
-                </div>
-                <input type="email" class="form-control" placeholder="Confirm e-mail" aria-describedby="confirm-addon"
-                    required>
-            </div>
-            <div class="invalid-feedback">
-                Please confirm the patient's e-mail.
-            </div>
-        </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" onclick="close_form()">Cancel</button>
+        <button id="submit-invite-form" type="submit" class="btn btn-success">Send Invite</button>
     </div>
 </form>
 {% endblock %}
