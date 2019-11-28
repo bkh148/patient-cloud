@@ -49,6 +49,12 @@ def dashboard():
             "session_id": session['session_id']}
 
         # Todo: Create a clinician's patient view
+        metadata['templates']['users_container'] = render_template('clinician/users_container_override.html', 
+                                                                   title='Your Patients', 
+                                                                   subtitle_one='Currently in your care', 
+                                                                   subtitle_two='Previously in your care',
+                                                                   modal_title='Invite a Patient')
+        metadata['templates']['patient_item'] = 'Patient'
         metadata['templates']['appointments_container'] = render_template('appointments_container.html')
         metadata['templates']['appointments_item'] = render_template('clinician/appointment_container_item.html')
         metadata['templates']['settings'] = render_template(
