@@ -228,6 +228,8 @@ class SQLiteDatabase(object):
         invited_by TEXT NOT NULL,
         user_role_id TEXT NOT NULL,
         invited_email TEXT NOT NULL,
+        invited_first_name TEXT NOT NULL,
+        invited_last_name TEXT NOT NULL,
         invited_on_utc TEXT NOT NULL,
         expiration_date_utc TEXT NOT NULL,
         is_consumed TEXT DEFAULT 0,
