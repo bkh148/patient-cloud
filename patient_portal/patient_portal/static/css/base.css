@@ -84,10 +84,13 @@ p {
     color: #fff;
     background-color: #FE4284;
     border-color: #FE4284;
-    border-radius: 20px;
-    -webkit-box-shadow: -13px 15px 36px -13px rgba(254, 66, 132, 0.97);
+    /* -webkit-box-shadow: -13px 15px 36px -13px rgba(254, 66, 132, 0.97);
     -moz-box-shadow: -13px 15px 36px -13px rgba(254, 66, 132, 0.97);
-    box-shadow: -13px 15px 36px -13px rgba(254, 66, 132, 0.97);
+    box-shadow: -13px 15px 36px -13px rgba(254, 66, 132, 0.97); */
+}
+
+.btn-rounded {
+    border-radius: 20px;
 }
 
 .btn-custom-danger {
@@ -210,8 +213,11 @@ p {
     color: #323546;
 }
 
-.hd-dark div p {
+.hd-dark {
     background-color: #323546;
+}
+
+.hd-dark p {
     color: #fff;
 }
 
