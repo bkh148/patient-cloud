@@ -102,5 +102,6 @@ class Services(containers.DeclarativeContainer):
         EmailService,
         mail_server = mail_server,
         invite_repo = Repositories.invite_repo,
+        user_service = user_service,
         log_service = log_service
     )

@@ -53,6 +53,22 @@ class UserService(IUserService):
             self._log_service.log_exception(e)
         return None;
     
+    def get_user_role_ids(self, user_roles):
+        """ return the ids of user roles """
+        try:
+            return self._user_repo.get_user_role_ids(user_roles)
+        except Exception as e:
+            self._log_service.log_exception(e)
+            
+        return {}
+    
+    def get_user_role(self, user_role_id):
+        """ get a user role by it's id """
+        try :
+            return self._user_repo.get_user_role(user_role_id)
+        except Exception as e:
+            self._log_service.log_exception(e)
+    
     def get_user_role_by_id(self, user_id):
         """ get a user's role by their id """
     

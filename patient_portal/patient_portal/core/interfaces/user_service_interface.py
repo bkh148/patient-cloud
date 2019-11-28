@@ -19,6 +19,14 @@ class IUserService(metaclass=abc.ABCMeta):
         """ get a user object by the id """
     
     @abc.abstractmethod
+    def get_user_role_ids(self, user_roles):
+        """ return the ids of user roles """
+    
+    @abc.abstractmethod
+    def get_user_role(self, user_role_id):
+        """ get a user role by it's id"""
+    
+    @abc.abstractmethod
     def get_user_role_by_id(self, user_id):
         """ get a user's role by their id """
     
