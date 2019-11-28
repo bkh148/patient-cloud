@@ -92,7 +92,7 @@ PatientsComponent.prototype.show = function() {
     let patient_component = document.createElement('div');
     patient_component.setAttribute('id', `${PatientsComponent.prototype.name}-component`)
 
-    let patient_markup = context_manager._cache.templates[PatientsComponent.prototype.name];
+    let patient_markup = context_manager._cache.templates['users_container'];
     patient_component.innerHTML = patient_markup;
 
     addFadeIn(patient_component, '#content', 600);
