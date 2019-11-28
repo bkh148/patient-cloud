@@ -68,6 +68,7 @@ def dashboard():
 
     return render_template('admin/index.html', title='Dashboard - Admin', static_folder='admin.static',
                            style_paths=['css/main.css'],
+                           script_paths=['js/invite.js'],
                            nav_links=[care_locations, data_analytics],
                            metadata=metadata)
 
