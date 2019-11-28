@@ -44,7 +44,7 @@ def dashboard():
         }
 
         metadata['templates']['appointments_container'] = render_template('appointments_container.html')
-        metadata['templates']['appointments_item'] = render_template('appointment_container_item.html')
+        metadata['templates']['appointments_item'] = render_template('patient/appointment_container_item.html')
         metadata['templates']['settings'] = render_template('patient/settings.html', context=metadata['settings'])
 
     except Exception as e:
@@ -60,6 +60,7 @@ def dashboard():
 
     return render_template('patient/index.html', title='Dashboard - Patient',
                            static_folder='patient.static',
-                           style_paths=['css/main.css'],
+                           style_paths=['css/appointment.css'],
+                           script_paths=['js/appointment.js'],
                            nav_links=[appointments],
                            metadata=metadata)

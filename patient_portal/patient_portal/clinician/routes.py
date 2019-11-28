@@ -49,9 +49,8 @@ def dashboard():
             "session_id": session['session_id']}
 
         # Todo: Create a clinician's patient view
-        metadata['templates']['patients'] = 'Hello, patients'
-        # Todo: Create a clinician appointment view
-        metadata['templates']['appointments'] = 'Hello, appointments'
+        metadata['templates']['appointments_container'] = render_template('appointments_container.html')
+        metadata['templates']['appointments_item'] = render_template('clinician/appointment_container_item.html')
         metadata['templates']['settings'] = render_template(
             'clinician/settings.html', context=metadata['settings'])
 
@@ -73,6 +72,7 @@ def dashboard():
 
     return render_template('clinician/index.html', title='Dashboard - Clinician',
                            static_folder='clinician.static',
-                           style_paths=['css/main.css'],
+                           style_paths=['css/appointment.css'],
+                           script_paths=['js/appointment.js', 'js/invite.js'],
                            nav_links=[patients, appointments],
                            metadata=metadata)
