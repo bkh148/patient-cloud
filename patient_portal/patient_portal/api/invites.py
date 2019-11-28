@@ -1,5 +1,5 @@
 from flask_restplus import Namespace, Resource, fields
-from flask import request
+from flask import request, render_template
 from datetime import datetime, timedelta
 from .. import services
 
@@ -10,6 +10,8 @@ invite_fields = nsp.model('Invite', {
     'invited_by': fields.String(required=True, description='User having created the invite.'),
     'user_role_id': fields.String(required=True, description='Assigned user role to invite.'),
     'invited_email': fields.String(required=True, description="Invitee's email."),
+    'invited_first_name': fields.String(required=True, description="Invitee's first name."),
+    'invited_last_name': fields.String(required=True, description="Invitee's first name."),
     'invited_on_utc': fields.DateTime(required=True),
     'expiration_date_utc': fields.DateTime(required=True),
     'is_consumed': fields.Boolean(required=True, default=False),
@@ -20,6 +22,8 @@ mock_invite =  {
     'invited_by': 'd0e114ba-3527-4c4a-aee7-4bde6095f94f',
     'user_role_id': 'd0e114ba-3527-4c4a-aee7-4bde6095f94f',
     'invited_email': 'test@gmail.com',
+    'invited_first_name': 'Test',
+    'invited_last_name': 'Last',
     'invited_on_utc': datetime.utcnow(),
     'expiration_date_utc': datetime.utcnow() + timedelta(minutes=60),
     'is_consumed': False
@@ -45,7 +49,10 @@ class Invites(Resource):
         """ Create a new invite """
         try:
             invite = request.json
-            services.invite_service().upsert_invite(invite)            
+            services.invite_service().upsert_invite(invite)
+            
+            services.email_service().send_user_invite(invite)
+    
             return invite, 201
         except Exception as e:
             nsp.abort(500, 'An internal server error has occurred: {}'.format(e))
