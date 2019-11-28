@@ -2,8 +2,8 @@
     <div class="col ml-2 mr-2 align-self-container component-container">
         <div class="row component-container-header hd-light justify-content-between">
             <p>{{ title }}</p>
-            <button class="btn btn-custom mt-2 mb-2" data-toggle="modal"
-                data-target="#invite_user_model">Invite</button>
+            <button id="user_header_invite-button" class="btn btn-custom mt-2 mb-2" data-toggle="modal"
+                data-target="#invite-user-model">Invite</button>
         </div>
         <div class="row component-container-body m-3">
             <p class="component-container-body-header">{{ subtitle_one }}</p>
@@ -17,24 +17,17 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="invite_user_model" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="invite-user-model" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header align-items-center hd-dark">
-                    <p class="modal-title" id="exampleModalLongTitle">{{ modal_title }}</p>
+                    <p class="modal-title" id="invite-user-model-title">{{ modal_title }}</p>
                     <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="fas fa-times"></i>
                     </button>
                 </div>
-                <div class="modal-body">
-                    {% block patient_invitation %}
-                    {% endblock %}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success" onclick="submit_invite()">Send Invite</button>
-                </div>
+                {% block invitation_body %}
+                {% endblock %}
             </div>
         </div>
     </div>
