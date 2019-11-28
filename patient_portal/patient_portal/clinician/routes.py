@@ -33,8 +33,7 @@ def dashboard():
         #     'Accept Invitation',
         #     'https://google.co.uk')
 
-        appointments = []
-        metadata['appointments']['upcoming'] = appointments
+        metadata['appointments'] = services.appointment_service().get_appointments_created_by(session['user']['user_id'])
         metadata['patients'] = services.user_service().get_all_users_patients(session['user']['user_id'])
         metadata['settings'] = {
             'user': session['user'],
