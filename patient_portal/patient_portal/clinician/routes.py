@@ -3,7 +3,7 @@
 from . import clinician
 from flask import render_template, session
 from .. import services
-from ..core import login_required
+from ..core import login_required, UserRole
 
 @clinician.route('/', methods=['GET'])
 @clinician.route('/dashboard', methods=['GET'])
@@ -18,23 +18,14 @@ def dashboard():
         'templates': {},
         'components': ['patients', 'appointments', 'settings'],
         'settings': {},
-        'online_users': {}
+        'online_users': {},
+        'user_roles': {}
     }
 
     try:
-        # # render the body with another Jinja template
-        # services.email_service().send_user_invite('Patient Invitation',
-        #     ['liam.j.lamb@gmail.com'],
-        #     'Liam',
-        #     """Dr. Tim Jones has invited you to join the patient portal platform.
-        #     Once you accept the invitation, you will be redirected to an authentication page
-        #     where you will be able to create a password for your account. You will then be placed
-        #     under Dr. Tim's until discharged, or a transfer of care. <br /> <br /> We thank you for choosing Patient Portal.""",
-        #     'Accept Invitation',
-        #     'https://google.co.uk')
-
         metadata['appointments'] = services.appointment_service().get_appointments_created_by(session['user']['user_id'])
         metadata['patients'] = services.user_service().get_all_users_patients(session['user']['user_id'])
+        metadata['user_roles'] = services.user_service().get_user_role_ids([UserRole.PATIENT.value])
         metadata['settings'] = {
             'user': session['user'],
             "care_location": services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b'),
