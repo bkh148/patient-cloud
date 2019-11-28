@@ -1,7 +1,7 @@
 """Module for handling the local admin requests"""
 
 from . import local_admin
-from flask import render_template
+from flask import render_template, session
 from .. import services
 from ..core import login_required
 
