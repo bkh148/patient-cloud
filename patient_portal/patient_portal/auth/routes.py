@@ -80,6 +80,11 @@ def register(invite_id):
                     services.user_service().upsert_user_role_map(user_role_map)
                     services.user_service().upsert_user(user)
                     services.password_service().upsert_password(user['user_id'], generate_password_hash(request.form.get('password')))
+                    user_role = services.user_service().get_user_role(invite['user_role_id'])
+
+                    # If this is a patient, we need to create a mapping with their clinician:
+                    if user_role['user_role']  == UserRole.PATIENT.value:
+                        services.user_service().upsert_patient_clinician_map(invite['invited_by'], user['user_id'])
 
                     invite['is_consumed'] = '1'
                     services.invite_service().upsert_invite(invite)
