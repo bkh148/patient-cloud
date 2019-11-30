@@ -96,12 +96,12 @@ class SQLiteDatabase(object):
         cursor.close()
         self.disconnect()
 
-    def execute(self, query, params= ()):
+    def execute(self, query, params=()):
         connection = self.connect()
         cursor = self.connection().cursor()
-        
+
         cursor.execute(query, params)
-        
+
         cursor.close()
         self.disconnect()
 
@@ -133,8 +133,8 @@ class SQLiteDatabase(object):
         user_id TEXT PRIMARY KEY NOT NULL,
         user_role_map_id TEXT NOT NULL,
         user_email TEXT NOT NULL,
-        user_forname TEXT NOT NULL,
-        user_lastname TEXT NOT NULL,
+        user_forename TEXT NOT NULL,
+        user_surname TEXT NOT NULL,
         CONSTRAINT unique_email UNIQUE (user_email),
         FOREIGN KEY (user_role_map_id) REFERENCES user_role_map(user_role_map_id))
         """)
@@ -156,6 +156,24 @@ class SQLiteDatabase(object):
         location_id TEXT NOT NULL,
         FOREIGN KEY (user_role_id) REFERENCES user_role(user_role_id),
         FOREIGN KEY (location_id) REFERENCES location(location_id))
+        """)
+
+    def create_invite_table(self):
+        self.connection().execute("""
+        CREATE TABLE IF NOT EXISTS invite(
+        invite_id TEXT PRIMARY KEY NOT NULL,
+        invited_by TEXT NOT NULL,
+        user_role_id TEXT NOT NULL,
+        invited_email TEXT NOT NULL,
+        invited_forename TEXT NOT NULL,
+        invited_surname TEXT NOT NULL,
+        invited_on_utc TEXT NOT NULL,
+        assign_to_location TEXT NOT NULL,
+        expiration_date_utc TEXT NOT NULL,
+        is_consumed TEXT DEFAULT 0,
+        CONSTRAINT unique_invite_id UNIQUE (invite_id),
+        FOREIGN KEY (invited_by) REFERENCES users(user_id),
+        FOREIGN KEY (user_role_id) REFERENCES user_role(user_role_id))
         """)
 
     def create_patient_clinician_map_table(self):
@@ -219,23 +237,6 @@ class SQLiteDatabase(object):
         FOREIGN KEY (created_by) REFERENCES user(user_id),
         FOREIGN KEY (created_for) REFERENCES appointment(user_id),
         FOREIGN KEY (location_id) REFERENCES location(location_id))
-        """)
-
-    def create_invite_table(self):
-        self.connection().execute("""
-        CREATE TABLE IF NOT EXISTS invite(
-        invite_id TEXT PRIMARY KEY NOT NULL,
-        invited_by TEXT NOT NULL,
-        user_role_id TEXT NOT NULL,
-        invited_email TEXT NOT NULL,
-        invited_first_name TEXT NOT NULL,
-        invited_last_name TEXT NOT NULL,
-        invited_on_utc TEXT NOT NULL,
-        expiration_date_utc TEXT NOT NULL,
-        is_consumed TEXT DEFAULT 0,
-        CONSTRAINT unique_invite_id UNIQUE (invite_id),
-        FOREIGN KEY (invited_by) REFERENCES users(user_id),
-        FOREIGN KEY (user_role_id) REFERENCES user_role(user_role_id))
         """)
 
     def create_activity_table(self):
