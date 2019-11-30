@@ -3,6 +3,10 @@ import abc
 class IInviteService(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
+    def get_invite_by_id(self, invite_id):
+        """ return a invite object by it's id. """
+
+    @abc.abstractmethod
     def upsert_invite(self, invite):
         """ update or insert a new invite into the table"""
 
