@@ -18,7 +18,7 @@ def login():
     validation_error = {}
 
     if request.method == "POST":
-        
+
         user_mail = request.form.get('email', None)
         user_pwd = request.form.get('password', None)
         user = services.user_service().validate_user(user_mail, user_pwd)
@@ -33,12 +33,12 @@ def login():
                     validation_error['authentication_error'] = 'An error has occurred logging you in.'
         else:
             validation_error['authentication_error'] = 'Unrecognized e-mail & password combination.'
-            
-    return render_template('auth/login.html', 
-                           title='Login', 
-                           static_folder='auth.static', 
-                           script_paths=['js/auth.js'], 
-                           style_paths=['css/auth.css'], 
+
+    return render_template('auth/login.html',
+                           title='Login',
+                           static_folder='auth.static',
+                           script_paths=['js/auth.js'],
+                           style_paths=['css/auth.css'],
                            error=validation_error)
 
 
