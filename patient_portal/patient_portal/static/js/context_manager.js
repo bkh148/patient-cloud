@@ -48,6 +48,16 @@ ContextManager.prototype.new_guid = function () {
 	  );
 }
 
+ContextManager.prototype.success_message = function(title, message) {
+	toastr.options.closeButton = true;
+	toastr.success(message, title);
+}
+
+ContextManager.prototype.error_message = function(title, message) {
+	toastr.options.closeButton = true;
+	toastr.error(message, title);
+}
+
 ContextManager.prototype.post_activity = function (activity_type) {
 	try {
 

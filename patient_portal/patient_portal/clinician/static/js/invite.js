@@ -110,7 +110,7 @@ let submit_invite = function (form) {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(invite),
                 success: function() {
-                    console.log("SUCCESS ON THE INVITE")
+                    context_manager.success_message('Success!', `Your invitation has successfully been sent to ${invite['invited_forename']} ${invite['invited_surname']} at: ${invite['invited_email']}!`)
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     throw new Error(errorThrown)
@@ -119,7 +119,7 @@ let submit_invite = function (form) {
         }
 
     } catch (err) {
-        // Log exception
-        console.log(`An error has occurred whilst posting the invite to the server: ${err}`)
+        context_manager.post_exception('post_exception', err);
+        context_manager.error_message('Oops!', `An unexpected error has occurred whilst sending your invitation, please try again.`);
     }
 }
