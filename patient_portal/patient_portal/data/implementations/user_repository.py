@@ -1,5 +1,5 @@
 from ..interfaces import IUserRepository
-
+import uuid
 
 class UserRepository(IUserRepository):
 
@@ -31,6 +31,24 @@ class UserRepository(IUserRepository):
         return self._db.count("""
             SELECT COUNT() FROM user_role_map
             WHERE user_role_map_id = ?""", (user_role_map_id, )) > 0
+        
+    def upsert_patient_clinician_map(self, clinician_id, patient_id):
+        """ Create a mapping between patient and clinician """
+        
+        model = {'patient_id': patient_id, 'clinician_id': clinician_id}
+        
+        if self.has_patient_clinician_map(patient_id):
+            self._db.update('patient_clinician_map', model)
+        else:
+            model['patient_map_id']= str(uuid.uuid4())
+            self._db.insert('patient_clinician_map', model)
+            
+    
+    def has_patient_clinician_map(self,patient_id):
+        """Evaluate if a mapping for this patient already exists"""
+        return self._db.count("""
+            SELECT COUNT() FROM patient_clinician_map
+            WHERE patient_id = ?""", (patient_id, )) > 0
 
     def get_user_by_id(self, user_id):
         """ get a user object by the the user id """

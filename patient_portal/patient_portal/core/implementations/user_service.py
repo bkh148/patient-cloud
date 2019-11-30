@@ -22,6 +22,13 @@ class UserService(IUserService):
             self._user_repo.upsert_user_role_map(user_role_map)
         except Exception as e:
             self._log_service.log_exception(e)
+            
+    def upsert_patient_clinician_map(self, clinician_id, patient_id):
+        """ Create a mapping between patient and clinician """
+        try:
+            self._user_repo.upsert_patient_clinician_map(clinician_id, patient_id)
+        except Exception as e:
+            self._log_service.log_exception(e)
     
     def get_user_by_id(self, user_id):
         try :
@@ -90,8 +97,7 @@ class UserService(IUserService):
         except Exception as e:
             self._log_service.log_exception(e)
             raise
-            
-    
+        
     def get_all_users_patients(self, clinician_id):
         """ get all patients for a clinician """
         try :

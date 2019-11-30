@@ -15,6 +15,14 @@ class IUserRepository(metaclass=abc.ABCMeta):
         """ Evaluate if a user role map already exists """
     
     @abc.abstractmethod
+    def upsert_patient_clinician_map(self, clinician_id, patient_id):
+        """ Create a mapping between patient and clinician """
+    
+    @abc.abstractmethod
+    def has_patient_clinician_map(self,patient_id):
+        """Evaluate if a mapping for this patient already exists"""
+    
+    @abc.abstractmethod
     def has_user(self, user_id):
         """ Evaluate if a user exists in datastore """
     
