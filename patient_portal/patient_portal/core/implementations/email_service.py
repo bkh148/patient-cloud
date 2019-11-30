@@ -124,24 +124,21 @@ class EmailService(IEmailService):
     def send_user_invite(self, invite):
         
         invite_id = invite['invite_id']
-        recipient_firstname = invite['invited_first_name']
-        recipient_lastname = invite['invited_last_name']
+        recipient_firstname = invite['invited_forename']
+        recipient_lastname = invite['invited_surname']
         recipient_email = invite['invited_email']
         user_role = invite['user_role_id']
         sender_id = invite['invited_by']
         
         sender = self._user_service.get_user_by_id(sender_id)
         user_role = self._user_service.get_user_role(user_role);
-        
-        print("SENDER: {}".format(sender))
-        print("ROLE: {}".format(user_role))
-        
+
         if user_role['user_role'] == "ADMIN":
-            self.__send_admin_invite(invite_id, recipient_email, recipient_firstname, recipient_lastname, sender['user_forname'])
+            self.__send_admin_invite(invite_id, recipient_email, recipient_firstname, recipient_lastname, sender['user_forename'])
         elif user_role['user_role'] == "LOCAL_ADMIN":
-            self.__send_local_admin_invite(invite_id, recipient_email, recipient_firstname, recipient_lastname, sender['user_forname'])
+            self.__send_local_admin_invite(invite_id, recipient_email, recipient_firstname, recipient_lastname, sender['user_forename'])
         elif user_role['user_role'] == "CLINICIAN":
-            self.__send_clinician_invite(invite_id, recipient_email, recipient_firstname, recipient_lastname, sender['user_forname'])
+            self.__send_clinician_invite(invite_id, recipient_email, recipient_firstname, recipient_lastname, sender['user_forename'])
         else:
-            self.__send_patient_invite(invite_id, recipient_email, recipient_firstname, recipient_lastname, sender['user_lastname'])
+            self.__send_patient_invite(invite_id, recipient_email, recipient_firstname, recipient_lastname, sender['user_surname'])
             
