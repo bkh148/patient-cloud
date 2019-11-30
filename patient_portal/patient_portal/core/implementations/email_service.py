@@ -11,11 +11,12 @@ class EmailService(IEmailService):
         self._log_service = log_service
 
     # TODO: These should all be moved out into strategy pattern to encourage growth.
+    # TODO: Get the redirect url from the configurations
 
     def __send_admin_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_firstname):
         try:
             subject = "Admin Invitation"
-            action_url = "https://google.co.uk/{}".format(invite_id)
+            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(invite_id)
             action_title = "Join as Admin"
             message = """
             {} has invited you to join the Patient Portal platform as an administrator.
@@ -39,7 +40,7 @@ class EmailService(IEmailService):
     def __send_local_admin_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_firstname):
         try:
             subject = "Local Admin Invitation"
-            action_url = "https://google.co.uk/{}".format(invite_id)
+            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(invite_id)
             action_title = "Join as Local Admin"
             message = """
             {} has invited you to join the Patient Portal platform as an local administrator.
@@ -62,7 +63,7 @@ class EmailService(IEmailService):
     def __send_clinician_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_firstname):
         try:
             subject = "Clinician Invitation"
-            action_url = "https://google.co.uk/{}".format(invite_id)
+            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(invite_id)
             action_title = "Join as Clinician"
             message = """
             {} has invited you to join the Patient Portal as a clinician in your care location.
@@ -86,7 +87,7 @@ class EmailService(IEmailService):
     def __send_patient_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_lastname):
         try:
             subject = "Patient Invitation"
-            action_url = "https://google.co.uk/{}".format(invite_id)
+            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(invite_id)
             action_title = "Join as Patient"
             message = """
             Dr. {} has invited you to join Patient Portal as a new patient.
