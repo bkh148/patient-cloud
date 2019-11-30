@@ -1,10 +1,12 @@
 """Module representing the authentication routes"""
 
-from flask import render_template, flash, session, request, redirect, url_for, json, make_response
+from flask import render_template, flash, session, request, redirect, url_for, json, make_response, abort
 from . import auth
 import uuid
 from .. import services
+from datetime import datetime
 from ..core.models import UserRole, anonymous_required
+from werkzeug.security import generate_password_hash
 
 # If authenticated, navigated to appropriate view (admin / norm)
 # @auth.routes('/', methods=['GET', 'POST'])
@@ -42,10 +44,94 @@ def login():
                            error=validation_error)
 
 
-@auth.route('/register', methods=['GET', 'POST'])
-def register():
-    """Endpoint for handling user registration."""
-    return "Hello, sign up!"
+@auth.route('/invite/<string:invite_id>', methods=['GET', 'POST'])
+@anonymous_required
+def register(invite_id):
+
+    invite = services.invite_service().get_invite_by_id(invite_id)
+
+    if invite:
+        # If the invite hasn't expired, process it, and update it, then redirect user
+        # DANGER: This is a temporary date parsing solution due to the python version I need to use.. Python 3.7 handles ISO parsing properly
+        expire_date = datetime.strptime(
+            invite['expiration_date_utc'], "%Y-%m-%dT%H:%M:%SZ")
+
+        if datetime.utcnow() < expire_date and not bool(int(invite['is_consumed'])):
+            messages = {}
+            if request.method == "POST":
+                try:
+
+                    # Create a new user role map entry
+                    user_role_map = {
+                        'user_role_map_id': str(uuid.uuid4()),
+                        'user_role_id': invite['user_role_id'],
+                        'location_id': invite['assign_to_location']
+                    }
+                    
+                    # Create a new user from the form
+                    user = {
+                        'user_id': str(uuid.uuid4()),
+                        'user_role_map_id': user_role_map['user_role_map_id'],
+                        'user_email': invite['invited_email'],
+                        'user_forename': request.form.get('forename', invite['invited_forename']),
+                        'user_surname': request.form.get('surname', invite['invited_surname'])
+                    }
+                
+                    services.user_service().upsert_user_role_map(user_role_map)
+                    services.user_service().upsert_user(user)
+                    services.password_service().upsert_password(user['user_id'], generate_password_hash(request.form.get('password')))
+
+                    invite['is_consumed'] = '1'
+                    services.invite_service().upsert_invite(invite)
+                    
+                    messages['authentication_success'] = "You have successfully created your account."
+                    
+                    return render_template('auth/invite_credentials.html',
+                        title='Create Login',
+                        invite=invite,
+                        messages=messages,
+                        static_folder='auth.static',
+                        style_paths=['css/auth.css'],
+                        script_paths=['js/auth.js']), 200
+                    
+                except Exception as e:
+                    
+                    print("ERROR {}".format(e))
+                    messages['authentication_error'] = "An error has occurred whilst creating your credentials."
+                    
+                    return render_template('auth/invite_credentials.html',
+                        title='Create Login',
+                        invite=invite,
+                        messages=messages,
+                        static_folder='auth.static',
+                        style_paths=['css/auth.css'],
+                        script_paths=['js/auth.js']), 500
+                    
+            else:
+                return render_template('auth/invite_credentials.html',
+                                       title='Create Login',
+                                       invite=invite,
+                                       messages=messages,
+                                       static_folder='auth.static',
+                                       style_paths=['css/auth.css'],
+                                       script_paths=['js/auth.js']), 200
+
+        else:
+            # TODO: return a template saying that the invitation has expired.
+            abort(404)
+    else:
+        abort(404)
+
+    """Register user's invitation from the e-mail redirect"""
+    return render_template('welcome.html',
+                           title='Welcome to Patient Portal',
+                           payload={
+                               "welcome_message": "Wether you’re a local admin, clininian, or a patient - patient portal allows you to manage all of your medical data in one simple, intuitive and real-time application.",
+                               "logo_doctor": "/static/images/doctor_lady_single.svg",
+                               "version_number": "ver. 1.3.0"},
+                           static_folder='static',
+                           style_paths=['css/welcome.css'],
+                           nav_links=[login, register])
 
 
 @auth.route('/logout', methods=['GET', 'POST'])
