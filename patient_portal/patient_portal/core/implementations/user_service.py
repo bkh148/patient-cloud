@@ -11,10 +11,17 @@ class UserService(IUserService):
     
     def upsert_user(self, user):
         try:
-            print("")
+            self._user_repo.upsert_user(user);
         except Exception as e:
             self._log_service.log_exception(e)
             raise
+        
+    def upsert_user_role_map(self, user_role_map):
+        """ Create or update a user role map """    
+        try:
+            self._user_repo.upsert_user_role_map(user_role_map)
+        except Exception as e:
+            self._log_service.log_exception(e)
     
     def get_user_by_id(self, user_id):
         try :

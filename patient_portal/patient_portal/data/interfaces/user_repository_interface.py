@@ -5,7 +5,15 @@ class IUserRepository(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def upsert_user(self, user):
         """ Create or update a user model """
-        
+    
+    @abc.abstractmethod
+    def upsert_user_role_map(self, user_role_map):
+        """ Create or update a user role map """    
+    
+    @abc.abstractmethod
+    def has_user_role_map(self, user_role_map_id):
+        """ Evaluate if a user role map already exists """
+    
     @abc.abstractmethod
     def has_user(self, user_id):
         """ Evaluate if a user exists in datastore """

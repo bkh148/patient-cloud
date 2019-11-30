@@ -19,6 +19,19 @@ class UserRepository(IUserRepository):
             SELECT COUNT() FROM user
             WHERE user_id = ?""", (user_id, )) > 0
 
+    def upsert_user_role_map(self, user_role_map):
+        """ Create or update a user role map """    
+        if self.has_user_role_map(user_role_map['user_role_map_id']):
+            self._db.update('user_role_map', user_role_map)
+        else:
+            self._db.insert('user_role_map', user_role_map)
+    
+    def has_user_role_map(self, user_role_map_id):
+        """ Evaluate if a user role map already exists """
+        return self._db.count("""
+            SELECT COUNT() FROM user_role_map
+            WHERE user_role_map_id = ?""", (user_role_map_id, )) > 0
+
     def get_user_by_id(self, user_id):
         """ get a user object by the the user id """
         return self._db.get_single("""
@@ -28,7 +41,7 @@ class UserRepository(IUserRepository):
     def get_all_users_patients(self, clinician_id):
         """ get all patients for a clinician """
         return self._db.get_all("""
-        SELECT user_id, user_email, user_forname, user_lastname FROM user t1
+        SELECT user_id, user_email, user_forename, user_surname FROM user t1
         LEFT JOIN patient_clinician_map t2 ON t1.user_id = t2.patient_id
         WHERE clinician_id = ?""", (clinician_id, ))
 
@@ -67,7 +80,7 @@ class UserRepository(IUserRepository):
     def get_patient_clinician(self, patient_id):
         """return the clinician overlooking this patient's care"""
         return self._db.get_single("""
-        SELECT user_id, user_email, user_forname, user_lastname FROM user t1
+        SELECT user_id, user_email, user_forename, user_surname FROM user t1
         LEFT JOIN patient_clinician_map t2 ON t1.user_id = t2.clinician_id
         WHERE patient_id = ?""", (patient_id, ))
 

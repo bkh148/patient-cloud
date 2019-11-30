@@ -7,6 +7,10 @@ class IUserService(metaclass=abc.ABCMeta):
         """ Create or update a user model """
     
     @abc.abstractmethod
+    def upsert_user_role_map(self, user_role_map):
+        """ Create or update a user role map """
+    
+    @abc.abstractmethod
     def get_user_by_id(self, user_id):
         """ get a user object by the the user id """
     
