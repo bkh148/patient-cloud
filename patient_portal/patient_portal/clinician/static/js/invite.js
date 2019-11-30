@@ -94,8 +94,7 @@ let submit_invite = function (form) {
                 'invited_by': context_manager._cache.settings.user['user_id'],
                 'user_role_id': context_manager._cache.user_roles['PATIENT'],
                 'invited_email': email_input.val(),
-                'invited_first_name': firstname_input.val(),
-                'invited_last_name': lastname_input.val(),
+                'assign_to_location': context_manager._cache.settings.care_location.location_id,
                 'invited_on_utc': moment().utc().format(),
                 'expiration_date_utc': moment().add(4, 'hours').utc().format()
             }

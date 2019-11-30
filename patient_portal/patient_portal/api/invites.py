@@ -13,6 +13,7 @@ invite_fields = nsp.model('Invite', {
     'invited_first_name': fields.String(required=True, description="Invitee's first name."),
     'invited_last_name': fields.String(required=True, description="Invitee's first name."),
     'invited_on_utc': fields.DateTime(required=True),
+    'assign_to_location': fields.String(required=True),
     'expiration_date_utc': fields.DateTime(required=True),
     'is_consumed': fields.Boolean(required=True, default=False),
 })
