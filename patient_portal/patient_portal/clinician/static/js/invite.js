@@ -1,3 +1,5 @@
+//TODO FIX THIS WHOLE FILE :(
+
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -9,65 +11,60 @@ function validateName(name) {
 }
 
 
-let validate_form = function(form, firstname_input, lastname_input, email_input, confirm_email_input) {
+let validate_form = function(form, forename_input, surname_input, email_input, confirm_email_input) {
 
     let is_valid = true;
 
     // Validate first name
-    let firstname_validator = $(form).find('#firstname-validator')
-    $(firstname_validator).attr('class', '')
+    let firstname_validator = $(form).find('#forename-validator')
 
-    if (validateName(firstname_input.val())) {
+    if (validateName(forename_input.val())) {
         $(firstname_validator).html('Looks good!')
-        $(firstname_validator).addClass('valid-feedback')
+        $(firstname_validator).attr('class', 'valid-feedback')
     } else {
         $(firstname_validator).html('Invalid name.')
-        $(firstname_validator).addClass('invalid-feedback d-block');
+        $(firstname_validator).attr('class', 'invalid-feedback d-block');
         is_valid = false;
     }
 
     // Validate last name
-    let lastname_validator = $(form).find('#lastname-validator')
-    $(lastname_validator).attr('class', '')
+    let lastname_validator = $(form).find('#surname-validator')
 
-    if (validateName(lastname_input.val())) {
+    if (validateName(surname_input.val())) {
         $(lastname_validator).html('Looks good!')
-        $(lastname_validator).addClass('valid-feedback')
+        $(lastname_validator).attr('class', 'valid-feedback')
     } else {
         $(lastname_validator).html('Invalid name');
-        $(lastname_validator).addClass('invalid-feedback d-block');
+        $(lastname_validator).attr('class', 'invalid-feedback d-block');
         is_valid = false;
     }
 
     // Validate e-mail
     let email_validator = $(form).find('#email-validator')
-    $(email_validator).attr('class', '')
-
 
     if (validateEmail($(email_input).val())) {
         $(email_validator).html('Looks good!')
-        $(email_validator).addClass('valid-feedback')
+        $(email_validator).attr('class', 'valid-feedback')
     } else {
         $(email_validator).html('Please enter a valid e-mail.');
-        $(email_validator).addClass('invalid-feedback d-block');
+        $(email_validator).attr('class', 'invalid-feedback d-block');
         is_valid = false;
     }
 
     // Validate confirmation
     let confirm_validator = $(form).find('#confirm-email-validator')
-    $(confirm_validator).attr('class', '')
 
     if ($(email_input).val() == $(confirm_email_input).val()) {
         $(confirm_validator).html('E-mail addresses match!')
-        $(confirm_validator).addClass('valid-feedback')
+        $(confirm_validator).attr('class', 'valid-feedback')
     } else {
         $(confirm_validator).html('E-mail addresses don\'t match.');
-        $(confirm_validator).addClass('invalid-feedback d-block');
+        $(confirm_validator).attr('class', 'invalid-feedback d-block');
         is_valid = false;
     }
 
     // The form has been checked.
-    form.classList.add('was-validated');
+    $(form).addClass('was-validated');
 
     return is_valid;
 }
@@ -80,20 +77,23 @@ let close_form = function() {
 }
 let submit_invite = function (form) {
     try {
-        let form = document.getElementById('invite-form');
-        let firstname_input = $(form).find('#invite-first-name');
-        let lastname_input = $(form).find('#invite-last-name');
+
+        //let form = document.getElementById('invite-form');
+        let forename_input = $(form).find('#invite-forename');
+        let surname_input = $(form).find('#invite-surname');
         let email_input = $(form).find('#invite-email');
         let confirm_email_input = $(form).find('#invite-confirm-email');
 
-        if (validate_form(form, firstname_input, lastname_input, email_input, confirm_email_input)) {
+        if (validate_form(form, forename_input, surname_input, email_input, confirm_email_input)) {
 
             // Post request + close and clean the form on success
             let invite = {
                 'invite_id': context_manager.new_guid(),
-                'invited_by': context_manager._cache.settings.user['user_id'],
+                'invited_by': context_manager._cache.settings.user.user_id,
                 'user_role_id': context_manager._cache.user_roles['PATIENT'],
                 'invited_email': email_input.val(),
+                'invited_forename': forename_input.val(),
+                'invited_surname': surname_input.val(),
                 'assign_to_location': context_manager._cache.settings.care_location.location_id,
                 'invited_on_utc': moment().utc().format(),
                 'expiration_date_utc': moment().add(4, 'hours').utc().format()
