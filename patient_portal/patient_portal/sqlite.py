@@ -135,6 +135,7 @@ class SQLiteDatabase(object):
         user_email TEXT NOT NULL,
         user_forename TEXT NOT NULL,
         user_surname TEXT NOT NULL,
+        user_dob TEXT NOT NULL,
         CONSTRAINT unique_email UNIQUE (user_email),
         FOREIGN KEY (user_role_map_id) REFERENCES user_role_map(user_role_map_id))
         """)
