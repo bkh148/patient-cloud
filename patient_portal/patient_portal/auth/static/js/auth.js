@@ -1,5 +1,6 @@
 const name_pattern = /^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z]*)*$/;
 const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[(){}!#$_%&? "])(?=.*[A-Z]).{8,}$/;
+const date_pattern = /^((?:0[0-9])|(?:[1-2][0-9])|(?:3[0-1]))\/((?:0[1-9])|(?:1[0-2]))\/((?:19|20)\d{2})$/;
 
 let validate_login = function() {
   let is_valid = true;
@@ -7,7 +8,7 @@ let validate_login = function() {
   return is_valid;
 }
 
-let validate_create_login = function(form, forename_input, surname_input, password_input, confirm_input) {
+let validate_create_login = function(form, forename_input, surname_input, dob_input, password_input, confirm_input) {
   let is_valid = true;
 
   let forename_validator = $(form).find('#forename-validator');
@@ -29,6 +30,17 @@ let validate_create_login = function(form, forename_input, surname_input, passwo
   } else {
     $(surname_validator).html('Invalid name!');
     $(surname_validator).attr('class', 'invalid-feedback d-block');
+    is_valid = false;
+  }
+
+  let date_validator = $(form).find('#date-validator');
+
+  if (dob_input.val().match(date_pattern) != null) {
+    $(date_validator).html('Looks good!');
+    $(date_validator).attr('class', 'valid-feedback');
+  } else {
+    $(date_validator).html('Please enter a valid date!');
+    $(date_validator).attr('class', 'invalid-feedback d-block');
     is_valid = false;
   }
 
@@ -63,10 +75,11 @@ $('#confirm-login-form').submit(function(event) {
   event.preventDefault();
   let forename = $(this).find('#user-forename');
   let surname = $(this).find('#user-surname');
+  let dob = $(this).find('#user-dob');
   let password = $(this).find('#user-password');
   let confirm = $(this).find('#user-confirm-password');
 
-  if (validate_create_login(this, forename, surname, password, confirm)) {
+  if (validate_create_login(this, forename, surname, dob, password, confirm)) {
     console.log("Submit")
     this.submit();
   }
