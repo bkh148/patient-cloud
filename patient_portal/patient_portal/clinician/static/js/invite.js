@@ -1,48 +1,38 @@
-//TODO FIX THIS WHOLE FILE :(
-
-function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-
-function validateName(name) {
-    var re = /^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z]*)*$/;
-    return re.test(String(name).toLowerCase());
-}
-
+let email_pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+let name_pattern = /^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z]*)*$/;
 
 let validate_form = function(form, forename_input, surname_input, email_input, confirm_email_input) {
 
     let is_valid = true;
 
     // Validate first name
-    let firstname_validator = $(form).find('#forename-validator')
+    let forename_validator = $(form).find('#forename-validator')
 
-    if (validateName(forename_input.val())) {
-        $(firstname_validator).html('Looks good!')
-        $(firstname_validator).attr('class', 'valid-feedback')
+    if (forename_input.val().match(name_pattern)) {
+        $(forename_validator).html('Looks good!')
+        $(forename_validator).attr('class', 'valid-feedback')
     } else {
-        $(firstname_validator).html('Invalid name.')
-        $(firstname_validator).attr('class', 'invalid-feedback d-block');
+        $(forename_validator).html('Invalid name.')
+        $(forename_validator).attr('class', 'invalid-feedback d-block');
         is_valid = false;
     }
 
     // Validate last name
-    let lastname_validator = $(form).find('#surname-validator')
+    let surname_validator = $(form).find('#surname-validator')
 
-    if (validateName(surname_input.val())) {
-        $(lastname_validator).html('Looks good!')
-        $(lastname_validator).attr('class', 'valid-feedback')
+    if (surname_input.val().match(name_pattern)) {
+        $(surname_validator).html('Looks good!')
+        $(surname_validator).attr('class', 'valid-feedback')
     } else {
-        $(lastname_validator).html('Invalid name');
-        $(lastname_validator).attr('class', 'invalid-feedback d-block');
+        $(surname_validator).html('Invalid name');
+        $(surname_validator).attr('class', 'invalid-feedback d-block');
         is_valid = false;
     }
 
     // Validate e-mail
     let email_validator = $(form).find('#email-validator')
 
-    if (validateEmail($(email_input).val())) {
+    if (email_input.val().match(email_pattern)) {
         $(email_validator).html('Looks good!')
         $(email_validator).attr('class', 'valid-feedback')
     } else {
@@ -54,7 +44,7 @@ let validate_form = function(form, forename_input, surname_input, email_input, c
     // Validate confirmation
     let confirm_validator = $(form).find('#confirm-email-validator')
 
-    if ($(email_input).val() == $(confirm_email_input).val()) {
+    if (email_input.val() == confirm_email_input.val()) {
         $(confirm_validator).html('E-mail addresses match!')
         $(confirm_validator).attr('class', 'valid-feedback')
     } else {
@@ -63,7 +53,6 @@ let validate_form = function(form, forename_input, surname_input, email_input, c
         is_valid = false;
     }
 
-    // The form has been checked.
     $(form).addClass('was-validated');
 
     return is_valid;
