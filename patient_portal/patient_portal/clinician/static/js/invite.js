@@ -71,11 +71,35 @@ let validate_form = function(form, forename_input, surname_input, email_input, c
 
 let close_form = function() {
     let form = document.getElementById('invite-form');
+
+    deactivate_loading(form);
     $('#invite-user-model').modal("hide");
     $(form).attr('class', '');
     $(form).trigger('reset');
 }
-let submit_invite = function (form) {
+
+let activate_loading = function(form) {
+    let cancel_submit = $(form).find('#submit-cancel-form');
+    let submit = $(form).find('#submit-invite-form');
+
+    let spinner_markdown = `<span id="invite-sending-spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...`;
+    $(submit).html(spinner_markdown);
+
+    $(cancel_submit).prop('disabled', true);
+    $(submit).prop('disabled', true);
+}
+
+let deactivate_loading = function(form) {
+    let cancel_submit = $(form).find('#submit-cancel-form');
+    let submit = $(form).find('#submit-invite-form');
+
+    $(submit).html("Send Invite");
+
+    $(cancel_submit).prop('disabled', false);
+    $(submit).prop('disabled', false);
+}
+
+let submit_invite = function(form) {
     try {
 
         //let form = document.getElementById('invite-form');
@@ -85,8 +109,9 @@ let submit_invite = function (form) {
         let confirm_email_input = $(form).find('#invite-confirm-email');
 
         if (validate_form(form, forename_input, surname_input, email_input, confirm_email_input)) {
+            
+            activate_loading(form);
 
-            // Post request + close and clean the form on success
             let invite = {
                 'invite_id': context_manager.new_guid(),
                 'invited_by': context_manager._cache.settings.user.user_id,
@@ -99,8 +124,6 @@ let submit_invite = function (form) {
                 'expiration_date_utc': moment().add(4, 'hours').utc().format()
             }
             
-            close_form();
-            
             $.ajax({
                 url: `http://${context_manager._cache.configurations['host']}:${context_manager._cache.configurations['port']}/api/v1.0/invites/`,
                 type: 'POST',
@@ -110,10 +133,14 @@ let submit_invite = function (form) {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(invite),
                 success: function() {
-                    context_manager.success_message('Success!', `Your invitation has successfully been sent to ${invite['invited_forename']} ${invite['invited_surname']} at: ${invite['invited_email']}!`)
+                    context_manager.success_message('Success!', `Your invitation has successfully been sent to ${invite['invited_forename']} ${invite['invited_surname']} at: ${invite['invited_email']}!`);
+                    close_form();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    throw new Error(errorThrown)
+                    context_manager.post_exception('post_exception', errorThrown);
+                    context_manager.error_message('Oops!', `Your invitation for ${invite['invited_forename']} ${invite['invited_surname']} failed to send. Please try again.`);
+
+                    deactivate_loading(form);
                 }
             })
         }
@@ -121,5 +148,7 @@ let submit_invite = function (form) {
     } catch (err) {
         context_manager.post_exception('post_exception', err);
         context_manager.error_message('Oops!', `An unexpected error has occurred whilst sending your invitation, please try again.`);
+
+        deactivate_loading(form);
     }
 }
