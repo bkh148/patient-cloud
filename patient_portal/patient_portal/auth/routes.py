@@ -74,7 +74,8 @@ def register(invite_id):
                         'user_role_map_id': user_role_map['user_role_map_id'],
                         'user_email': invite['invited_email'],
                         'user_forename': request.form.get('forename', invite['invited_forename']),
-                        'user_surname': request.form.get('surname', invite['invited_surname'])
+                        'user_surname': request.form.get('surname', invite['invited_surname']),
+                        'user_dob': request.form.get('dob')
                     }
                 
                     services.user_service().upsert_user_role_map(user_role_map)
