@@ -89,13 +89,23 @@ PatientsComponent.prototype.name = "not_set"
 
 PatientsComponent.prototype.show = function() {
   try {
-    let patient_component = document.createElement('div');
-    patient_component.setAttribute('id', `${PatientsComponent.prototype.name}-component`)
+    let patients_container = document.createElement('div');
+    patients_container.setAttribute('id', `${PatientsComponent.prototype.name}-component`)
 
     let patient_markup = context_manager._cache.templates['users_container'];
-    patient_component.innerHTML = patient_markup;
+    patients_container.innerHTML = patient_markup;
 
-    addFadeIn(patient_component, '#content', 600);
+    let current_patients_container = $(patients_container).find('#current_user_container');
+    let previous_patients_container = $(patients_container).find('#past_user_container');
+
+    for (let i = 0; i < context_manager._cache.patients.length; i++) {
+      let patient = context_manager._cache.patients[i];
+      let patient_element = build_patient(patient);
+
+      $(current_patients_container).append(patient_element);
+    }
+
+    addFadeIn(patients_container, '#content', 600);
     
   } catch (err) {
     // Push exception to API endpoint
