@@ -1,0 +1,53 @@
+.patient-item .row {
+    margin: 0px;
+}
+
+.patient-item {
+    margin-bottom: 10px;
+}
+
+.patient-item-body {
+    background: #32354515;
+    padding:10px;
+    overflow-wrap: break-word;
+}
+
+.patient-item-body p {
+    margin: 0px;
+}
+
+.patient-item-body .key {
+    font-weight: bold;
+}
+
+.patient-item-header {
+    font-size: .9rem;
+    background: #323545;
+    border-radius: 10px 10px 0px 0px;
+    color: white;
+    min-height: 50px;
+}
+
+.patient-action-container {
+    padding-right: 0px;
+}
+
+.patient-item-header .col {
+    margin: 0px;
+}
+
+.badge-status {
+    height: 10px;
+    width: 10px;
+    border-radius: .25rem;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.badge-online {
+    background-color: #28a745;
+}
+
+.badge-offline {
+    background-color: #dc3545;
+}
