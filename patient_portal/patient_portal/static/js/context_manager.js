@@ -22,10 +22,12 @@ ContextManager.prototype.initialise_socket = function () {
 
 		socket.on('on_user_login', function(data) {
 			context_manager._cache['online_users'][data['user_id']] = data['user_sid']
+			user_logged_in(data);
 		});
 
 		socket.on('on_user_logout', function(data) {
 			delete context_manager._cache['online_users'][data['user_id']];
+			user_logged_out(data);
 		});
 
 	} catch (err) {
