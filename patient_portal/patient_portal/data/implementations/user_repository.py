@@ -59,7 +59,7 @@ class UserRepository(IUserRepository):
     def get_all_users_patients(self, clinician_id):
         """ get all patients for a clinician """
         return self._db.get_all("""
-        SELECT user_id, user_email, user_forename, user_surname FROM user t1
+        SELECT user_id, user_email, user_forename, user_surname, user_dob FROM user t1
         LEFT JOIN patient_clinician_map t2 ON t1.user_id = t2.patient_id
         WHERE clinician_id = ?""", (clinician_id, ))
 
