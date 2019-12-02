@@ -68,7 +68,6 @@ def dashboard():
 
     return render_template('clinician/index.html', title='Dashboard - Clinician',
                            static_folder='clinician.static',
-                           style_paths=['css/appointment.css'],
-                           script_paths=['js/appointment.js', 'js/invite.js'],
+                           script_paths=['js/appointment.js', 'js/invite.js', 'js/patients.js', 'js/main.js'],
                            nav_links=[patients, appointments],
                            metadata=metadata)
