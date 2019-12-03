@@ -14,12 +14,13 @@ def dashboard():
     metadata = {
         'appointments': {},
         'patients': '',
+        'online_users': {},
+        'user_roles': {},
+        'locations': {},
+        'settings': {},
         'configurations': {},
         'templates': {},
         'components': ['patients', 'appointments', 'settings'],
-        'settings': {},
-        'online_users': {},
-        'user_roles': {}
     }
 
     try:
@@ -27,7 +28,7 @@ def dashboard():
         metadata['patients'] = services.user_service().get_all_users_patients(session['user']['user_id'])
         user_ids = [patient['user_id'] for patient in metadata['patients']] 
         metadata['online_users'] = {user_id: online_patients[user_id] for user_id in user_ids if user_id in online_patients} 
-    
+        metadata['locations'] = services.location_service().get_all_locations();
         
         metadata['user_roles'] = services.user_service().get_user_role_ids([UserRole.PATIENT.value])
         metadata['settings'] = {
@@ -68,7 +69,7 @@ def dashboard():
         "text": "Appointments",
         "style": "",
         "context": metadata['components'][1],
-        "icon": "fas fa-calendar-check"}
+        "icon": "fas fa-calendar-alt"}
 
     return render_template('clinician/index.html', title='Dashboard - Clinician',
                            static_folder='clinician.static',
