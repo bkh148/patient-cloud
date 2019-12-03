@@ -23,10 +23,7 @@ def dashboard():
     try:
         metadata['appointments'] = services.appointment_service().get_appointments_for(session['user']['user_id'])
         session['clinician'] = services.user_service().get_patient_clinician(session['user']['user_id'])
-        
-        location_ids = []
-        [location_ids.append(appointment['location_id']) for appointment in metadata['appointments'] if appointment['location_id'] not in location_ids]
-        metadata['locations'] = services.location_service().get_locations_by_ids(location_ids)
+        metadata['locations'] = services.location_service().get_all_locations()
         
         # Get from session
         metadata['configurations'] = {
@@ -56,7 +53,7 @@ def dashboard():
         "text": "Appointments",
         "style": "active",
         "context": metadata['components'][0],
-        "icon": "fas fa-calendar-check"}
+        "icon": "fas fa-calendar-alt"}
 
     return render_template('patient/index.html', title='Dashboard - Patient',
                            static_folder='patient.static',
