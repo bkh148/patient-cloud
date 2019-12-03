@@ -16,8 +16,8 @@ ContextManager.prototype.initialise_socket = function () {
 			socket.emit('load_dashboard', {});
 		});
 
-		socket.on('on_load', function (data) {
-			context_manager._cache['online_users'] = data['online_users']
+		socket.on('on_send', function (data) {
+			handle_data_received(data);
 		});
 
 		socket.on('on_user_login', function(data) {
