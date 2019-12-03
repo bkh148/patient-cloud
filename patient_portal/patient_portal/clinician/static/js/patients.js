@@ -2,12 +2,6 @@ let format_name = function (name) {
     return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 }
 
-let create_appointment = function (patient) {
-    return function () {
-        console.log(patient);
-    }
-}
-
 let edit_patient = function (patient_id) {
     return function () {
         context_manager.info_message("The ability to edit patients data will be added in a feature version of Patient Portal.", true);
@@ -23,6 +17,17 @@ let transfer_patient = function (patient_id) {
 let update_status_badge = function(user_id, status) {
     let status_badge = $(`#status-badge_${user_id}`);
     $(status_badge).attr('class', `badge-status badge-${status}`);
+}
+
+let upcoming_appointments_count = function(patient) {
+    let count = 0;
+    context_manager._cache.appointments.forEach(function(appointment) {
+        if (appointment.created_for == patient.user_id && moment(appointment.appointment_date_utc) > moment()) {
+            count++;
+        }
+    });
+
+    return count;
 }
 
 let build_patient = function (patient) {
@@ -75,6 +80,10 @@ let build_patient = function (patient) {
         let patient_email = $(patient_wrapper).find('#patient_email');
         $(patient_email).attr('id', `${patient_email.attr('id')}_${patient.user_id}`);
         $(patient_email).html(`${patient.user_email}`);
+
+        let appointments = $(patient_wrapper).find("#patient_appointment_count");
+        $(appointments).attr('id', `${appointments.attr('id')}_${patient.user_id}`)
+        $(appointments).html(upcoming_appointments_count(patient));
 
         return patient_wrapper
     } catch (err) {
