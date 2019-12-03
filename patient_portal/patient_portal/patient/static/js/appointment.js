@@ -1,3 +1,30 @@
+let handle_incoming_appointment = function(appointment) {
+    context_manager._cache.appointments.push(appointment);
+
+    if (context_manager.current_context == "appointments") {
+        let component = undefined;
+        
+
+        for (let i = 0; i < context_manager.components.length; i++) {
+            component = context_manager.components[i];
+
+            if (component.name == "appointments") {
+                component.hide();
+                component.show();
+                break;
+            }
+        }
+
+        context_manager.info_message(`Your clinician Dr. ${context_manager._cache.settings.clinician.user_surname} has scheduled a new appointment for your on ${moment(appointment.appointment_date_utc).format('dddd Do MMM YYYY')}.`);
+
+    } else {
+
+        // Notification Badge
+        // If the badge is already existant
+        // 
+    }
+}
+
 let build_appointment = function(appointment) {
     try {
         let appointment_wrapper = document.createElement('div')
