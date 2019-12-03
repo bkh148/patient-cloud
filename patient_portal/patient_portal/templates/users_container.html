@@ -22,7 +22,7 @@
             <div class="modal-content">
                 <div class="modal-header align-items-center hd-dark">
                     <p class="modal-title" id="invite-user-model-title">{{ modal_title }}</p>
-                    <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" style="color: white;" onclick="close_invite_form()" aria-label="Close">
                         <i aria-hidden="true" class="fas fa-times"></i>
                     </button>
                 </div>
@@ -31,4 +31,6 @@
             </div>
         </div>
     </div>
+    {% block component_specific %}
+    {% endblock %}
 </div>

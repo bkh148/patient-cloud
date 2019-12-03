@@ -1,7 +1,7 @@
 let email_pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 let name_pattern = /^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z]*)*$/;
 
-let validate_form = function(form, forename_input, surname_input, email_input, confirm_email_input) {
+let validate_invite_form = function(form, forename_input, surname_input, email_input, confirm_email_input) {
 
     let is_valid = true;
 
@@ -58,16 +58,16 @@ let validate_form = function(form, forename_input, surname_input, email_input, c
     return is_valid;
 }
 
-let close_form = function() {
+let close_invite_form = function() {
     let form = document.getElementById('invite-form');
 
-    deactivate_loading(form);
+    invite_loaded(form);
     $('#invite-user-model').modal("hide");
     $(form).attr('class', '');
     $(form).trigger('reset');
 }
 
-let activate_loading = function(form) {
+let invite_loading = function(form) {
     let cancel_submit = $(form).find('#submit-cancel-form');
     let submit = $(form).find('#submit-invite-form');
 
@@ -78,7 +78,7 @@ let activate_loading = function(form) {
     $(submit).prop('disabled', true);
 }
 
-let deactivate_loading = function(form) {
+let invite_loaded = function(form) {
     let cancel_submit = $(form).find('#submit-cancel-form');
     let submit = $(form).find('#submit-invite-form');
 
@@ -97,9 +97,9 @@ let submit_invite = function(form) {
         let email_input = $(form).find('#invite-email');
         let confirm_email_input = $(form).find('#invite-confirm-email');
 
-        if (validate_form(form, forename_input, surname_input, email_input, confirm_email_input)) {
+        if (validate_invite_form(form, forename_input, surname_input, email_input, confirm_email_input)) {
             
-            activate_loading(form);
+            invite_loading(form);
 
             let invite = {
                 'invite_id': context_manager.new_guid(),
@@ -123,13 +123,13 @@ let submit_invite = function(form) {
                 data: JSON.stringify(invite),
                 success: function() {
                     context_manager.success_message('Success!', `Your invitation has successfully been sent to ${invite['invited_forename']} ${invite['invited_surname']} at: ${invite['invited_email']}!`);
-                    close_form();
+                    close_invite_form();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    context_manager.post_exception('post_exception', errorThrown);
+                    context_manager.post_exception('CLIENT_EXCEPTION_INVITE', errorThrown);
                     context_manager.error_message('Oops!', `Your invitation for ${invite['invited_forename']} ${invite['invited_surname']} failed to send. Please try again.`);
 
-                    deactivate_loading(form);
+                    invite_loaded(form);
                 }
             })
         }
@@ -138,6 +138,6 @@ let submit_invite = function(form) {
         context_manager.post_exception('post_exception', err);
         context_manager.error_message('Oops!', `An unexpected error has occurred whilst sending your invitation, please try again.`);
 
-        deactivate_loading(form);
+        invite_loaded(form);
     }
 }
