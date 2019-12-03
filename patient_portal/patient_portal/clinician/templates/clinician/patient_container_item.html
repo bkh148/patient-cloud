@@ -9,8 +9,8 @@
                 <div class="col-md-6 patient-action-container">
                         <div class="row h-100 align-items-center justify-content-end">
                                 <div class="btn-group mr-1" role="group" aria-label="patient_actions">
-                                        <button type="button" id="new_appointment" class="btn btn-light"><i
-                                                        class="fas fa-calendar-check"></i> +</button>
+                                        <button type="button" id="new_appointment" onclick="create_appointment(this)" class="btn btn-light" data-toggle="modal" data-target="#new-appointment-model"><i
+                                                        class="fas fa-calendar-alt"></i> +</button>
                                         <button type="button" id="edit_patient" class="btn btn-light"><i
                                                         class="fas fa-edit"></i></button>
                                         <button type="button" id="transfer_patient" class="btn btn-danger"><i
