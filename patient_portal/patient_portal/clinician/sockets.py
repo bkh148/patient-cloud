@@ -42,3 +42,10 @@ def logout(message):
     print('Socket closed through logout')
     disconnect()
     
+@socket_io.on('notify_patient', namespace='/clinician')
+def notify_patient(message):
+    try:
+        socket_io.emit('on_send', message['data'], namespace='/patient', room=message['room_id'])
+        print("MESSAGE: ", message)
+    except Exception as e:
+        print("SOCKET EXCEPTION: {}".format(e))
