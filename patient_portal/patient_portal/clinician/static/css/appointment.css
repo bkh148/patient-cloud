@@ -1,54 +1,57 @@
 .appointment-item .row {
-    margin: 0px;
-  }
-  
-  .appointment-item {
-    margin-bottom: 10px;
-    border: 1px solid #e3e3e3;
-  }
-  
-  .appointment-item-header {
-    padding: 5px 0px;
-    font-size: .9rem;
-  }
-  
-  .appointment-item-header .col {
-    margin: 0px;
-  }
-  
-  .appointment-item-header span {
-    color: #FE4284;
-    padding: 0px 10px;
-  }
-  
-  .appointment-item-header .time {
-    text-align: end;
-  }
-  
-  .appointment-item-header .separator {
-    min-height: 2px;
-    background-color: #FE4284;
-    margin: 0px 10px;
-  }
-  
-  .location-container, .reason-container {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .appointment-item-body {
-    padding-bottom: 15px;
-    font-size: .9rem;
-  }
-  
-  .appointment-item-body .key {
-    color: #7B7B7B;
-  }
-  
-  .appointment-item-body .value {
-    color: #333333;
-    font-size: 0.9rem;
-    padding: 0px 10px;
-    text-align: justify;
-  }
-  
+  margin: 0px;
+}
+
+.appointment-item {
+  margin-bottom: 10px;
+  border: 1px solid #e3e3e3;
+}
+
+.appointment-item-header {
+  padding: 5px 0px;
+  font-size: .9rem;
+}
+
+.appointment-item-header .col {
+  margin: 0px;
+}
+
+.appointment-item-header span {
+  color: #FE4284;
+  padding: 0px 10px;
+}
+
+.appointment-item-header .time {
+  text-align: end;
+}
+
+.appointment-item-header .separator {
+  min-height: 2px;
+  background-color: #FE4284;
+  margin: 0px 10px;
+}
+
+.location-container, .reason-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.appointment-item-body {
+  padding-bottom: 15px;
+  font-size: .9rem;
+}
+
+.appointment-item-body .key {
+  color: #7B7B7B;
+}
+
+.appointment-item-body .value {
+  color: #333333;
+  font-size: 0.9rem;
+  padding: 0px 10px;
+  text-align: justify;
+}
+
+.table-sm td, .table-sm th {
+  padding: .25rem !important;
+}
