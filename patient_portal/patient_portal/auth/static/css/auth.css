@@ -23,3 +23,7 @@ html, body {
 .invalid-feedback {
     width: initial;
 }
+
+.table-sm td, .table-sm th {
+    padding: .25rem !important;
+}
