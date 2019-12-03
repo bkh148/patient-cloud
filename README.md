@@ -21,6 +21,9 @@ Invitation (Patient): <br />
 Appointments (WIP): <br />
 ![alt text](./public/appointments.png "Appointments") <br />
 
+Create new Appointments: <br />
+![alt text](./public/appointments_form.png "Appointments Form") <br />
+
 Settings (WIP): <br />
 ![alt text](./public/settings.png "Settings") <br/>
 
