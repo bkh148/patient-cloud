@@ -60,6 +60,12 @@ ContextManager.prototype.error_message = function(title, message) {
 	toastr.error(message, title);
 }
 
+ContextManager.prototype.info_message = function(message, single=false) {
+	toastr.options.closeButton = true;
+	toastr.options.preventDuplicates = single;
+	toastr.info(message, "Information");
+}
+
 ContextManager.prototype.post_activity = function (activity_type) {
 	try {
 
