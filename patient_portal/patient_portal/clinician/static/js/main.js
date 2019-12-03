@@ -12,3 +12,7 @@ let user_logged_in = function(data) {
         update_status_badge(data['user_id'], 'online');
     }
 }
+
+let handle_data_received = function(data) {
+
+}
