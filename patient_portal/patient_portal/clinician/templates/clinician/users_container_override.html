@@ -1,7 +1,6 @@
 {% extends "users_container.html" %}
 
 {% block invitation_body %}
-
 <form id="invite-form" action="#" onsubmit="submit_invite(this); return false;" novalidate>
     <div class="modal-body">
         <div class="form-row">
@@ -44,8 +43,134 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button id="submit-cancel-form" type="button" class="btn btn-danger" onclick="close_form()">Cancel</button>
+        <button id="submit-cancel-form" type="button" class="btn btn-danger"
+            onclick="close_invite_form()">Cancel</button>
         <button id="submit-invite-form" type="submit" class="btn btn-success">Send Invite</button>
     </div>
 </form>
+{% endblock %}
+
+{% block component_specific %}
+<!-- New Appointment Model -->
+<div class="modal fade" id="new-appointment-model" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header align-items-center hd-dark">
+                <p class="modal-title" id="invite-user-model-title">New Appointment</p>
+                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="appointment-form" action="#" onsubmit="submit_appointment(this); return false;" novalidate>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="appointment-forename">Forename</label>
+                            <input type="text" class="form-control" id="appointment-forename" placeholder="Forename"
+                                required disabled />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="appointment-surname">Surname</label>
+                            <input name="forename" type="text" class="form-control" id="appointment-surname"
+                                placeholder="Surname" required disabled />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="appointment-dob">Date of Birth</label>
+                            <input name="surname" type="text" class="form-control" id="appointment-dob"
+                                placeholder="DD/MM/YYYY" required disabled />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="appointment-email">E-mail</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="email-addon">@</span>
+                                </div>
+                                <input name="email" type="text" class="form-control" id="appointment-email"
+                                    placeholder="Patient e-mail" required disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <!-- Reason -->
+                        <div class="col-md-12 mb-3">
+                            <label for="appointment-type">Reason for Appointment</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="appointment-type">Reason</label>
+                                </div>
+                                <select class="custom-select form-control" id="appointment-type" required="">
+                                    <option value="default" selected disabled="disabled">Select an appointment type...
+                                    </option>
+                                    <!-- In future versions, this should be dynamically populated by appointments types in the DB.
+                                        This would allow us to insert new appointment types into the DB and align things up by ID rather than a string...
+                                    -->
+                                    <option value="d1c9d93a-a27b-499d-9c6f-60e02c481fc6">Appointment Type 1</option>
+                                    <option value="b4b9a86e-9dd9-4713-a4a1-13c4c09853e9">Appointment Type 2</option>
+                                    <option value="24b5faf6-5706-410a-a5c3-a70ff04784d3">Appointment Type 3</option>
+                                    <option value="dab7655b-94b2-4308-b566-f24d45976e5c">Appointment Type 4</option>
+                                    <option value="7e630208-1b72-40d1-8f50-69fbd7c78719">Appointment Type 5</option>
+                                    <option value="138b6c0e-73ca-4a1d-91ea-f4dbb74e9397">Appointment Type 6</option>
+                                    <option value="9e688abe-d32e-43f5-b2ec-3a975864b5d1">Appointment Type 7</option>
+                                </select>
+                                <div id="appointment-type-validator"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <!-- Location -->
+                        <div class="col-md-12 mb-3">
+                            <label for="appointment-location">Location</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="appointment-location"><i
+                                            class="fas fa-hospital-alt"></i></label>
+                                </div>
+                                <select class="custom-select form-control" id="appointment-location" required>
+                                    <option value="default" selected>Select care location...</option>
+                                    <!-- Dynamic -->
+                                </select>
+                                <div id="appointment-location-validator"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <!-- Date & Time -->
+                        <div class="col-md-12 mb-3">
+                            <label for="appointment-datetime-group">Date and Time</label>
+                            <div class="input-group date" id="appointment-datetime-group" data-target-input="nearest">
+                                <div class="input-group-prepend" data-target="#appointment-datetime-group"
+                                    data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                                </div>
+                                <input name="datetime" id="appointment-datetime" onkeydown="return false" type="text"
+                                    pattern="^((?:0[0-9])|(?:[1-2][0-9])|(?:3[0-1]))\/((?:0[1-9])|(?:1[0-2]))\/((?:19|20)\d{2}) (0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$"
+                                    class="form-control datetimepicker-input" data-target="#appointment-datetime-group"
+                                    required autocomplete="off">
+                                <div id="appointment-date-validator"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="appointment-notes">Notes</label>
+                            <textarea name="notes" rows="3" class="form-control" id="appointment-notes"
+                                placeholder="Any additional comments for your patient here..."
+                                style="font-size: .9rem; resize: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancel-appointment" type="button" class="btn btn-danger"
+                        onclick="close_appointment_form()">Cancel</button>
+                    <button id="submit-appointment" type="submit" class="btn btn-success">Create Appointment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
