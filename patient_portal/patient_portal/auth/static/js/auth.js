@@ -1,3 +1,10 @@
+$(function () {
+  $('#dob-picker').datetimepicker({
+      format: 'DD/MM/YYYY',
+      //dayViewHeaderFormat: 'dddd Do MMM YY'
+  });
+});
+
 const name_pattern = /^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z]*)*$/;
 const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[(){}!#$_%&? "])(?=.*[A-Z]).{8,}$/;
 const date_pattern = /^((?:0[0-9])|(?:[1-2][0-9])|(?:3[0-1]))\/((?:0[1-9])|(?:1[0-2]))\/((?:19|20)\d{2})$/;
@@ -39,7 +46,7 @@ let validate_create_login = function(form, forename_input, surname_input, dob_in
     $(date_validator).html('Looks good!');
     $(date_validator).attr('class', 'valid-feedback');
   } else {
-    $(date_validator).html('Please enter a valid date!');
+    $(date_validator).html('Please select a valid date!');
     $(date_validator).attr('class', 'invalid-feedback d-block');
     is_valid = false;
   }
