@@ -122,12 +122,12 @@ let submit_invite = function(form) {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(invite),
                 success: function() {
-                    context_manager.success_message('Success!', `Your invitation has successfully been sent to ${invite['invited_forename']} ${invite['invited_surname']} at: ${invite['invited_email']}!`);
+                    context_manager.success_message(`Your invitation has successfully been sent to ${invite['invited_forename']} ${invite['invited_surname']} at: ${invite['invited_email']}!`);
                     close_invite_form();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     context_manager.post_exception('CLIENT_EXCEPTION_INVITE', errorThrown);
-                    context_manager.error_message('Oops!', `Your invitation for ${invite['invited_forename']} ${invite['invited_surname']} failed to send. Please try again.`);
+                    context_manager.error_message(`Your invitation for ${invite['invited_forename']} ${invite['invited_surname']} failed to send. Please try again.`);
 
                     invite_loaded(form);
                 }
@@ -136,7 +136,7 @@ let submit_invite = function(form) {
 
     } catch (err) {
         context_manager.post_exception('post_exception', err);
-        context_manager.error_message('Oops!', `An unexpected error has occurred whilst sending your invitation, please try again.`);
+        context_manager.error_message(`An unexpected error has occurred whilst sending your invitation, please try again.`);
 
         invite_loaded(form);
     }

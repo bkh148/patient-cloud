@@ -149,7 +149,7 @@ let handle_appointment_success = function(appointment) {
     let appointment_count = $(`#patient_appointment_count_${appointment.created_for}`);
     $(appointment_count).html(Number($(appointment_count).html()) + 1);
 
-    context_manager.success_message('Success', `Your appointment has successfully been scheduled for ${moment(appointment.appointment_date_utc).format('dddd Do MMM YYYY')}`)
+    context_manager.success_message(`Your appointment has successfully been scheduled for ${moment(appointment.appointment_date_utc).format('dddd Do MMM YYYY')}`)
 }
 
 let submit_appointment = function(form) {
@@ -191,7 +191,7 @@ let submit_appointment = function(form) {
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     context_manager.post_exception('CLIENT_EXCEPTION_APPOINTMENT', errorThrown);
-                    context_manager.error_message(`Oops', 'Your appointment for ${current_appointment_patient.user_forename} ${current_appointment_patient.user_surname} couldn't be created. Please try again.`);
+                    context_manager.error_message(`Your appointment for ${current_appointment_patient.user_forename} ${current_appointment_patient.user_surname} couldn't be created. Please try again.`);
 
                     appointment_loaded(form);
                 }
@@ -199,7 +199,7 @@ let submit_appointment = function(form) {
         }
     } catch (err) {
         context_manager.post_exception('post_exception', err);
-        context_manager.error_message('Oops!', `An unexpected error has occurred whilst creating your appointment, please try again.`);
+        context_manager.error_message(`An unexpected error has occurred whilst creating your appointment, please try again.`);
 
         appointment_loaded(form);
     }

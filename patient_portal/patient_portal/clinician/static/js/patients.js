@@ -4,13 +4,13 @@ let format_name = function (name) {
 
 let edit_patient = function (patient_id) {
     return function () {
-        context_manager.info_message("The ability to edit patients data will be added in a feature version of Patient Portal.", true);
+        context_manager.info_message("The ability to edit patients data will be added in a feature version of Patient Portal.");
     }
 }
 
 let transfer_patient = function (patient_id) {
     return function () {
-        context_manager.info_message("The ability to transfer patients will be added in a feature version of Patient Portal.", true);
+        context_manager.info_message("The ability to transfer patients will be added in a feature version of Patient Portal.");
     }
 }
 
