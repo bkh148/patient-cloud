@@ -46,9 +46,10 @@ def dashboard():
         # Todo: Create a clinician's patient view
         metadata['templates']['users_container'] = render_template('clinician/users_container_override.html', 
                                                                    title='Your Patients', 
+                                                                   invite_icon='fas fa-user-injured',
                                                                    subtitle_one='Currently in your care', 
                                                                    subtitle_two='Previously in your care',
-                                                                   modal_title='Invite a Patient')
+                                                                   modal_title='Invite a Patient',)
         
         metadata['templates']['patient_item'] = render_template('clinician/patient_container_item.html')
         metadata['templates']['appointments_container'] = render_template('appointments_container.html')
