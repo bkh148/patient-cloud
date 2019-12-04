@@ -8,21 +8,15 @@
 }
 
 .appointment-item-header {
-  padding: 5px 0px;
   font-size: .9rem;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  color: #323545;
+  min-height: 50px;
 }
 
 .appointment-item-header .col {
   margin: 0px;
-}
-
-.appointment-item-header span {
-  color: #FE4284;
-  padding: 0px 10px;
-}
-
-.appointment-item-header .time {
-  text-align: end;
 }
 
 .appointment-item-header .separator {
@@ -36,18 +30,17 @@
   flex-direction: row;
 }
 
+.appointment-item-body p {
+  margin: 0px;
+}
+
 .appointment-item-body {
-  padding-bottom: 15px;
-  font-size: .9rem;
+  padding:10px;
+  font-size: 0.8rem;
+  overflow-wrap: break-word;
 }
 
 .appointment-item-body .key {
-  color: #7B7B7B;
+  font-weight: bold;
 }
 
-.appointment-item-body .value {
-  color: #333333;
-  font-size: 0.9rem;
-  padding: 0px 10px;
-  text-align: justify;
-}
