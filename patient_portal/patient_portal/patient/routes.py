@@ -43,6 +43,7 @@ def dashboard():
         metadata['templates']['appointments_container'] = render_template('appointments_container.html')
         metadata['templates']['appointments_item'] = render_template('patient/appointment_container_item.html')
         metadata['templates']['settings'] = render_template('patient/settings.html', context=metadata['settings'])
+        metadata['templates']['notification'] = render_template('notification.html')
 
     except Exception as e:
         # Log error

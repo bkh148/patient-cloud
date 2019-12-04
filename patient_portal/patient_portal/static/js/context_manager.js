@@ -50,20 +50,47 @@ ContextManager.prototype.new_guid = function () {
 	  );
 }
 
-ContextManager.prototype.success_message = function(title, message) {
-	toastr.options.closeButton = true;
-	toastr.success(message, title);
+let create_notification = function(type, icon, message, time=null){
+	let notification = document.createElement('div');
+	$(notification).attr('class', `toast toast-${type}`);
+	$(notification).attr('role', 'alert');
+	$(notification).attr('aria-live', 'assertive');
+	$(notification).attr('aria-atomic', 'true');
+	$(notification).html(context_manager._cache.templates["notification"]);
+
+	let notification_icon = $(notification).find('#toast-icon');
+	$(notification_icon).attr('class', `${icon} mr-2`);
+
+	let notification_title = $(notification).find('#toast-title');
+	$(notification_title).html(type.charAt(0).toUpperCase() + type.slice(1));
+
+	let notification_time = $(notification).find('#notification-time');
+	if (time == null) {
+		$(notification_time).html('just now');
+	} else {
+		$(notification_time).html('TODO');
+	}
+
+	let notification_body = $(notification).find('#notification-body');
+	$(notification_body).html(message);
+
+	$(notification).appendTo('#notification-wrapper');
+	$(notification).toast({
+		delay: 3500
+	});
+	$(notification).toast('show');
 }
 
-ContextManager.prototype.error_message = function(title, message) {
-	toastr.options.closeButton = true;
-	toastr.error(message, title);
+ContextManager.prototype.success_message = function(message, time=null) {
+	create_notification('success', 'far fa-check-circle', message);
 }
 
-ContextManager.prototype.info_message = function(message, single=false) {
-	toastr.options.closeButton = true;
-	toastr.options.preventDuplicates = single;
-	toastr.info(message, "Information");
+ContextManager.prototype.error_message = function(message, time=null) {
+	create_notification('error', 'far fa-times-circle', message);
+}
+
+ContextManager.prototype.info_message = function(message, time=null) {
+	create_notification('information', 'far fa-question-circle', message);
 }
 
 ContextManager.prototype.post_activity = function (activity_type) {

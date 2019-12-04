@@ -64,6 +64,7 @@ def dashboard():
     metadata['templates']['care_locations'] = 'Hello, care locations'
     metadata['templates']['data_analytics'] = 'Hello, data analytics'
     metadata['templates']['settings'] = render_template('admin/settings.html', context=metadata['settings'])
+    metadata['templates']['notification'] = render_template('notification.html')
 
 
     return render_template('admin/index.html', title='Dashboard - Admin', static_folder='admin.static',

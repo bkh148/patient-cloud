@@ -50,10 +50,12 @@ def dashboard():
 
     metadata['templates']['clinicians'] = render_template('local_admin/users_container_override.html', 
                                                                    title='Your Clinicians', 
+                                                                   invite_icon='fas fa-user-md',
                                                                    subtitle_one='Currently in this care location', 
                                                                    subtitle_two='Previously in this care location',
                                                                    modal_title='Invite a Clinician')
     metadata['templates']['settings'] = render_template('local_admin/settings.html', context=metadata['settings'])
+    metadata['templates']['notification'] = render_template('notification.html')
 
     return render_template('local_admin/index.html', title='Dashboard - Local Admin',
                            static_folder='local_admin.static',

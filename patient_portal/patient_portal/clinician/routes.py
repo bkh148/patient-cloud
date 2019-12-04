@@ -55,6 +55,7 @@ def dashboard():
         metadata['templates']['appointments_item'] = render_template('clinician/appointment_container_item.html')
         metadata['templates']['settings'] = render_template(
             'clinician/settings.html', context=metadata['settings'])
+        metadata['templates']['notification'] = render_template('notification.html')
 
     except Exception as e:
         services.log_service().log_exception(e);
