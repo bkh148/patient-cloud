@@ -22,7 +22,7 @@ class AppointmentService(IAppointmentService):
     def delete_appointment(self, appointment_id):
         """Delete an existing appointment"""
         try:
-            return []
+            self._repo.delete_appointment(appointment_id);
         except Exception as e:
             self._log_service.log_exception(e)
             raise

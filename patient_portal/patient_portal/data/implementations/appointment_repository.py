@@ -20,7 +20,6 @@ class AppointmentRepository(IAppointmentRepository):
 
     def delete_appointment(self, appointment_id):
         """ Deletes an appointment form the datastore.
-
         Args:
             appointment_id: id of the appointment.
         """
