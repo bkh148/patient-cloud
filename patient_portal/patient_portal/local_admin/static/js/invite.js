@@ -1,3 +1,5 @@
+// Clinician implementation of the invite.js abstraction
+
 let close_invite_form = function() {
     
 }

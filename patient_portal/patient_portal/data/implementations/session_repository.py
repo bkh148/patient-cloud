@@ -1,5 +1,6 @@
 from ..interfaces import ISessionRepository
 
+
 class SessionRepository(ISessionRepository):
 
     def __init__(self, db):
@@ -16,4 +17,3 @@ class SessionRepository(ISessionRepository):
 
     def delete_session(self, session_id):
         """remove a session from the data store"""
-

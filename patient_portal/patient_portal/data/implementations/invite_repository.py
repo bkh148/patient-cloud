@@ -1,6 +1,7 @@
 
 from ..interfaces import IInviteRepository
 
+
 class InviteRepository(IInviteRepository):
 
     def __init__(self, db):
@@ -15,11 +16,11 @@ class InviteRepository(IInviteRepository):
     def get_all_invites(self):
         """ return all invites in the system """
         return self._db._get_all("""
-        SELECT * FROM invite""");
+        SELECT * FROM invite""")
 
     def upsert_invite(self, invite):
         """ update or insert a new invite into the table"""
-        
+
         if self.has_invite(invite['invite_id']):
             self._db.update('invite', invite)
         else:

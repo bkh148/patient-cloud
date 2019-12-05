@@ -1,16 +1,16 @@
 function update_icons() {
     if ($('#sidebar').hasClass("active")) {
-	    $('#sidebar-collapse-icon').addClass('fa-angle-double-right').removeClass('fa-angle-double-left')
+        $('#sidebar-collapse-icon').addClass('fa-angle-double-right').removeClass('fa-angle-double-left')
     } else {
-	    $('#sidebar-collapse-icon').addClass('fa-angle-double-left').removeClass('fa-angle-double-right')
+        $('#sidebar-collapse-icon').addClass('fa-angle-double-left').removeClass('fa-angle-double-right')
     }
 }
 
 function update_sidebar() {
     if ($(window).width() <= 768 && !$('#sidebar').hasClass('active')) {
-   	$('#sidebar').addClass('active')
-	$('#content').addClass('active')
-	update_icons()
+        $('#sidebar').addClass('active')
+        $('#content').addClass('active')
+        update_icons()
     }
 }
 
@@ -19,12 +19,12 @@ $(document).ready(function () {
 
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
-	$('#content').toggleClass('active');
+        $('#content').toggleClass('active');
 
-	update_icons()
+        update_icons()
     });
 });
 
-$(window).resize(function() {
+$(window).resize(function () {
     update_sidebar()
 });

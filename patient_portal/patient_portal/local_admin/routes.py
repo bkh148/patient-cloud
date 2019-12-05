@@ -5,6 +5,7 @@ from flask import render_template, session
 from .. import services
 from ..core import login_required
 
+
 @local_admin.route('/', methods=['GET'])
 @local_admin.route('/dashboard', methods=['GET'])
 @login_required('LOCAL_ADMIN')
@@ -19,9 +20,9 @@ def dashboard():
         'settings': {},
         'online_users': {}
     }
-    
+
     try:
-        
+
         # Pull from session object
         metadata['clinicians'] = []
         metadata['components'] = ['clinicians', 'settings']
@@ -31,13 +32,13 @@ def dashboard():
             "email": "some.admin@admin.co.uk",
             "active_account": 1,
             "stay_logged_in": 1}
-        
+
         metadata['configurations'] = {
-        "host": "127.0.0.1",
-        "port": "5000",
-        "namespace": "local_admin",
-        "session_id": session['session_id']}
-        
+            "host": "127.0.0.1",
+            "port": "5000",
+            "namespace": "local_admin",
+            "session_id": session['session_id']}
+
     except Exception as e:
         # Log error
         print('Some exception {}'.format(e))
@@ -48,14 +49,16 @@ def dashboard():
         "context": metadata['components'][0],
         "icon": "fas fa-user-md"}
 
-    metadata['templates']['clinicians'] = render_template('local_admin/users_container_override.html', 
-                                                                   title='Your Clinicians', 
-                                                                   invite_icon='fas fa-user-md',
-                                                                   subtitle_one='Currently in this care location', 
-                                                                   subtitle_two='Previously in this care location',
-                                                                   modal_title='Invite a Clinician')
-    metadata['templates']['settings'] = render_template('local_admin/settings.html', context=metadata['settings'])
-    metadata['templates']['notification'] = render_template('notification.html')
+    metadata['templates']['clinicians'] = render_template('local_admin/users_container_override.html',
+                                                          title='Your Clinicians',
+                                                          invite_icon='fas fa-user-md',
+                                                          subtitle_one='Currently in this care location',
+                                                          subtitle_two='Previously in this care location',
+                                                          modal_title='Invite a Clinician')
+    metadata['templates']['settings'] = render_template(
+        'local_admin/settings.html', context=metadata['settings'])
+    metadata['templates']['notification'] = render_template(
+        'notification.html')
 
     return render_template('local_admin/index.html', title='Dashboard - Local Admin',
                            static_folder='local_admin.static',

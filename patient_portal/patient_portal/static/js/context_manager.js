@@ -31,7 +31,7 @@ ContextManager.prototype.initialise_socket = function () {
 
 	} catch (err) {
 		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
-        context_manager.error_message(`An unexpected error has occurred whilst loading your dashboard, please try refreshing the page.`);
+		context_manager.error_message(`An unexpected error has occurred whilst loading your dashboard, please try refreshing the page.`);
 	}
 }
 
@@ -41,7 +41,7 @@ ContextManager.prototype.logout = function () {
 		context_manager.post_activity('CONTEXT_MANAGER_LOGOUT');
 	} catch (err) {
 		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
-        context_manager.error_message(`An unexpected error has occurred whilst logging your out..`);
+		context_manager.error_message(`An unexpected error has occurred whilst logging your out..`);
 	}
 }
 
@@ -88,7 +88,7 @@ let create_notification = function (type, icon, message, options, time = null, t
 	return notification
 }
 
-ContextManager.prototype.update_component = function(name) {
+ContextManager.prototype.update_component = function (name) {
 	let component = undefined;
 	for (let i = 0; i < context_manager.components.length; i++) {
 		component = context_manager.components[i];
@@ -120,7 +120,7 @@ ContextManager.prototype.info_message = function (message, time = null) {
 
 	$(notification).toast(options);
 	$(notification).toast('show');
-	$(notification).on('hide', function() {
+	$(notification).on('hide', function () {
 		console.log('hidden');
 	})
 }
@@ -266,7 +266,7 @@ ContextManager.prototype.switch_context = function (target) {
 		}
 	} catch (err) {
 		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
-        context_manager.error_message(`An unexpected error has occurred whilst loading elements on your dashboard dashboard, please try refreshing the page.`);
+		context_manager.error_message(`An unexpected error has occurred whilst loading elements on your dashboard dashboard, please try refreshing the page.`);
 	}
 }
 
@@ -294,8 +294,8 @@ $(document).ready(function () {
 		context_manager.components[0].show();
 
 	} catch (err) {
-        context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
-        context_manager.error_message(`An unexpected error has occurred whilst loading your dashboard, please try refreshing the page.`);
+		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
+		context_manager.error_message(`An unexpected error has occurred whilst loading your dashboard, please try refreshing the page.`);
 	}
 	console.log('Context manager initialized successfully.');
 

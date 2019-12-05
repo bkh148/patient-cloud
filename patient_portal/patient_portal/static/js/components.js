@@ -4,7 +4,7 @@
 */
 
 /* Definition */
-let Component = function() {
+let Component = function () {
   if (this.constructor == Component) {
     throw new Error('Can\'t instantiate abstract class.')
   }
@@ -15,18 +15,18 @@ Component.prototype.subscriptions = []
 Component.prototype.name = "abstract"
 
 /* Show will show this component in the content div */
-Component.prototype.show = function() {
-    throw new Error('Cannot call an abstract method.')
+Component.prototype.show = function () {
+  throw new Error('Cannot call an abstract method.')
 }
 
 /* Hide will remove this component from the content div */
-Component.prototype.hide = function() {
-    throw new Error('Cannot call an abstract method.')
+Component.prototype.hide = function () {
+  throw new Error('Cannot call an abstract method.')
 }
 
 /* Update will update the data in the component when in the content div */
-Component.prototype.update = function() {
-    throw new Error('Cannot call an abstract method.')
+Component.prototype.update = function () {
+  throw new Error('Cannot call an abstract method.')
 }
 
 
@@ -34,28 +34,28 @@ Component.prototype.update = function() {
 	Component Factory
 */
 
-let ComponentFactory = function() {
+let ComponentFactory = function () {
 }
 
-ComponentFactory.prototype.create_component = function(type) {
-    switch(type) {
-      case 'dashboard':
-        return new DashboardComponent(type);
-      case 'appointments':
-        return new AppointmentComponent(type);
-      case 'settings':
-        return new SettingsComponent(type);
-      case 'clinicians':
-        return new ClinicianComponent(type);
-      case 'care_locations':
-        return new CareLocationsComponent(type);
-      case 'patients':
-        return new PatientsComponent(type);
-      case 'data_analytics':
-        return new DataAnalyticsComponent(type);
-      default:
-	throw new Error('Couldn\'t load component type.')
-    }
+ComponentFactory.prototype.create_component = function (type) {
+  switch (type) {
+    case 'dashboard':
+      return new DashboardComponent(type);
+    case 'appointments':
+      return new AppointmentComponent(type);
+    case 'settings':
+      return new SettingsComponent(type);
+    case 'clinicians':
+      return new ClinicianComponent(type);
+    case 'care_locations':
+      return new CareLocationsComponent(type);
+    case 'patients':
+      return new PatientsComponent(type);
+    case 'data_analytics':
+      return new DataAnalyticsComponent(type);
+    default:
+      throw new Error('Couldn\'t load component type.')
+  }
 };
 
 /*
@@ -63,8 +63,9 @@ ComponentFactory.prototype.create_component = function(type) {
 */
 
 function removeFadeOut(element, speed) {
-  $(element).fadeOut(speed, 
-    function() { $(element).remove(); 
+  $(element).fadeOut(speed,
+    function () {
+      $(element).remove();
     });
 }
 
@@ -76,7 +77,7 @@ function addFadeIn(element, parent, speed) {
   Patient Component
 */
 
-let PatientsComponent = function(name) {
+let PatientsComponent = function (name) {
   Component.apply(this, arguments)
   PatientsComponent.prototype.name = name;
 }
@@ -87,7 +88,7 @@ PatientsComponent.prototype.constructor = PatientsComponent;
 PatientsComponent.prototype.subscriptions = ['patients']
 PatientsComponent.prototype.name = "not_set"
 
-PatientsComponent.prototype.show = function() {
+PatientsComponent.prototype.show = function () {
   try {
     let patients_container = document.createElement('div');
     patients_container.setAttribute('id', `${PatientsComponent.prototype.name}-component`)
@@ -106,14 +107,14 @@ PatientsComponent.prototype.show = function() {
     }
 
     addFadeIn(patients_container, '#content', 600);
-    
+
   } catch (err) {
     context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_PATIENT', err);
     context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
-PatientsComponent.prototype.hide = function() {
+PatientsComponent.prototype.hide = function () {
   try {
     removeFadeOut(`#${PatientsComponent.prototype.name}-component`, 200);
   } catch (err) {
@@ -122,7 +123,7 @@ PatientsComponent.prototype.hide = function() {
   }
 }
 
-PatientsComponent.prototype.update = function() {
+PatientsComponent.prototype.update = function () {
   console.log('Update the patients component.')
 }
 
@@ -130,7 +131,7 @@ PatientsComponent.prototype.update = function() {
 /*
 	Dashboard component - used for some top level information details
 */
-let DashboardComponent = function(name) {
+let DashboardComponent = function (name) {
   Component.apply(this, arguments)
   DashboardComponent.prototype.name = name
 }
@@ -141,15 +142,15 @@ DashboardComponent.prototype.constructor = DashboardComponent;
 DashboardComponent.prototype.subscriptions = ['dashboard']
 DashboardComponent.prototype.name = "not_set"
 
-DashboardComponent.prototype.show = function() {
+DashboardComponent.prototype.show = function () {
   console.log('Show the dashboard component.')
 };
 
-DashboardComponent.prototype.hide = function() {
+DashboardComponent.prototype.hide = function () {
   console.log('Hide the dashboard component.')
 }
 
-DashboardComponent.prototype.update = function() {
+DashboardComponent.prototype.update = function () {
   console.log('Update the dashboard component.')
 }
 
@@ -157,7 +158,7 @@ DashboardComponent.prototype.update = function() {
     Appointment Component
 */
 
-let AppointmentComponent = function(name) {
+let AppointmentComponent = function (name) {
   Component.apply(this, arguments);
   AppointmentComponent.prototype.name = name
 }
@@ -168,7 +169,7 @@ AppointmentComponent.prototype.constructor = AppointmentComponent;
 AppointmentComponent.prototype.subscriptions = ['appointments']
 AppointmentComponent.prototype.name = "not_set"
 
-AppointmentComponent.prototype.show = function() {
+AppointmentComponent.prototype.show = function () {
   try {
     let appointments_container = document.createElement('div');
     appointments_container.setAttribute('id', `${AppointmentComponent.prototype.name}-component`)
@@ -182,7 +183,7 @@ AppointmentComponent.prototype.show = function() {
     for (let i = 0; i < context_manager._cache.appointments.length; i++) {
       let appointment = context_manager._cache.appointments[i];
       let appointment_element = build_appointment(appointment);
-      
+
       if (moment() > moment(appointment['appointment_date_utc'])) {
         $(past_appointments).append(appointment_element)
       } else {
@@ -191,14 +192,14 @@ AppointmentComponent.prototype.show = function() {
     }
 
     addFadeIn(appointments_container, '#content', 600);
-    
+
   } catch (err) {
     context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_APPOINTMENT', err);
     context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
-AppointmentComponent.prototype.hide = function() {
+AppointmentComponent.prototype.hide = function () {
   try {
     removeFadeOut(`#${AppointmentComponent.prototype.name}-component`, 200);
   } catch (err) {
@@ -207,7 +208,7 @@ AppointmentComponent.prototype.hide = function() {
   }
 }
 
-AppointmentComponent.prototype.update = function() {
+AppointmentComponent.prototype.update = function () {
   console.log('Update the appointments component.')
 }
 
@@ -215,7 +216,7 @@ AppointmentComponent.prototype.update = function() {
   Clinician Component
 */
 
-let ClinicianComponent = function(name) {
+let ClinicianComponent = function (name) {
   Component.apply(this, arguments);
   ClinicianComponent.prototype.name = name
 };
@@ -226,7 +227,7 @@ ClinicianComponent.prototype.constructor = ClinicianComponent;
 ClinicianComponent.prototype.subscriptions = ['clinicians']
 ClinicianComponent.prototype.name = "not_set"
 
-ClinicianComponent.prototype.show = function() {
+ClinicianComponent.prototype.show = function () {
   try {
     let clinician_component = document.createElement('div');
     clinician_component.setAttribute('id', `${ClinicianComponent.prototype.name}-component`)
@@ -235,14 +236,14 @@ ClinicianComponent.prototype.show = function() {
     clinician_component.innerHTML = clinician_markdown;
 
     addFadeIn(clinician_component, '#content', 600);
-    
+
   } catch (err) {
     context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_CLINICIAN', err);
     context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
-ClinicianComponent.prototype.hide = function() {
+ClinicianComponent.prototype.hide = function () {
   try {
     removeFadeOut(`#${ClinicianComponent.prototype.name}-component`, 200);
   } catch (err) {
@@ -251,7 +252,7 @@ ClinicianComponent.prototype.hide = function() {
   }
 }
 
-ClinicianComponent.prototype.update = function() {
+ClinicianComponent.prototype.update = function () {
   console.log('Update the care location components')
 }
 
@@ -259,7 +260,7 @@ ClinicianComponent.prototype.update = function() {
    Care location Component
 */
 
-let CareLocationsComponent = function(name) {
+let CareLocationsComponent = function (name) {
   Component.apply(this, arguments);
   CareLocationsComponent.prototype.name = name
 };
@@ -271,7 +272,7 @@ CareLocationsComponent.prototype.subscriptions = ['care_locations']
 CareLocationsComponent.prototype.name = "not_set"
 
 
-CareLocationsComponent.prototype.show = function() {
+CareLocationsComponent.prototype.show = function () {
   try {
     let care_location_component = document.createElement('div');
     care_location_component.setAttribute('id', `${CareLocationsComponent.prototype.name}-component`)
@@ -280,14 +281,14 @@ CareLocationsComponent.prototype.show = function() {
     care_location_component.innerHTML = care_location_markup;
 
     addFadeIn(care_location_component, '#content', 600);
-    
+
   } catch (err) {
     context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_CARELOCATION', err);
     context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
-CareLocationsComponent.prototype.hide = function() {
+CareLocationsComponent.prototype.hide = function () {
   try {
     removeFadeOut(`#${CareLocationsComponent.prototype.name}-component`, 200);
   } catch (err) {
@@ -296,7 +297,7 @@ CareLocationsComponent.prototype.hide = function() {
   }
 }
 
-CareLocationsComponent.prototype.update = function() {
+CareLocationsComponent.prototype.update = function () {
   console.log('Update the care location components')
 }
 
@@ -304,7 +305,7 @@ CareLocationsComponent.prototype.update = function() {
     Analytics Componenet
 */
 
-let DataAnalyticsComponent = function(name) {
+let DataAnalyticsComponent = function (name) {
   Component.apply(this, arguments);
   DataAnalyticsComponent.prototype.name = name
 };
@@ -315,7 +316,7 @@ DataAnalyticsComponent.prototype.constructor = DataAnalyticsComponent;
 DataAnalyticsComponent.prototype.subscriptions = ['data_analytics']
 DataAnalyticsComponent.prototype.name = "not_set"
 
-DataAnalyticsComponent.prototype.show = function() {
+DataAnalyticsComponent.prototype.show = function () {
   try {
     let data_analytics_component = document.createElement('div');
     data_analytics_component.setAttribute('id', `${DataAnalyticsComponent.prototype.name}-component`)
@@ -324,14 +325,14 @@ DataAnalyticsComponent.prototype.show = function() {
     data_analytics_component.innerHTML = data_analytics_markup;
 
     addFadeIn(data_analytics_component, '#content', 600);
-    
+
   } catch (err) {
     context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_ANALYTICS', err);
     context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
-DataAnalyticsComponent.prototype.hide = function() {
+DataAnalyticsComponent.prototype.hide = function () {
   try {
     removeFadeOut(`#${DataAnalyticsComponent.prototype.name}-component`, 200);
   } catch (err) {
@@ -341,7 +342,7 @@ DataAnalyticsComponent.prototype.hide = function() {
 }
 
 
-DataAnalyticsComponent.prototype.update = function() {
+DataAnalyticsComponent.prototype.update = function () {
   console.log('Update the data analytics components')
 }
 
@@ -349,7 +350,7 @@ DataAnalyticsComponent.prototype.update = function() {
 /*
 Setting component - used for managing the user's settings
 */
-let SettingsComponent = function(name) {
+let SettingsComponent = function (name) {
   Component.apply(this, arguments);
   SettingsComponent.prototype.name = name
 };
@@ -359,7 +360,7 @@ SettingsComponent.prototype.constructor = SettingsComponent;
 
 SettingsComponent.prototype.subscriptions = ['settings']
 
-SettingsComponent.prototype.show = function() {
+SettingsComponent.prototype.show = function () {
   try {
     let settings_component = document.createElement('div');
     settings_component.setAttribute('id', `${SettingsComponent.prototype.name}-component`)
@@ -374,7 +375,7 @@ SettingsComponent.prototype.show = function() {
   }
 }
 
-SettingsComponent.prototype.hide = function() {
+SettingsComponent.prototype.hide = function () {
   try {
     removeFadeOut(`#${SettingsComponent.prototype.name}-component`, 200);
   } catch (err) {
@@ -383,6 +384,6 @@ SettingsComponent.prototype.hide = function() {
   }
 }
 
-SettingsComponent.prototype.update = function() {
+SettingsComponent.prototype.update = function () {
   console.log('Update the settings component.')
 }

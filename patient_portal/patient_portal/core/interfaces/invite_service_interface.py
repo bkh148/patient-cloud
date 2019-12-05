@@ -1,5 +1,6 @@
 import abc
 
+
 class IInviteService(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod

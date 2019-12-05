@@ -8,14 +8,14 @@ let transfer_patient = function (patient) {
     context_manager.info_message("The ability to transfer patients will be added in a feature version of Patient Portal.");
 }
 
-let update_status_badge = function(user_id, status) {
+let update_status_badge = function (user_id, status) {
     let status_badge = $(`#status-badge_${user_id}`);
     $(status_badge).attr('class', `badge-status badge-${status}`);
 }
 
-let upcoming_appointments_count = function(patient) {
+let upcoming_appointments_count = function (patient) {
     let count = 0;
-    context_manager._cache.appointments.forEach(function(appointment) {
+    context_manager._cache.appointments.forEach(function (appointment) {
         if (appointment.created_for == patient.user_id && moment(appointment.appointment_date_utc) > moment()) {
             count++;
         }
@@ -49,21 +49,21 @@ let build_patient = function (patient) {
         // New appointment button
         let new_appointment_button = $(patient_wrapper).find('#new-appointment');
         $(new_appointment_button).attr('id', `${new_appointment_button.attr('id')}_${patient.user_id}`);
-        $(new_appointment_button).on('click', function() {
+        $(new_appointment_button).on('click', function () {
             create_appointment(patient);
         });
 
         // Edit user button
         let edit_patient_button = $(patient_wrapper).find('#edit-patient');
         $(edit_patient_button).attr('id', `${edit_patient_button.attr('id')}_${patient.user_id}`);
-        $(edit_patient_button).on('click', function() {
+        $(edit_patient_button).on('click', function () {
             edit_patient(patient)
         });
 
         // Transfer of care button
         let transfer_of_care = $(patient_wrapper).find('#transfer-patient');
         $(transfer_of_care).attr('id', `${transfer_of_care.attr('id')}_${patient.user_id}`);
-        $(transfer_of_care).on('click', function() {
+        $(transfer_of_care).on('click', function () {
             transfer_patient(patient)
         });
 

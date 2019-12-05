@@ -2,6 +2,7 @@ from ..interfaces import IEmailService
 from flask_mail import Message
 from flask import render_template
 
+
 class EmailService(IEmailService):
 
     def __init__(self, mail_server, invite_repo, user_service, log_service):
@@ -16,7 +17,8 @@ class EmailService(IEmailService):
     def __send_admin_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_firstname):
         try:
             subject = "Admin Invitation"
-            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(invite_id)
+            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(
+                invite_id)
             action_title = "Join as Admin"
             message = """
             {} has invited you to join the Patient Portal platform as an administrator.
@@ -40,7 +42,8 @@ class EmailService(IEmailService):
     def __send_local_admin_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_firstname):
         try:
             subject = "Local Admin Invitation"
-            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(invite_id)
+            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(
+                invite_id)
             action_title = "Join as Local Admin"
             message = """
             {} has invited you to join the Patient Portal platform as an local administrator.
@@ -63,7 +66,8 @@ class EmailService(IEmailService):
     def __send_clinician_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_firstname):
         try:
             subject = "Clinician Invitation"
-            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(invite_id)
+            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(
+                invite_id)
             action_title = "Join as Clinician"
             message = """
             {} has invited you to join the Patient Portal as a clinician in your care location.
@@ -87,7 +91,8 @@ class EmailService(IEmailService):
     def __send_patient_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_lastname):
         try:
             subject = "Patient Invitation"
-            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(invite_id)
+            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(
+                invite_id)
             action_title = "Join as Patient"
             message = """
             Dr. {} has invited you to join Patient Portal as a new patient.
@@ -107,7 +112,6 @@ class EmailService(IEmailService):
             self._log_service.log_exception(e)
             raise
 
-
     def __send_message(self, subject, recipient_name, recipients, body, action_title, action_url):
         msg = Message(subject, sender='liamlambwebtech@gmail.com',
                       recipients=recipients)
@@ -119,26 +123,28 @@ class EmailService(IEmailService):
             'action_url': action_url
         })
         self._mail_server.send(msg)
-        
 
     def send_user_invite(self, invite):
-        
+
         invite_id = invite['invite_id']
         recipient_forename = invite['invited_forename']
         recipient_surname = invite['invited_surname']
         recipient_email = invite['invited_email']
         user_role = invite['user_role_id']
         sender_id = invite['invited_by']
-        
+
         sender = self._user_service.get_user_by_id(sender_id)
-        user_role = self._user_service.get_user_role(user_role);
+        user_role = self._user_service.get_user_role(user_role)
 
         if user_role['user_role'] == "ADMIN":
-            self.__send_admin_invite(invite_id, recipient_email, recipient_forename, recipient_surname, sender['user_forename'])
+            self.__send_admin_invite(
+                invite_id, recipient_email, recipient_forename, recipient_surname, sender['user_forename'])
         elif user_role['user_role'] == "LOCAL_ADMIN":
-            self.__send_local_admin_invite(invite_id, recipient_email, recipient_forename, recipient_surname, sender['user_forename'])
+            self.__send_local_admin_invite(
+                invite_id, recipient_email, recipient_forename, recipient_surname, sender['user_forename'])
         elif user_role['user_role'] == "CLINICIAN":
-            self.__send_clinician_invite(invite_id, recipient_email, recipient_forename, recipient_surname, sender['user_forename'])
+            self.__send_clinician_invite(
+                invite_id, recipient_email, recipient_forename, recipient_surname, sender['user_forename'])
         else:
-            self.__send_patient_invite(invite_id, recipient_email, recipient_forename, recipient_surname, sender['user_surname'])
-            
+            self.__send_patient_invite(
+                invite_id, recipient_email, recipient_forename, recipient_surname, sender['user_surname'])

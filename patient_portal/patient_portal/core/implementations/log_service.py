@@ -1,10 +1,12 @@
 """ Implementation of the log service abstraction """
 from flask import session
 from ..interfaces import ILogService
-import traceback, uuid
+import traceback
+import uuid
 from datetime import datetime
 from ..models.exception_types import ExceptionType
 from pprint import pprint as pp
+
 
 class LogService(ILogService):
 
@@ -12,26 +14,27 @@ class LogService(ILogService):
         self._repo = repo
 
     def stack_trace(self, exception):
-        stack = traceback.extract_stack()[:-3] + traceback.extract_tb(exception.__traceback__)  # add limit=?? 
+        stack = traceback.extract_stack(
+        )[:-3] + traceback.extract_tb(exception.__traceback__)  # add limit=??
         pretty = traceback.format_list(stack)
-        return ''.join(pretty) + '\n  {} {}'.format(exception.__class__,exception)
+        return ''.join(pretty) + '\n  {} {}'.format(exception.__class__, exception)
 
     def log_exception(self, error):
         """build the exception object and log it"""
         try:
             stack_trace = self.stack_trace(error)
             log = dict(exception_log_id=str(uuid.uuid4()),
-                   exception_log_type=ExceptionType.SERVICE_EXCEPTION.value,
-                   session_id=session['session_id'] if 'session_id' in session else str(uuid.UUID('00000000-0000-0000-0000-000000000000')),
-                   occurred_on_utc=datetime.utcnow(),
-                   is_handled = True,
-                   stack_trace = stack_trace)
-            
+                       exception_log_type=ExceptionType.SERVICE_EXCEPTION.value,
+                       session_id=session['session_id'] if 'session_id' in session else str(
+                           uuid.UUID('00000000-0000-0000-0000-000000000000')),
+                       occurred_on_utc=datetime.utcnow(),
+                       is_handled=True,
+                       stack_trace=stack_trace)
+
             self.upsert_exception(log)
-            
+
         except Exception as e:
             print("Service Exception: {}".format(e))
-
 
     def get_exceptions_by_session_id(self, session_id):
         """get all exceptions from a given user session

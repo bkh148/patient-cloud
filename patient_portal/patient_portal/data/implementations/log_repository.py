@@ -1,5 +1,6 @@
 from ..interfaces import ILogRepository
 
+
 class LogRepository(ILogRepository):
 
     def __init__(self, db):
@@ -18,7 +19,6 @@ class LogRepository(ILogRepository):
             SELECT * FROM exception_log
             WHERE session_id = ?""", (session_id, ))
 
-
     def upsert_exception(self, exception_log):
         """inserts or updates an exception log
 
@@ -36,7 +36,6 @@ class LogRepository(ILogRepository):
         return self._db.count("""
             SELECT COUNT() FROM exception_log
             WHERE exception_log_id = ?""", (exception_log_id, )) > 0
-        
 
     def delete_exception(self, exception_log_id):
         """removes an exception log from the data store"""

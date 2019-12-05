@@ -1,6 +1,7 @@
 from ..interfaces import IUserRepository
 import uuid
 
+
 class UserRepository(IUserRepository):
 
     def __init__(self, db):
@@ -20,31 +21,30 @@ class UserRepository(IUserRepository):
             WHERE user_id = ?""", (user_id, )) > 0
 
     def upsert_user_role_map(self, user_role_map):
-        """ Create or update a user role map """    
+        """ Create or update a user role map """
         if self.has_user_role_map(user_role_map['user_role_map_id']):
             self._db.update('user_role_map', user_role_map)
         else:
             self._db.insert('user_role_map', user_role_map)
-    
+
     def has_user_role_map(self, user_role_map_id):
         """ Evaluate if a user role map already exists """
         return self._db.count("""
             SELECT COUNT() FROM user_role_map
             WHERE user_role_map_id = ?""", (user_role_map_id, )) > 0
-        
+
     def upsert_patient_clinician_map(self, clinician_id, patient_id):
         """ Create a mapping between patient and clinician """
-        
+
         model = {'patient_id': patient_id, 'clinician_id': clinician_id}
-        
+
         if self.has_patient_clinician_map(patient_id):
             self._db.update('patient_clinician_map', model)
         else:
-            model['patient_map_id']= str(uuid.uuid4())
+            model['patient_map_id'] = str(uuid.uuid4())
             self._db.insert('patient_clinician_map', model)
-            
-    
-    def has_patient_clinician_map(self,patient_id):
+
+    def has_patient_clinician_map(self, patient_id):
         """Evaluate if a mapping for this patient already exists"""
         return self._db.count("""
             SELECT COUNT() FROM patient_clinician_map

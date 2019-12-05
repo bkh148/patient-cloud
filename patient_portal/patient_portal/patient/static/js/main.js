@@ -1,12 +1,14 @@
-let user_logged_out = function(data) {
+// Patient implementation of the main.js abstraction
+
+let user_logged_out = function (data) {
 
 }
 
-let user_logged_in = function(data) {
+let user_logged_in = function (data) {
 
 }
 
-let handle_data_received = function(data) {
+let handle_data_received = function (data) {
 
     let temp = data['appointment'];
     // if payload contains appointment, then a clinician is notifying of an appointment.

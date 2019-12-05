@@ -4,6 +4,7 @@ from ..interfaces import IAppointmentRepository
 from pprint import pprint as pp
 from datetime import datetime
 
+
 class AppointmentRepository(IAppointmentRepository):
     """ Some docstring """
 

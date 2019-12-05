@@ -2,6 +2,7 @@
 
 import abc
 
+
 class ILogService(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod

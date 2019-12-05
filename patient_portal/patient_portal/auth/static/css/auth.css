@@ -3,7 +3,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
- }
+}
 
 #centered-container-wrapper form {
     display: flex;
@@ -17,7 +17,7 @@ html, body {
 }
 
 #centered-container-wrapper input {
-   background-color: rgb(232, 240, 254);
+    background-color: rgb(232, 240, 254);
 }
 
 .invalid-feedback {

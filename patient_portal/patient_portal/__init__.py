@@ -10,7 +10,8 @@ import eventlet
 import os
 
 
-eventlet.monkey_patch(socket=True, select=True)
+# Monkey patch socket as suggested: https://github.com/miguelgrinberg/python-engineio/issues/19
+eventlet.monkey_patch(socket=True)
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig() if os.getenv(
@@ -20,9 +21,15 @@ jwt_manager = JWTManager()
 socket_io = SocketIO()
 mail = Mail()
 
+# register configurations in the configs IoC
 configs = Configs.config.override(app.config)
+
+# register mail server in the services IoC
 services = Services(config={'mail_server': mail})
 
+
+# HACK: This is a temporary solution. The application will need to know what users are online 
+# for various socket operations. This should eventually be moved into it's own module with various abstraction methods due to code repetition
 online_patients = {}
 online_clinicians = {}
 online_admins = {}
@@ -62,6 +69,6 @@ def initialise_application():
     app.register_blueprint(patient_blueprint, url_prefix='/patient')
     app.register_blueprint(api_v1_blueprint)
 
-    socket_io.init_app(app, logger=True, engineio_logger=True)
+    socket_io.init_app(app, logger=True)
 
     return app, socket_io

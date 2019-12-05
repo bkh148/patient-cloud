@@ -1,7 +1,7 @@
 $(function () {
   $('#dob-picker').datetimepicker({
-      format: 'DD/MM/YYYY',
-      //dayViewHeaderFormat: 'dddd Do MMM YY'
+    format: 'DD/MM/YYYY',
+    //dayViewHeaderFormat: 'dddd Do MMM YY'
   });
 });
 
@@ -9,13 +9,13 @@ const name_pattern = /^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z]*)*$/;
 const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[(){}!#$_%&? "])(?=.*[A-Z]).{8,}$/;
 const date_pattern = /^((?:0[0-9])|(?:[1-2][0-9])|(?:3[0-1]))\/((?:0[1-9])|(?:1[0-2]))\/((?:19|20)\d{2})$/;
 
-let validate_login = function() {
+let validate_login = function () {
   let is_valid = true;
 
   return is_valid;
 }
 
-let validate_create_login = function(form, forename_input, surname_input, dob_input, password_input, confirm_input) {
+let validate_create_login = function (form, forename_input, surname_input, dob_input, password_input, confirm_input) {
   let is_valid = true;
 
   let forename_validator = $(form).find('#forename-validator');
@@ -78,7 +78,7 @@ let validate_create_login = function(form, forename_input, surname_input, dob_in
   return is_valid;
 }
 
-$('#confirm-login-form').submit(function(event) {
+$('#confirm-login-form').submit(function (event) {
   event.preventDefault();
   let forename = $(this).find('#user-forename');
   let surname = $(this).find('#user-surname');

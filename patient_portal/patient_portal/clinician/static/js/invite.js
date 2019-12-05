@@ -1,7 +1,7 @@
 let email_pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 let name_pattern = /^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z]*)*$/;
 
-let validate_invite_form = function(form, forename_input, surname_input, email_input, confirm_email_input) {
+let validate_invite_form = function (form, forename_input, surname_input, email_input, confirm_email_input) {
 
     let is_valid = true;
 
@@ -58,7 +58,7 @@ let validate_invite_form = function(form, forename_input, surname_input, email_i
     return is_valid;
 }
 
-let close_invite_form = function() {
+let close_invite_form = function () {
     let form = document.getElementById('invite-form');
 
     invite_loaded(form);
@@ -67,7 +67,7 @@ let close_invite_form = function() {
     $(form).trigger('reset');
 }
 
-let invite_loading = function(form) {
+let invite_loading = function (form) {
     let cancel_submit = $(form).find('#submit-cancel-form');
     let submit = $(form).find('#submit-invite-form');
 
@@ -78,7 +78,7 @@ let invite_loading = function(form) {
     $(submit).prop('disabled', true);
 }
 
-let invite_loaded = function(form) {
+let invite_loaded = function (form) {
     let cancel_submit = $(form).find('#submit-cancel-form');
     let submit = $(form).find('#submit-invite-form');
 
@@ -88,7 +88,7 @@ let invite_loaded = function(form) {
     $(submit).prop('disabled', false);
 }
 
-let submit_invite = function(form) {
+let submit_invite = function (form) {
     try {
         context_manager.post_activity('SCRIPT_INVITE_CLINICIAN_SUBMIT_APPOINTMENT');
 
@@ -99,7 +99,7 @@ let submit_invite = function(form) {
         let confirm_email_input = $(form).find('#invite-confirm-email');
 
         if (validate_invite_form(form, forename_input, surname_input, email_input, confirm_email_input)) {
-            
+
             invite_loading(form);
 
             let invite = {
@@ -113,20 +113,20 @@ let submit_invite = function(form) {
                 'invited_on_utc': moment().utc().format(),
                 'expiration_date_utc': moment().add(4, 'hours').utc().format()
             }
-            
+
             $.ajax({
                 url: `http://${context_manager._cache.configurations['host']}:${context_manager._cache.configurations['port']}/api/v1.0/invites/`,
                 type: 'POST',
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", `Bearer ${context_manager._cache.configurations['access_token']}`);
                 },
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(invite),
-                success: function() {
+                success: function () {
                     context_manager.success_message(`Your invitation has successfully been sent to ${invite['invited_forename']} ${invite['invited_surname']} at: ${invite['invited_email']}!`);
                     close_invite_form();
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function (jqXHR, textStatus, errorThrown) {
                     context_manager.post_exception('CLIENT_EXCEPTION_INVITE', errorThrown);
                     context_manager.error_message(`Your invitation for ${invite['invited_forename']} ${invite['invited_surname']} failed to send. Please try again.`);
 

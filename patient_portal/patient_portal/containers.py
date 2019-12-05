@@ -12,12 +12,13 @@ class Configs(containers.DeclarativeContainer):
 
 
 class DataStores(containers.DeclarativeContainer):
-    """The datastores allow for dynamic loading of configurations based off environment"""
-    
+    """Datastore will allow for different storage interfaces to be loaded based on configuration. This currently isn't really used by would be quite useful when application is running in test mode."""
+
     database = providers.Singleton(
         SQLiteDatabase,
-        config = Configs.config
+        config=Configs.config
     )
+
 
 class Repositories(containers.DeclarativeContainer):
     """Repositories class holds references to all repositories that can be injected throughout the application."""
@@ -40,14 +41,15 @@ class Repositories(containers.DeclarativeContainer):
     location_repo = providers.Singleton(
         LocationRepository, db=DataStores.database
     )
-    
+
     user_repo = providers.Singleton(
         UserRepository, db=DataStores.database
     )
-    
+
     password_repo = providers.Singleton(
         PasswordRepository, db=DataStores.database
     )
+
 
 class Services(containers.DeclarativeContainer):
     """Services class holds references to all services that can be injected throughout the application."""
@@ -75,7 +77,7 @@ class Services(containers.DeclarativeContainer):
     password_service = providers.Singleton(
         PasswordService,
         repo=Repositories.password_repo,
-        log_service = log_service
+        log_service=log_service
     )
 
     invite_service = providers.Singleton(
@@ -89,18 +91,18 @@ class Services(containers.DeclarativeContainer):
         loc_repo=Repositories.location_repo,
         log_service=log_service
     )
-    
+
     user_service = providers.Singleton(
         UserService,
         user_repo=Repositories.user_repo,
         password_service=password_service,
         log_service=log_service
     )
-    
+
     email_service = providers.Singleton(
         EmailService,
-        mail_server = mail_server,
-        invite_repo = Repositories.invite_repo,
-        user_service = user_service,
-        log_service = log_service
+        mail_server=mail_server,
+        invite_repo=Repositories.invite_repo,
+        user_service=user_service,
+        log_service=log_service
     )

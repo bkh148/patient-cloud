@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
     height: 100%;
     font-weight: normal;
     font-family: Comfortaa;
@@ -18,14 +17,11 @@ body {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-
 /* change the brand and text color */
 
-.navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
+.navbar-custom .navbar-brand, .navbar-custom .navbar-text {
     color: rgba(255, 255, 255, .8);
 }
-
 
 /* change the link color */
 
@@ -33,11 +29,9 @@ body {
     color: rgba(255, 255, 255, .5);
 }
 
-
 /* change the color of active or hovered links */
 
-.navbar-custom .nav-item.active .nav-link,
-.navbar-custom .nav-item:hover .nav-link {
+.navbar-custom .nav-item.active .nav-link, .navbar-custom .nav-item:hover .nav-link {
     color: #ffffff;
 }
 
@@ -63,8 +57,7 @@ body {
     max-width: 300px;
 }
 
-#centered-container-wrapper h1,
-p {
+#centered-container-wrapper h1, p {
     color: #323445;
 }
 
@@ -125,7 +118,6 @@ p {
     border-color: #bc2b39;
 }
 
-
 /* Media Queries */
 
 @media only screen and (min-width: 400px) {
@@ -149,7 +141,6 @@ p {
         min-width: 300px;
     }
 }
-
 
 /*
         Shared component css

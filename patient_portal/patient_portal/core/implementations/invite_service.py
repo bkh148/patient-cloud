@@ -1,30 +1,32 @@
 from ..interfaces import IInviteService
 
+
 class InviteService(IInviteService):
     """
     Implementation of the abstract IInviteRepository.
 
     Todo: add service call logging
     """
+
     def __init__(self, repo, log_service):
         self._repo = repo
         self._log_service = log_service
-        
+
     def get_all_invites(self):
-        """ return all invites in the system """   
+        """ return all invites in the system """
         try:
-            return self._repo.get_all_invites();
+            return self._repo.get_all_invites()
         except Exception as e:
-            self._log_service.log_exception(e) 
-        
+            self._log_service.log_exception(e)
+
     def get_invite_by_id(self, invite_id):
         """ return a invite object by it's id. """
         try:
             return self._repo.get_invite_by_id(invite_id)
         except Exception as e:
             self._log_service.log_exception(e)
-        
-        return None;
+
+        return None
 
     def upsert_invite(self, invite):
         """ update or insert a new invite into the table"""
@@ -48,7 +50,7 @@ class InviteService(IInviteService):
             return self._repo.get_invites_created_by(user_id)
         except Exception as e:
             self._log_service.log_exception(e)
-        
+
         return []
 
     def get_invites_created_for(self, email):
@@ -57,5 +59,5 @@ class InviteService(IInviteService):
             return self._repo.get_invites_created_for(email)
         except Exception as e:
             self._log_service.log_exception(e)
-        
+
         return []

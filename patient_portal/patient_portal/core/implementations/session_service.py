@@ -1,5 +1,6 @@
 from ..interfaces import ISessionService
 
+
 class SessionService(ISessionService):
 
     def __init__(self, repo, log_service):

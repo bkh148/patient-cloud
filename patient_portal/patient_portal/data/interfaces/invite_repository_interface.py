@@ -1,11 +1,12 @@
 import abc
 
+
 class IInviteRepository(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def get_invite_by_id(self, invite_id):
         """ return a invite object by it's id. """
-        
+
     @abc.abstractmethod
     def get_all_invites(self):
         """ return all invites in the system """

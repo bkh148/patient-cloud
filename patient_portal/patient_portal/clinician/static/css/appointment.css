@@ -35,7 +35,7 @@
 }
 
 .appointment-item-body {
-  padding:10px;
+  padding: 10px;
   font-size: 0.8rem;
   overflow-wrap: break-word;
 }
@@ -43,4 +43,3 @@
 .appointment-item-body .key {
   font-weight: bold;
 }
-

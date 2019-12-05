@@ -10,4 +10,3 @@ from . password_repository_interface import IPasswordRepository
 
 __all__ = ['IAppointmentRepository', 'ILogRepository', 'ISessionRepository',
            'IInviteRepository', 'ILocationRepository', 'IUserRepository', 'IPasswordRepository']
-

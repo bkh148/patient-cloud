@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
     background: #323545;
     display: flex;
     flex-direction: column;

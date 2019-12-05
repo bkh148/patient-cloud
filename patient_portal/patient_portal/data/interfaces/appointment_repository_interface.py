@@ -1,5 +1,6 @@
 import abc
 
+
 class IAppointmentRepository(metaclass=abc.ABCMeta):
     """Abstract interface of the appointment repository. This should be used as part of a decoupling process to improve testability and growth of the code."""
 

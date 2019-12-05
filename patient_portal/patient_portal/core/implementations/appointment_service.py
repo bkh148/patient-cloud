@@ -3,6 +3,7 @@
 from ..interfaces import IAppointmentService
 from ...data.interfaces import IAppointmentRepository
 
+
 class AppointmentService(IAppointmentService):
     """Implementation of the appointment service abstraction"""
 
@@ -18,11 +19,11 @@ class AppointmentService(IAppointmentService):
         except Exception as e:
             self._log_service.log_exception(e)
             raise
-        
+
     def delete_appointment(self, appointment_id):
         """Delete an existing appointment"""
         try:
-            self._repo.delete_appointment(appointment_id);
+            self._repo.delete_appointment(appointment_id)
         except Exception as e:
             self._log_service.log_exception(e)
             raise
@@ -45,7 +46,7 @@ class AppointmentService(IAppointmentService):
         except Exception as e:
             self._log_service.log_exception(e)
             raise
-        
+
         return None
 
     def get_appointments_for(self, user_id):
@@ -56,7 +57,7 @@ class AppointmentService(IAppointmentService):
             self._log_service.log_exception(e)
             raise
         return []
-    
+
     def get_appointments_created_by(self, user_id):
         """ Get all the appointments for a given clinician"""
         try:
@@ -64,9 +65,9 @@ class AppointmentService(IAppointmentService):
         except Exception as e:
             self._log_service.log_exception(e)
             raise
-            
+
         return []
-        
+
     def get_appointments_at_location(self, user_id):
         """ Get all the appointments for a given clinician"""
         try:
@@ -74,5 +75,5 @@ class AppointmentService(IAppointmentService):
         except Exception as e:
             self._log_service.log_exception(e)
             raise
-            
+
         return []

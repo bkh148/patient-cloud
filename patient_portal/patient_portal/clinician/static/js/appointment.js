@@ -348,10 +348,10 @@ let build_appointment = function (appointment) {
             });
 
             $(cancel_appointment_button).on('click', function () {
-                context_manager.binary_prompt(appointment.appointment_id, 'Warning', `Are you sure you wish to cancel this appointment ?`, 'Yes', function () { 
+                context_manager.binary_prompt(appointment.appointment_id, 'Warning', `Are you sure you wish to cancel this appointment ?`, 'Yes', function () {
                     context_manager.post_activity('SCRIPT_APPOINTMENT_CLINICIAN_CANCEL_APPOINTMENT');
                     return cancel_appointment(appointment);
-                 }, 'No', null);
+                }, 'No', null);
             });
         }
 

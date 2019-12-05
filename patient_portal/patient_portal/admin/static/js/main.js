@@ -1,3 +1,5 @@
+// Admin implementation of the main.js abstraction
+
 let user_logged_out = function(data) {
 
 }

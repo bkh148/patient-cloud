@@ -32,9 +32,9 @@ let handle_incoming_appointment = function (appointment) {
 let handle_cancelled_appointment = function (appointment_id) {
     try {
         let date_copy;
-        for(let i = 0; i < context_manager._cache.appointments.length; i++) {
+        for (let i = 0; i < context_manager._cache.appointments.length; i++) {
             let cached_appointment = context_manager._cache.appointments[i];
-    
+
             if (cached_appointment != undefined) {
                 if (cached_appointment.appointment_id == appointment_id) {
                     date_copy = { 'appointment_date_utc': cached_appointment.appointment_date_utc };
@@ -58,10 +58,6 @@ let handle_cancelled_appointment = function (appointment_id) {
 
 let build_appointment = function (appointment) {
     try {
-
-
-        // TODO: Centralise 
-
         let appointment_wrapper = document.createElement('div')
         appointment_wrapper.setAttribute('id', `appointment_wrapper_${appointment.appointment_id}`)
         appointment_wrapper.innerHTML = context_manager._cache.templates.appointments_item;
