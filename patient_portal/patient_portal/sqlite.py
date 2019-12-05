@@ -1,5 +1,6 @@
 import sqlite3
 import uuid
+from collections import OrderedDict
 from pprint import pprint as pp
 
 
@@ -40,7 +41,7 @@ class SQLiteDatabase(object):
     def get_single(self, query, params=()):
         connection = self.connect()
         cursor = self.connection().cursor()
-        result = [dict((cursor.description[idx][0], value) for idx, value in enumerate(
+        result = [OrderedDict((cursor.description[idx][0], value) for idx, value in enumerate(
             row)) for row in cursor.execute(query, params).fetchall()]
         cursor.close()
         self.disconnect()
