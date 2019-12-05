@@ -123,7 +123,6 @@ def register(invite_id):
                                        script_paths=['js/auth.js']), 200
 
         else:
-            # TODO: return a template saying that the invitation has expired.
             abort(404)
     else:
         abort(404)

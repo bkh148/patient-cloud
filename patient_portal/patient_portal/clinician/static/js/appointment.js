@@ -268,8 +268,6 @@ let cancel_appointment = function (appointment) {
 
 let build_appointment = function (appointment) {
     try {
-        // TODO: Centralise
-
         let appointment_wrapper = document.createElement('div')
         appointment_wrapper.setAttribute('id', `appointment_wrapper_${appointment.appointment_id}`)
         appointment_wrapper.innerHTML = context_manager._cache.templates.appointments_item;

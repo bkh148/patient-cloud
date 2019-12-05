@@ -78,6 +78,7 @@ let create_notification = function (type, icon, message, options, time = null, t
 	if (time == null) {
 		$(notification_time).html('just now');
 	} else {
+		// This isn't implemented just now, but a "when" message would be good, in case of messaging delays
 		$(notification_time).html('TODO');
 	}
 

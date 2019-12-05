@@ -33,7 +33,6 @@ class UserService(IUserService):
 
     def get_user_by_id(self, user_id):
         try:
-            # TODO: log service call
             return self._user_repo.get_user_by_id(user_id)
         except Exception as e:
             self._log_service.log_exception(e)
@@ -94,7 +93,6 @@ class UserService(IUserService):
     def get_patient_clinician(self, patient_id):
         """return the clinician overlooking this patient's care"""
         try:
-            # Todo: log activity
             return self._user_repo.get_patient_clinician(patient_id)
         except Exception as e:
             self._log_service.log_exception(e)
@@ -103,7 +101,6 @@ class UserService(IUserService):
     def get_all_users_patients(self, clinician_id):
         """ get all patients for a clinician """
         try:
-            # TODO: log service call
             return self._user_repo.get_all_users_patients(clinician_id)
         except Exception as e:
             self._log_service.log_exception(e)

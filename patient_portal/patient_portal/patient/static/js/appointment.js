@@ -19,7 +19,7 @@ let handle_incoming_appointment = function (appointment) {
         if (context_manager.current_context == "appointments") {
             context_manager.update_component("appointments");
         } else {
-            // TODO: Notification badege when not in context!
+            // TODO: When appointments are not in context, we would want to see a notification badge showing on the appointments tab
         }
 
         context_manager.info_message(`Your clinician Dr. ${context_manager._cache.settings.clinician.user_surname} has scheduled a new appointment for your on ${moment(appointment.appointment_date_utc).format('dddd Do MMM YYYY')}.`);

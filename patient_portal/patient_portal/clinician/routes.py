@@ -48,7 +48,6 @@ def dashboard():
             "namespace": "clinician",
             "session_id": session['session_id']}
 
-        # Todo: Create a clinician's patient view
         metadata['templates']['users_container'] = render_template('clinician/users_container_override.html',
                                                                    title='Your Patients',
                                                                    invite_icon='fas fa-user-injured',

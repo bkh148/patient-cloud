@@ -12,6 +12,7 @@ exception_field = nsp.model('Exception', {
     'exception_log_id': fields.String(required=True),
     'exception_log_type': fields.String(required=True),
     'occurred_on_utc': fields.String(required=True),
+    'session_id': field.String(default="00000000-0000-0000-0000-000000000000"),
     'is_handled': fields.Boolean(required=True),
     'stack_trace': fields.String(required=True)
 })
@@ -21,6 +22,7 @@ exception_field = nsp.model('Exception', {
 activity_field = nsp.model('Activity', {
     'activity_log_id': fields.String(required=True),
     'activity_log_type': fields.String(required=True),
+    'session_id': field.String(default="00000000-0000-0000-0000-000000000000"),
     'occurred_on_utc': fields.DateTime(required=True)
 })
 
@@ -60,7 +62,6 @@ class Exception(Resource):
         """Update an exception object by it's id."""
         try:
             exception = request.json
-            #TODO: push in session id
             services.log_service().upsert_exception(exception), 204
         except Exception as e:
             nsp.abort(500, "An internal error has occurred: {}".format(e))
@@ -91,7 +92,6 @@ class Activity(Resource):
         """Insert a new activity log"""
         try:
             activity = request.json
-            #TODO: push in session id
             services.log_service().upsert_activity(activity), 201
         except Exception as e:
             nsp.abort(500, "An internal error has occurred: {}".format(e))
@@ -102,7 +102,6 @@ class Activity(Resource):
         """Update an activity object by it's id."""
         try:
             activity = request.json
-            #TODO: push in session id
             services.log_service().upsert_activity(activity), 204
         except Exception as e:
             nsp.abort(500, "An internal error has occurred: {}".format(e))

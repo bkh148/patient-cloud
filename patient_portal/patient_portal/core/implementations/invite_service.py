@@ -4,8 +4,6 @@ from ..interfaces import IInviteService
 class InviteService(IInviteService):
     """
     Implementation of the abstract IInviteRepository.
-
-    Todo: add service call logging
     """
 
     def __init__(self, repo, log_service):
