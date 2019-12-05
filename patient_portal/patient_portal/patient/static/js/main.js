@@ -13,4 +13,8 @@ let handle_data_received = function(data) {
     if (data['appointment'] != undefined) {
         handle_incoming_appointment(data['appointment']);
     }
+
+    if (data['appointment-cancelled'] != undefined) {
+        handle_cancelled_appointment(data['appointment-cancelled']);
+    }
 }
