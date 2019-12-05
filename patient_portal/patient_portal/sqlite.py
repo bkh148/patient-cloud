@@ -1,18 +1,16 @@
 import sqlite3
 import uuid
 from collections import OrderedDict
-from pprint import pprint as pp
-
 
 class SQLiteDatabase(object):
 
     def __init__(self, config):
-        self._config = config
         self._connection = None
+        self._config = config
 
     def connect(self):
         try:
-            self._connection = sqlite3.connect(self._config.DATABASE_URI)
+            self._connection = sqlite3.connect(self._config['DATABASE_URI'])
             self._connection.row_factory = sqlite3.Row
             sqlite3.register_adapter(uuid.UUID, lambda u: u.bytes_le)
             return self._connection
@@ -108,7 +106,6 @@ class SQLiteDatabase(object):
     def initialise_database(self):
         """Initialise the database"""
         try:
-
             self.connect()
             self.create_user_table()
             self.create_user_role_table()
@@ -123,7 +120,8 @@ class SQLiteDatabase(object):
             self.create_exception_table()
             self.disconnect()
 
-            print('{} initialised successfully... 🎉'.format(self._config.MODE))
+            print('{} database initialised successfully... 🎉'.format(
+                self._config['MODE']))
         except Exception as e:
             print('An error has occurred whilst setting up the database: {}'.format(e))
 
