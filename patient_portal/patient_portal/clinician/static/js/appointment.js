@@ -73,7 +73,6 @@ let close_appointment_form = function () {
     $(date_validator).html('');
     $(appointment_datetime_input).attr('class', 'form-control datetimepicker-input');
 
-
     //HACK: unset global variable
     current_appointment_patient = null;
 
@@ -225,7 +224,7 @@ let submit_appointment = function (form) {
                     close_appointment_form();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    context_manager.post_exception('CLIENT_EXCEPTION_APPOINTMENT', errorThrown);
+                    context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_APPOINTMENT', errorThrown);
                     context_manager.error_message(`Your appointment for ${current_appointment_patient.user_forename} ${current_appointment_patient.user_surname} couldn't be created. Please try again.`);
 
                     appointment_loaded(form);
@@ -233,7 +232,7 @@ let submit_appointment = function (form) {
             })
         }
     } catch (err) {
-        context_manager.post_exception('post_exception', err);
+        context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_APPOINTMENT', err);
         context_manager.error_message(`An unexpected error has occurred whilst creating your appointment, please try again.`);
 
         appointment_loaded(form);
@@ -254,13 +253,13 @@ let cancel_appointment = function (appointment) {
                 handle_deleted_appointment_success(appointment, patient);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                context_manager.post_exception('CLIENT_EXCEPTION_APPOINTMENT', errorThrown);
+                context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_APPOINTMENT', errorThrown);
                 context_manager.error_message(`Your appointment for ${patient.user_forename} ${patient.user_surname} couldn't be cancel right now. Please try again.`);
             }
         });
 
     } catch (err) {
-        context_manager.post_exception('CLIENT_EXCEPTION_APPOINTMENT', err);
+        context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_APPOINTMENT', err);
         context_manager.error_message(`An unexpected error has occurred whilst deleting an appointment, please try again.`);
     }
 
@@ -360,8 +359,8 @@ let build_appointment = function (appointment) {
         return appointment_wrapper;
 
     } catch (err) {
-        console.log(`An error has occurred whilst building an appointment element. ${err}`)
-        context_manager.post_exception('CLIENT_EXCEPTION_APPOINTMENTS', err)
+        context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_APPOINTMENT', err);
+        context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
     }
 }
 

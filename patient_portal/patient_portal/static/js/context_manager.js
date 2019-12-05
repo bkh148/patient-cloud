@@ -34,7 +34,8 @@ ContextManager.prototype.initialise_socket = function () {
 		});
 
 	} catch (err) {
-		console.log(`Exception occurred whilst setting up socket: ${err}`)
+		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
+        context_manager.error_message(`An unexpected error has occurred whilst loading your dashboard, please try refreshing the page.`);
 	}
 }
 
@@ -42,8 +43,8 @@ ContextManager.prototype.logout = function () {
 	try {
 		socket.emit('logout', {})
 	} catch (err) {
-		console.log(`Exception occurred whilst setting up socket: ${err}`)
-		// Push error to log api
+		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
+        context_manager.error_message(`An unexpected error has occurred whilst logging your out..`);
 	}
 }
 
@@ -265,8 +266,8 @@ ContextManager.prototype.switch_context = function (target) {
 			}
 		}
 	} catch (err) {
-		console.log(`An error has occurred whilst switching the context: ${err}`);
-		// Push error to log api
+		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
+        context_manager.error_message(`An unexpected error has occurred whilst loading elements on your dashboard dashboard, please try refreshing the page.`);
 	}
 }
 
@@ -294,8 +295,8 @@ $(document).ready(function () {
 		context_manager.components[0].show();
 
 	} catch (err) {
-		console.log(`An error has occurred whilst loading the context manager: ${err}`);
-		// Push error to log api
+        context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
+        context_manager.error_message(`An unexpected error has occurred whilst loading your dashboard, please try refreshing the page.`);
 	}
 	console.log('Context manager initialized successfully.');
 

@@ -85,7 +85,7 @@ let build_patient = function (patient) {
 
         return patient_wrapper
     } catch (err) {
-        console.log(`An error has occurred whilst building a patient element: ${err}`);
-        context_manager.post_exception('CLIENT_EXCEPTION_PATIENTS', err);
+        context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_PATIENT', err);
+        context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
     }
 }

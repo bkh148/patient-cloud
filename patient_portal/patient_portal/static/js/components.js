@@ -108,8 +108,8 @@ PatientsComponent.prototype.show = function() {
     addFadeIn(patients_container, '#content', 600);
     
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error showing the patient component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_PATIENT', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -117,8 +117,8 @@ PatientsComponent.prototype.hide = function() {
   try {
     removeFadeOut(`#${PatientsComponent.prototype.name}-component`, 200);
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error hiding the patient component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_PATIENT', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -193,8 +193,8 @@ AppointmentComponent.prototype.show = function() {
     addFadeIn(appointments_container, '#content', 600);
     
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error showing the appointments component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_APPOINTMENT', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -202,8 +202,8 @@ AppointmentComponent.prototype.hide = function() {
   try {
     removeFadeOut(`#${AppointmentComponent.prototype.name}-component`, 200);
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error hiding the appointments component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_APPOINTMENT', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -237,8 +237,8 @@ ClinicianComponent.prototype.show = function() {
     addFadeIn(clinician_component, '#content', 600);
     
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error showing the clinician component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_CLINICIAN', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -246,8 +246,8 @@ ClinicianComponent.prototype.hide = function() {
   try {
     removeFadeOut(`#${ClinicianComponent.prototype.name}-component`, 200);
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error hiding the clinician component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_CLINICIAN', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -282,8 +282,8 @@ CareLocationsComponent.prototype.show = function() {
     addFadeIn(care_location_component, '#content', 600);
     
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error showing the care location component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_CARELOCATION', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -291,8 +291,8 @@ CareLocationsComponent.prototype.hide = function() {
   try {
     removeFadeOut(`#${CareLocationsComponent.prototype.name}-component`, 200);
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error hiding the care location component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_CARELOCATION', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -326,8 +326,8 @@ DataAnalyticsComponent.prototype.show = function() {
     addFadeIn(data_analytics_component, '#content', 600);
     
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error showing the data analytics component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_ANALYTICS', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -335,8 +335,8 @@ DataAnalyticsComponent.prototype.hide = function() {
   try {
     removeFadeOut(`#${DataAnalyticsComponent.prototype.name}-component`, 200);
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error hiding the data analytics component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_ANALYTICS', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -369,8 +369,8 @@ SettingsComponent.prototype.show = function() {
 
     addFadeIn(settings_component, '#content', 600);
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error showing the settings component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_SETTINGS', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 
@@ -378,8 +378,8 @@ SettingsComponent.prototype.hide = function() {
   try {
     removeFadeOut(`#${SettingsComponent.prototype.name}-component`, 200);
   } catch (err) {
-    // Push exception to API endpoint
-    console.log(`Error hiding the settings component: ${err}`)
+    context_manager.post_exception('CLIENT_EXCEPTION_COMPONENT_SETTINGS', err);
+    context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
   }
 }
 

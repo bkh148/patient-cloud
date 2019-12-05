@@ -24,7 +24,7 @@ let handle_incoming_appointment = function (appointment) {
 
         context_manager.info_message(`Your clinician Dr. ${context_manager._cache.settings.clinician.user_surname} has scheduled a new appointment for your on ${moment(appointment.appointment_date_utc).format('dddd Do MMM YYYY')}.`);
     } catch (err) {
-        context_manager.post_exception('CLIENT_EXCEPTION_APPOINTMENT', err);
+        context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_APPOINTMENTS', err);
         context_manager.error_message(`An unexpected error has occurred whilst handling an incoming appointment, please reload the page.`);
     }
 }
@@ -51,7 +51,7 @@ let handle_cancelled_appointment = function (appointment_id) {
         context_manager.info_message(`Your clinician Dr. ${context_manager._cache.settings.clinician.user_surname} has cancelled your scheduled appointment on ${moment(date_copy.appointment_date_utc).format('dddd Do MMM YYYY')}.`);
 
     } catch (err) {
-        context_manager.post_exception('CLIENT_EXCEPTION_APPOINTMENT', err);
+        context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_APPOINTMENTS', err);
         context_manager.error_message(`An unexpected error has occurred whilst handling a deleted appointment, please reload the page.`);
     }
 }
@@ -119,8 +119,8 @@ let build_appointment = function (appointment) {
 
         return appointment_wrapper
     } catch (err) {
-        console.log(`An error has occurred whilst building an appointment element. ${err}`)
-        context_manager.post_exception('CLIENT_EXCEPTION_APPOINTMENTS', err)
+        context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_APPOINTMENTS', err);
+        context_manager.error_message(`An unexpected error has occurred, please try refreshing the page.`);
     }
 }
 

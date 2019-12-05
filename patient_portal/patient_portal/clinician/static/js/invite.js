@@ -135,7 +135,7 @@ let submit_invite = function(form) {
         }
 
     } catch (err) {
-        context_manager.post_exception('post_exception', err);
+        context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_INVITE', err);
         context_manager.error_message(`An unexpected error has occurred whilst sending your invitation, please try again.`);
 
         invite_loaded(form);
