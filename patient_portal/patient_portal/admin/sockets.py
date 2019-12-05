@@ -18,12 +18,6 @@ def on_disconnect():
     if user_id in online_patients:
         online_admins.pop(user_id)
 
-@socket_io.on('load_dashboard', namespace='/admin')
-@authenticated_socket
-def dashboard(message):
-    print('Admin dashboard connection: {}'.format(message))
-
-
 @socket_io.on('logout', namespace='/admin')
 def logout(message):
     # To do: tidy up work to remove client from any necessary rooms

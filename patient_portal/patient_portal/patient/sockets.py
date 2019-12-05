@@ -27,11 +27,6 @@ def on_disconnect():
     if clinician_user_id in online_clinicians:
         socket_io.emit('on_user_logout', {'user_id': user_id}, namespace='/clinician', room=online_clinicians[clinician_user_id])
 
-@socket_io.on('load_dashboard', namespace='/patient')
-@authenticated_socket
-def dashboard(message):
-    print('Patient dashboard connection: {}'.format(message))
-
 @socket_io.on('logout', namespace='/patient')
 def logout(message):
     # To do: tidy up work to remove client from any necessary rooms

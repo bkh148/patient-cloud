@@ -12,10 +12,6 @@ ContextManager.prototype.initialise_socket = function () {
 		// Sets a global socket object
 		socket = io.connect(`http://${this._cache["configurations"]["host"]}:${this._cache["configurations"]["port"]}/${this._cache["configurations"]["namespace"]}`);
 
-		socket.on('connect', function () {
-			socket.emit('load_dashboard', {});
-		});
-
 		socket.on('on_load', function () {
 		});
 
