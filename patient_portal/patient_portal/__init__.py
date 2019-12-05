@@ -1,36 +1,52 @@
 """Module responsible for setting up app defintion rules"""
-import eventlet
-eventlet.monkey_patch()
-
-from flask import Flask
-from flask_debugtoolbar import DebugToolbarExtension
+from patient_portal.config import *
+from flask_jwt_extended import JWTManager
+from flask_mail import Mail
+from patient_portal.containers import *
 from flask_socketio import SocketIO
-from flask_moment import Moment
-from patient_portal.containers import Services, DataStores
-from patient_portal.sqlite import SQLiteDatabase
+from flask_debugtoolbar import DebugToolbarExtension
+from flask import Flask
+import eventlet
+import os
 
-services = Services()
+
+eventlet.monkey_patch(socket=True, select=True)
+
+app = Flask(__name__)
+app.config.from_object(DevelopmentConfig() if os.getenv(
+    'FLASK_ENV', 'development') == 'development' else ProductionConfig())
+
+jwt_manager = JWTManager()
 socket_io = SocketIO()
-toolbar = DebugToolbarExtension()
+mail = Mail()
+
+configs = Configs.config.override(app.config)
+services = Services(config={'mail_server': mail})
+
 online_patients = {}
 online_clinicians = {}
 online_admins = {}
 online_local_admins = {}
 
-def initialise_application(configuration):
+
+def initialise_application():
     """Create an instance of the flask application
     Args:
         configuration: A configuration object for settings various server settings.
     """
-    app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'secret!'
 
-    # if debug / prod /test
-    database = DataStores.database()
-    database.initialise_database()
+    # Initialise the flask mail plugin
+    mail = Mail(app)
 
+    # Initialise the JWT Token plugin
+    jwt_manager = JWTManager(app)
+
+    # Initialise the data store
+    DataStores.database().initialise_database()
+
+    # This will be skipped in production
+    toolbar = DebugToolbarExtension()
     toolbar.init_app(app)
-    moment.init_app(app)
 
     from .auth import auth as auth_blueprint
     from .admin import admin as admin_blueprint
@@ -45,7 +61,7 @@ def initialise_application(configuration):
     app.register_blueprint(clinician_blueprint, url_prefix='/clinician')
     app.register_blueprint(patient_blueprint, url_prefix='/patient')
     app.register_blueprint(api_v1_blueprint)
-    
+
     socket_io.init_app(app, logger=True, engineio_logger=True)
 
     return app, socket_io
