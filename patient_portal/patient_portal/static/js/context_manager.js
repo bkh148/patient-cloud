@@ -16,16 +16,19 @@ ContextManager.prototype.initialise_socket = function () {
 			socket.emit('load_dashboard', {});
 		});
 
+		socket.on('on_load', function () {
+		});
+
 		socket.on('on_send', function (data) {
 			handle_data_received(data);
 		});
 
-		socket.on('on_user_login', function(data) {
+		socket.on('on_user_login', function (data) {
 			context_manager._cache['online_users'][data['user_id']] = data['user_sid']
 			user_logged_in(data);
 		});
 
-		socket.on('on_user_logout', function(data) {
+		socket.on('on_user_logout', function (data) {
 			delete context_manager._cache['online_users'][data['user_id']];
 			user_logged_out(data);
 		});
@@ -45,17 +48,17 @@ ContextManager.prototype.logout = function () {
 }
 
 ContextManager.prototype.format_name = function (name) {
-    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+	return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 }
 
 
 ContextManager.prototype.new_guid = function () {
-	return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+	return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
 		(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-	  );
+	);
 }
 
-let create_notification = function(type, icon, message, time=null){
+let create_notification = function (type, icon, message, options, time = null, title_override = null) {
 	let notification = document.createElement('div');
 	$(notification).attr('class', `toast toast-${type}`);
 	$(notification).attr('role', 'alert');
@@ -67,7 +70,11 @@ let create_notification = function(type, icon, message, time=null){
 	$(notification_icon).attr('class', `${icon} mr-2`);
 
 	let notification_title = $(notification).find('#toast-title');
-	$(notification_title).html(type.charAt(0).toUpperCase() + type.slice(1));
+	if (title_override != null) {
+		$(notification_title).html(context_manager.format_name(title_override));
+	} else {
+		$(notification_title).html(context_manager.format_name(type));
+	}
 
 	let notification_time = $(notification).find('#notification-time');
 	if (time == null) {
@@ -78,24 +85,97 @@ let create_notification = function(type, icon, message, time=null){
 
 	let notification_body = $(notification).find('#notification-body');
 	$(notification_body).html(message);
-
 	$(notification).appendTo('#notification-wrapper');
-	$(notification).toast({
-		delay: 3500
-	});
+
+	return notification
+}
+
+ContextManager.prototype.update_component = function(name) {
+	let component = undefined;
+	for (let i = 0; i < context_manager.components.length; i++) {
+		component = context_manager.components[i];
+
+		if (component.name == name) {
+			component.hide();
+			component.show();
+			break;
+		}
+	}
+}
+
+ContextManager.prototype.success_message = function (message, time = null) {
+	let notification = create_notification('success', 'far fa-check-circle', message, options = { delay: 3500 }, time = time);
+
+	$(notification).toast(options);
 	$(notification).toast('show');
 }
 
-ContextManager.prototype.success_message = function(message, time=null) {
-	create_notification('success', 'far fa-check-circle', message);
+ContextManager.prototype.error_message = function (message, time = null) {
+	let notification = create_notification('error', 'far fa-times-circle', message, options = { delay: 3500 }, time = time);
+
+	$(notification).toast(options);
+	$(notification).toast('show');
 }
 
-ContextManager.prototype.error_message = function(message, time=null) {
-	create_notification('error', 'far fa-times-circle', message);
+ContextManager.prototype.info_message = function (message, time = null) {
+	let notification = create_notification('information', 'far fa-question-circle', message, options = { delay: 3500 }, time = time);
+
+	$(notification).toast(options);
+	$(notification).toast('show');
+	$(notification).on('hide', function() {
+		console.log('hidden');
+	})
 }
 
-ContextManager.prototype.info_message = function(message, time=null) {
-	create_notification('information', 'far fa-question-circle', message);
+ContextManager.prototype.binary_prompt = function (id, title, message, positive_value, callback_positive, negative_value, callback_negative) {
+	if (document.getElementById(`notification_${id}`) == null) {
+		let notification_id = id;
+		let binary_markdown = `
+		<div class="container-fluid">
+			<div class="row">
+				${message}
+			</div>
+			<div class="row justify-content-end">
+				<div id="notification_negative_${notification_id}" class="btn btn-danger m-2">${context_manager.format_name(negative_value)}</div>
+				<div id="notification_positive_${notification_id}" class="btn btn-success m-2">${context_manager.format_name(positive_value)}</div>
+			</div>
+		</div>
+		`;
+
+		let body_wrapper = document.createElement('div');
+		$(body_wrapper).html(binary_markdown);
+
+		let notification = create_notification('warning', 'far fa-question-circle', binary_markdown, options = { autohide: false }, time = null, title_override = title);
+		$(notification).attr('id', `notification_${notification_id}`);
+
+		let close_button = $(notification).find('#close-notification');
+		$(close_button).attr('id', `${close_button.attr('id')}_${notification_id}`);
+		$(close_button).on('click', function () {
+			if (callback_negative != null) {
+				callback_negative();
+			}
+			$(notification).remove();
+		})
+
+		let negative_button = $(notification).find(`#notification_negative_${notification_id}`);
+		$(negative_button).on('click', function () {
+			if (callback_negative != null) {
+				callback_negative();
+			}
+			$(notification).toast('hide');
+			$(notification).remove();
+		})
+
+		let positive_button = $(notification).find(`#notification_positive_${notification_id}`);
+		$(positive_button).on('click', function () {
+			callback_positive();
+			$(notification).toast('hide');
+			$(notification).remove();
+		});
+
+		$(notification).toast(options);
+		$(notification).toast('show');
+	}
 }
 
 ContextManager.prototype.post_activity = function (activity_type) {
@@ -111,12 +191,12 @@ ContextManager.prototype.post_activity = function (activity_type) {
 		$.ajax({
 			url: `http://${context_manager._cache.configurations['host']}:${context_manager._cache.configurations['port']}/api/v1.0/logs/activities`,
 			type: 'POST',
-			beforeSend: function(request) {
+			beforeSend: function (request) {
 				request.setRequestHeader("Authorization", `Bearer ${context_manager._cache.configurations['access_token']}`);
-			  },
+			},
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(activity),
-			error: function(jqXHR, textStatus, errorThrown) {
+			error: function (jqXHR, textStatus, errorThrown) {
 				throw new Error(errorThrown)
 			}
 		})
@@ -139,12 +219,12 @@ ContextManager.prototype.post_exception = function (type, error) {
 		$.ajax({
 			url: `http://${context_manager._cache.configurations['host']}:${context_manager._cache.configurations['port']}/api/v1.0/logs/exceptions`,
 			type: 'POST',
-			beforeSend: function(request) {
+			beforeSend: function (request) {
 				request.setRequestHeader("Authorization", `Bearer ${context_manager._cache.configurations['access_token']}`);
-			  },
+			},
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(exception),
-			error: function(jqXHR, textStatus, errorThrown) {
+			error: function (jqXHR, textStatus, errorThrown) {
 				throw new Error(errorThrown)
 			}
 		})
@@ -183,10 +263,6 @@ ContextManager.prototype.switch_context = function (target) {
 					component.hide();
 				}
 			}
-
-			console.log(`Current context: ${context_manager.current_context}`);
-		} else {
-			console.info(`Target already in context.`);
 		}
 	} catch (err) {
 		console.log(`An error has occurred whilst switching the context: ${err}`);

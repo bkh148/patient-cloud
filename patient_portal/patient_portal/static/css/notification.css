@@ -54,7 +54,7 @@
     opacity: 0.75;
 }
 
-.toast-info .toast-header strong, .toast-info .toast-header i {
+.toast-information .toast-header strong, .toast-information .toast-header i {
     color: #0c5460;
 }
 
@@ -64,5 +64,18 @@
 
 .toast-information .toast-body {
     background: #d1ecf1;
+    opacity: 0.75;
+}
+
+.toast-warning .toast-header strong, .toast-warning .toast-header i {
+    color: #856404;
+}
+
+.toast-warning .toast-header {
+    background: #fff3cd;
+}
+
+.toast-warning .toast-body {
+    background: #fff3cd;
     opacity: 0.75;
 }
