@@ -1,49 +1,6 @@
 {% extends "settings_container.html" %}
 
 {% block body %}
-<div class="component-container-section-header">Account Settings</div>
-<div class=" col component-container-section-body">
-    <form action="#">
-        <div class="form-group row">
-            <label for="user_email" class="col-sm-2 col-form-label">Email :</label>
-            <div class="col-sm-6">
-                <input type="email" class="form-control" id="user_email" placeholder="{{ context.user.user_email }}"
-                    readonly>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="user_forename" class="col-sm-2 col-form-label">Forename :</label>
-            <div class="col-sm-6">
-                <input type="email" class="form-control" id="user_forename" placeholder="{{ context.user.user_forename }}"
-                    readonly>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="user_surname" class="col-sm-2 col-form-label">Surname :</label>
-            <div class="col-sm-6">
-                <input type="email" class="form-control" id="user_surname" placeholder="{{ context.user.user_surname }}"
-                    readonly>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2">Remember me :</div>
-            <div class="col-sm-6">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remember_me">
-                    <label class="form-check-label" for="remember_me">
-                        Keep me logged in
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-10 settings-submit justify-content-end">
-                <button class="btn btn-custom-danger" onclick="context_manager.info_message('The ability to change any settings will be added in a later version of Patient Portal.');">Reset</button>
-                <button class="btn btn-custom-success" onclick="context_manager.info_message('The ability to change any settings will be added in a later version of Patient Portal.');">Save</button>
-            </div>
-        </div>
-    </form>
-</div>
 <div class="component-container-section-header">Personal Care Settings</div>
 <div class="col component-container-section-body">
     <form action="#">
