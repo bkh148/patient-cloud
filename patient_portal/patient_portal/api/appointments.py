@@ -15,7 +15,7 @@ appointment_field = nsp.model('Appointment', {
     'created_on_utc': fields.DateTime(required=True),
     'appointment_date_utc': fields.DateTime(required=True),
     'appointment_type': fields.String(required = True),
-    'appointment_notes': fields.String(required = True),
+    'appointment-notes': fields.String(required = True),
     'is_cancelled': fields.Boolean,
     'is_attended': fields.Boolean
 })
@@ -120,6 +120,8 @@ class Appointment(Resource):
     def delete(self, appointment_id):
         """Flag an appointment for deletion by it's id"""
         try:
+            print("Appointment_id", appointment_id);
+            services.appointment_service().delete_appointment(appointment_id);
             return 202
             #nsp.abort(400, "There was no appointment found at the provided id: {}".format(appointment_id), details="Please make sure you provide a valid appointment id (uuid)")
         except Exception as e:
