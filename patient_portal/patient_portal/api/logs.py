@@ -12,7 +12,7 @@ exception_field = nsp.model('Exception', {
     'exception_log_id': fields.String(required=True),
     'exception_log_type': fields.String(required=True),
     'occurred_on_utc': fields.String(required=True),
-    'session_id': field.String(default="00000000-0000-0000-0000-000000000000"),
+    'session_id': fields.String(default="00000000-0000-0000-0000-000000000000"),
     'is_handled': fields.Boolean(required=True),
     'stack_trace': fields.String(required=True)
 })
@@ -22,7 +22,7 @@ exception_field = nsp.model('Exception', {
 activity_field = nsp.model('Activity', {
     'activity_log_id': fields.String(required=True),
     'activity_log_type': fields.String(required=True),
-    'session_id': field.String(default="00000000-0000-0000-0000-000000000000"),
+    'session_id': fields.String(default="00000000-0000-0000-0000-000000000000"),
     'occurred_on_utc': fields.DateTime(required=True)
 })
 
