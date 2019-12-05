@@ -90,3 +90,15 @@ def clinician_socket_error(error):
     print('SOCKET CLINICIAN ERROR: {}'.format(error))
 
 
+@socket_io.on_error('/patient')
+def patient_socket_error(error):
+    print('SOCKET PATIENT ERROR: {}'.format(error))
+    
+    
+@jwt_manager.user_claims_loader
+def add_claims_to_access_token(user):
+    return {'role': user['role']}
+
+@jwt_manager.user_identity_loader
+def user_identity_lookup(user):
+    return user['user_id']
