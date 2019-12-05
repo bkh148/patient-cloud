@@ -14,7 +14,6 @@ api = Api(api_v1,
           )
 
 
-api.add_namespace(authentication_nsp)
 api.add_namespace(appointment_nsp)
 api.add_namespace(location_nsp)
 api.add_namespace(invitation_nsp)
