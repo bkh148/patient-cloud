@@ -1,7 +1,3 @@
-let format_name = function (name) {
-    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-}
-
 let edit_patient = function (patient_id) {
     return function () {
         context_manager.info_message("The ability to edit patients data will be added in a feature version of Patient Portal.");
@@ -40,7 +36,7 @@ let build_patient = function (patient) {
         // Get / Set the patients name in the header
         let patient_name = $(patient_wrapper).find('#patient_name');
         $(patient_name).attr('id', `${patient_name.attr('id')}_${patient.user_id}`);
-        $(patient_name).html(`${format_name(patient.user_surname)}, ${format_name(patient.user_forename)}`);
+        $(patient_name).html(`${context_manager.format_name(patient.user_surname)}, ${context_manager.format_name(patient.user_forename)}`);
 
         // Status badge
         let patient_badge = $(patient_wrapper).find('#status-badge');

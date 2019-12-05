@@ -134,12 +134,22 @@ let appointment_loaded = function(form) {
     $(submit).prop('disabled', false);
 }
 
-let handle_appointment_success = function(appointment) {
-    let patient_id = appointment.created_for;
+let get_patient = function(patient_id) {
+    for (let i = 0; i < context_manager._cache.patients.length; i++) {
+        let patient = context_manager._cache.patients[i];
 
-    if (context_manager._cache.online_users[`${patient_id}`] != undefined) {
+        if (patient.user_id == patient_id) {
+            return patient;
+        }
+    }
+}
+
+let handle_appointment_success = function(appointment) {
+    let patient = get_patient(appointment.created_for)
+    
+    if (context_manager._cache.online_users[`${appointment.created_for}`] != undefined) {
         // Patient is online, notify them that they have an appointment.
-        socket.emit('notify_patient', {'data': {'appointment': appointment}, 'room_id': context_manager._cache.online_users[`${patient_id}`]});
+        socket.emit('notify_patient', {'data': {'appointment': appointment}, 'room_id': context_manager._cache.online_users[`${appointment.created_for}`]});
     }
 
     // Add the appointment to the context
@@ -149,7 +159,7 @@ let handle_appointment_success = function(appointment) {
     let appointment_count = $(`#patient_appointment_count_${appointment.created_for}`);
     $(appointment_count).html(Number($(appointment_count).html()) + 1);
 
-    context_manager.success_message(`Your appointment has successfully been scheduled for ${moment(appointment.appointment_date_utc).format('dddd Do MMM YYYY')}`)
+    context_manager.success_message(`Your appointment with ${context_manager.format_name(patient.user_surname)}, ${context_manager.format_name(patient.user_forename)} has successfully been scheduled for ${moment(appointment.appointment_date_utc).format('dddd Do MMM YYYY')}`)
 }
 
 let submit_appointment = function(form) {
