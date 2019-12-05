@@ -120,7 +120,7 @@ class SQLiteDatabase(object):
             self.create_exception_table()
             self.disconnect()
 
-            print('{} database initialised successfully... 🎉'.format(
+            print('{} database initialised successfully!'.format(
                 self._config['MODE']))
         except Exception as e:
             print('An error has occurred whilst setting up the database: {}'.format(e))
