@@ -73,4 +73,20 @@ def internal_server_error(error):
                            style_paths=['css/error_page.css']), 500
 
 
+###################### Socket route handling ######################
+
+@socket_io.on_error('/admin')
+def admin_socket_error(error):
+    print('SOCKET ADMIN ERROR: {}'.format(error))
+
+
+@socket_io.on_error('/local_admin')
+def local_admin_socket_error(error):
+    print('SOCKET LOCAL ADMIN ERROR: {}'.format(error))
+
+
+@socket_io.on_error('/clinician')
+def clinician_socket_error(error):
+    print('SOCKET CLINICIAN ERROR: {}'.format(error))
+
 
