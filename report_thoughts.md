@@ -42,3 +42,15 @@ Discussion on the use of the core, and data layers for abstractions.
 
 
 **Observer pattern around the online users :** <br />
+
+
+
+**DEBUG MODE :** <br />
+Because of a known issue in Flask Socket IO, in order to run the application in debug mode, you need to do the following: <br />
+```
+export FLASK_ENV=development
+export FLASK_APP=patient_portal/start_up.py
+```
+
+and run the following command: ```python3 patient_portal/__main__.py``` <br />
+REFERENCE: https://github.com/miguelgrinberg/Flask-SocketIO/issues/817
