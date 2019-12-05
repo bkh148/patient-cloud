@@ -18,20 +18,6 @@ invite_fields = nsp.model('Invite', {
     'is_consumed': fields.Boolean(required=True, default=False),
 })
 
-mock_invite =  {
-    'invite_id': 'd0e114ba-3527-4c4a-aee7-4bde6095f94f',
-    'invited_by': 'd0e114ba-3527-4c4a-aee7-4bde6095f94f',
-    'user_role_id': 'd0e114ba-3527-4c4a-aee7-4bde6095f94f',
-    'invited_email': 'test@gmail.com',
-    'invited_first_name': 'Test',
-    'invited_last_name': 'Last',
-    'invited_on_utc': datetime.utcnow(),
-    'expiration_date_utc': datetime.utcnow() + timedelta(minutes=60),
-    'is_consumed': False
-}
-
-invitations = [mock_invite]
-
 @nsp.route('/')
 @nsp.response(200, 'Invite query executed successfully.')
 @nsp.response(500, 'Internal server error.')
@@ -41,7 +27,7 @@ class Invites(Resource):
     def get(self):
         """Get all invitations created in the platform"""
         try:
-            return invitations, 200
+            return services.invite_service().get_all_invites(), 200
         except Exception as e:
             nsp.abort(500, "An internal server error has occurred: {}".format(e))
 
@@ -64,11 +50,7 @@ class Invite(Resource):
     def get(self, invite_id):
         """Get an invite by id"""
         try:
-            for invite in invitations:
-                if invite['invite_id'] == invite_id:
-                    return invite, 200
-                
-            nsp.abort(400, 'There was no invite by at that id.')
+            return services.invite_service().get_invite_by_id(invite_id);
         except Exception as e:
             nsp.abort(500, 'An internal server error has occurred: {}'.format(e))
             print(e)
@@ -86,6 +68,7 @@ class Invite(Resource):
     def delete(self, invite_id):
         """Flag an invite for deletion by it's id"""
         try:
+            services.invite_service().delete_invite(invite_id);
             return 202
         except Exception as e:
             nsp.abort(500, "An internal error has occurred: {}".format(e))
