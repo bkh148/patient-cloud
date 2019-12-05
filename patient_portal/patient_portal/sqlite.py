@@ -100,9 +100,8 @@ class SQLiteDatabase(object):
     def execute(self, query, params=()):
         connection = self.connect()
         cursor = self.connection().cursor()
-
         cursor.execute(query, params)
-
+        connection.commit()
         cursor.close()
         self.disconnect()
 
