@@ -37,7 +37,8 @@ class AppointmentRepository(IAppointmentRepository):
     def get_all(self):
         """ Get all appointments in the system """
         return self._db.get_all("""
-            SELECT * FROM appointments""")
+            SELECT * FROM appointments
+            ORDER BY date(appointment_date_utc)""")
 
     def get_appointments_for(self, user_id):
         """ Get appointments created for a user.
@@ -47,7 +48,8 @@ class AppointmentRepository(IAppointmentRepository):
         """
         return self._db.get_all("""
         SELECT * FROM appointments
-        WHERE created_for = ?""", (user_id, ))
+        WHERE created_for = ?
+        ORDER BY date(appointment_date_utc)""", (user_id, ))
 
     def get_appointments_created_by(self, user_id):
         """ Get appointments create by a user.
@@ -57,7 +59,8 @@ class AppointmentRepository(IAppointmentRepository):
         """
         return self._db.get_all("""
         SELECT * FROM appointments
-        WHERE created_by = ?""", (user_id, ))
+        WHERE created_by = ?
+        ORDER BY date(appointment_date_utc)""", (user_id, ))
 
     def get_appointments_at_location(self, location_id):
         """ Get appointments at a given location.
@@ -67,4 +70,5 @@ class AppointmentRepository(IAppointmentRepository):
         """
         return self._db.get_all("""
         SELECT * FROM appointments
-        WHERE location_id = ?""", (location_id, ))
+        WHERE location_id = ?
+        ORDER BY date(appointment_date_utc)""", (location_id, ))
