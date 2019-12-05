@@ -1,3 +1,71 @@
 <div class="appointment-item">
-    Appointment Item Clinician
+    <div class="row appointment-item-header">
+        <div class="col-md-6">
+            <div class="row h-100 align-items-center">
+                <span><strong id="appointment-date">PLACEHOLDER_DATE</strong></span>
+            </div>
+        </div>
+        <div class="col-md-6 patient-action-container">
+            <div class="row h-100 align-items-center justify-content-end">
+                <span><strong id="appointment-time" class="mr-1">PLACEHOLDER_TIME</strong></span>
+                <div class="btn-group mr-1" role="group" aria-label="appointments_actions">
+                    <button type="button" id="edit-appointment"
+                        class="btn btn-light dark-icon" data-toggle="modal" data-target="#appointment-modal"><i
+                            class="fas fa-edit"></i></button>
+                    <button type="button" id="cancel-appointment"
+                        class="btn btn-danger"><i class="fas fa-ban"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row appointment-item-body">
+        <div class="col-lg-6">
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <p class="key">Patient Id:</p>
+                </div>
+                <div class="col-md-8">
+                    <p id="patient-id">PLACEHOLDER_PATIENT_ID</p>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <p class="key">Patient Name:</p>
+                </div>
+                <div class="col-md-8">
+                    <p id="patient-name">PLACEHOLDER_NAME</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <p class="key">Location:</p>
+                </div>
+                <div class="col-md-8">
+                    <p id="appointment-location-name">PLACEHOLDER_LOC_NAME</p>
+                    <p id="appointment-location-address">PLACEHOLDER_LOC_ADR</p>
+                    <p id="appointment-location-postcode">PLACEHOLDER_LOC_POS</p>
+                    <p id="appointment-location-city">PLACEHOLDER_LOC_CITY</p>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <p class="key">Reason:</p>
+                </div>
+                <div class="col-md-8">
+                    <p id="appointment-reason">PLACEHOLDER_REASON</p>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <p class="key">Notes:</p>
+                </div>
+                <div class="col-md-8">
+                    <p id="appointment-notes">PLACEHOLDER_NOTES</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
