@@ -1,5 +1,5 @@
 .notification-wrapper {
-    position: absolute; 
+    position: fixed; 
     display:flex;
     flex-direction: column;
     align-items: flex-end;
@@ -9,6 +9,10 @@
     min-height: 190px; 
     top: 10px; 
     right: 1%;
+}
+
+.toast {
+    pointer-events: auto;
 }
 
 .toast-body {
