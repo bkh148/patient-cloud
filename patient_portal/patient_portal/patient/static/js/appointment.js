@@ -1,5 +1,20 @@
 let handle_incoming_appointment = function(appointment) {
-    context_manager._cache.appointments.push(appointment);
+
+    if (context_manager._cache.appointments.length == 0) {
+        context_manager._cache.appointments.push(appointment);
+    } else {
+        for(let i = 0; i < context_manager._cache.appointments.length; i++) {
+            if (moment(appointment.appointment_date_utc).isBefore(moment(context_manager._cache.appointments[i].appointment_date_utc))) {
+                context_manager._cache.appointments.splice(i, 0, appointment);
+                break;
+            }
+
+            if (i == context_manager._cache.appointments.length - 1) {
+                context_manager._cache.appointments.push(appointment);
+                break;
+            }
+        }
+    }
 
     if (context_manager.current_context == "appointments") {
         let component = undefined;
