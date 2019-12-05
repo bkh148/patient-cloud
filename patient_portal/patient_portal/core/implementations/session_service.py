@@ -2,8 +2,9 @@ from ..interfaces import ISessionService
 
 class SessionService(ISessionService):
 
-    def __init__(self, repo):
+    def __init__(self, repo, log_service):
         self._repo = repo
+        self._log_service = log_service
 
     def get_session(self, user_id):
         """get a session by the user id"""
