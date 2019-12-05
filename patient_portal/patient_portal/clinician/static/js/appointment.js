@@ -52,7 +52,7 @@ let validate_appointment_form = function (form, type_select, location_select, da
 }
 
 let edit_appointment = function (appointment, patient) {
-    console.log(`Edit appointment: ${appointment.appointment_id}`);
+    context_manager.info_message("The ability to edit an appointment will be added in a later version of Patient Portal.");
 }
 
 let close_appointment_form = function () {
