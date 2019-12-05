@@ -1,9 +1,11 @@
 import os
-from flask import render_template, session, redirect, request, url_for, send_from_directory
+from flask import render_template, session, redirect, request, url_for, send_from_directory, abort
+from patient_portal import initialise_application, services, jwt_manager
+from pprint import pprint as pp
 from patient_portal.core.models import anonymous_required
-app, socket_io = initialise_application("development")
+app, socket_io = initialise_application()
 
-
+# Favicon Route
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/images'),
@@ -34,8 +36,6 @@ def home_page():
                            static_folder='static',
                            style_paths=['css/welcome.css'],
                            nav_links=[login, register])
-
-
 
 # Catch all logout route
 @app.route('/logout', methods=['POST'])
