@@ -1,28 +1,26 @@
 """Module describing the various IoC Containers needed for the applications injection"""
 
+import os
 from dependency_injector import containers, providers
 from patient_portal.core import *
 from patient_portal.data import *
-from patient_portal.config import *
 from patient_portal.sqlite import SQLiteDatabase
 
+
+class Configs(containers.DeclarativeContainer):
+    config = providers.Configuration('app_config')
+
+
 class DataStores(containers.DeclarativeContainer):
-
-    development_database = providers.Singleton(
+    """The datastores allow for dynamic loading of configurations based off environment"""
+    
+    database = providers.Singleton(
         SQLiteDatabase,
-        config = DevelopmentConfig()
+        config = Configs.config
     )
-
-    production_database = providers.Singleton(
-        SQLiteDatabase,
-        config = ProductionConfig()
-    )
-
-    # 🚨: temp until environments are fixed
-    mode = "development"
-    database = development_database if mode == 'development' else production_database
 
 class Repositories(containers.DeclarativeContainer):
+    """Repositories class holds references to all repositories that can be injected throughout the application."""
 
     appointment_repo = providers.Singleton(
         AppointmentRepository, db=DataStores.database)
@@ -52,6 +50,7 @@ class Repositories(containers.DeclarativeContainer):
     )
 
 class Services(containers.DeclarativeContainer):
+    """Services class holds references to all services that can be injected throughout the application."""
 
     config = providers.Configuration('config')
     mail_server = config.mail_server
