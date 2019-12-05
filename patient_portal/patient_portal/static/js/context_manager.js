@@ -41,7 +41,8 @@ ContextManager.prototype.initialise_socket = function () {
 
 ContextManager.prototype.logout = function () {
 	try {
-		socket.emit('logout', {})
+		socket.emit('logout', {});
+		context_manager.post_activity('CONTEXT_MANAGER_LOGOUT');
 	} catch (err) {
 		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
         context_manager.error_message(`An unexpected error has occurred whilst logging your out..`);
@@ -264,6 +265,8 @@ ContextManager.prototype.switch_context = function (target) {
 					component.hide();
 				}
 			}
+
+			context_manager.post_activity(`CONTEXT_MANAGER_SWITCH_CONTEXT_${target.toUpperCase()}`);
 		}
 	} catch (err) {
 		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);

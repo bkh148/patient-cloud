@@ -90,6 +90,7 @@ let invite_loaded = function(form) {
 
 let submit_invite = function(form) {
     try {
+        context_manager.post_activity('SCRIPT_INVITE_CLINICIAN_SUBMIT_APPOINTMENT');
 
         //let form = document.getElementById('invite-form');
         let forename_input = $(form).find('#invite-forename');

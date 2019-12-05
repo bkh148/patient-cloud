@@ -52,6 +52,7 @@ let validate_appointment_form = function (form, type_select, location_select, da
 }
 
 let edit_appointment = function (appointment, patient) {
+    context_manager.post_activity('SCRIPT_APPOINTMENT_CLINICIAN_EDIT_APPOINTMENT');
     context_manager.info_message("The ability to edit an appointment will be added in a later version of Patient Portal.");
 }
 
@@ -188,6 +189,7 @@ let handle_deleted_appointment_success = function (appointment, patient) {
 
 let submit_appointment = function (form) {
     try {
+        context_manager.post_activity('SCRIPT_APPOINTMENT_CLINICIAN_SUBMIT_APPOINTMENT');
 
         let appointment_reason_select = $(form).find('#appointment-type');
         let appointment_location_select = $(form).find('#appointment-location');
@@ -262,12 +264,6 @@ let cancel_appointment = function (appointment) {
         context_manager.post_exception('CLIENT_EXCEPTION_SCRIPT_APPOINTMENT', err);
         context_manager.error_message(`An unexpected error has occurred whilst deleting an appointment, please try again.`);
     }
-
-    // Try and delete the appointment on the API
-
-    // On success, notify the user
-    // Remove appointment from cache
-    // Refresh component
 }
 
 let build_appointment = function (appointment) {
@@ -352,7 +348,10 @@ let build_appointment = function (appointment) {
             });
 
             $(cancel_appointment_button).on('click', function () {
-                context_manager.binary_prompt(appointment.appointment_id, 'Warning', `Are you sure you wish to cancel this appointment ?`, 'Yes', function () { return cancel_appointment(appointment); }, 'No', null);
+                context_manager.binary_prompt(appointment.appointment_id, 'Warning', `Are you sure you wish to cancel this appointment ?`, 'Yes', function () { 
+                    context_manager.post_activity('SCRIPT_APPOINTMENT_CLINICIAN_CANCEL_APPOINTMENT');
+                    return cancel_appointment(appointment);
+                 }, 'No', null);
             });
         }
 

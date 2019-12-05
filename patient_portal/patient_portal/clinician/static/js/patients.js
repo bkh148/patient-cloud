@@ -1,8 +1,10 @@
 let edit_patient = function (patient) {
+    context_manager.post_activity('SCRIPT_PATIENT_CLINICIAN_EDIT_PATIENT_CLICKED');
     context_manager.info_message("The ability to edit patients data will be added in a feature version of Patient Portal.");
 }
 
 let transfer_patient = function (patient) {
+    context_manager.post_activity('SCRIPT_PATIENT_CLINICIAN_TRANSFER_PATIENT_CLICKED');
     context_manager.info_message("The ability to transfer patients will be added in a feature version of Patient Portal.");
 }
 
