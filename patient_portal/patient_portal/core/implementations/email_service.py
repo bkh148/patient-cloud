@@ -129,7 +129,7 @@ class EmailService(IEmailService):
         sender_id = invite['invited_by']
 
         sender = self._user_service.get_user_by_id(sender_id)
-        print("SENDER: {}".format(sender))
+        print("SENDER: {}".format(sender['user_forename']))
         
         user_role = self._user_service.get_user_role(user_role)
         print("USER ROLE: {}".format(user_role))
