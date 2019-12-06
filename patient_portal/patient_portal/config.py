@@ -5,12 +5,12 @@ from datetime import timedelta
 __all__ = ['DevelopmentConfig', 'ProductionConfig']
 
 class Config(object):
-    MAIL_SERVER = os.environ['MAIL_SERVER'] #smtp.gmail.com
+    MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_USERNAME = os.environ['MAIL_USERNAME'] #liamlambwebtech@gmail.com
-    MAIL_PASSWORD = os.environ['MAIL_PASSWORD'] #fglmcnthbmftkscd
+    MAIL_USERNAME = 'liamlambwebtech@gmail.com'
+    MAIL_PASSWORD = 'fglmcnthbmftkscd'
 
 class DevelopmentConfig(Config):
     MODE = 'Development'
@@ -31,6 +31,6 @@ class ProductionConfig(Config):
     PORT = 80
     PERMANENT_SESSION_LIFETIME = timedelta(seconds=3600) # Session expire in 1 hours
     JWT_EXPIRATION_DELTA = timedelta(seconds=3600) # Token expire in 1 hour
-    SECRET_KEY = os.environ['SECRET_KEY']
+    SECRET_KEY = os.urandom(64).hex()
     DATABASE_URI = 'patient_portal_production.db'
     
