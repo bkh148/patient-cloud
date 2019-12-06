@@ -2,7 +2,7 @@
 
 from . import clinician
 from flask import render_template, session
-from .. import services, online_patients
+from .. import services, online_patients, app
 from ..core import login_required, UserRole
 
 
@@ -43,8 +43,8 @@ def dashboard():
             "stay_logged_in": 1}
 
         metadata['configurations'] = {
-            "host": "127.0.0.1",
-            "port": "5000",
+            "host": app.config['HOST'],
+            "port": app.config['PORT'],
             "namespace": "clinician",
             "session_id": session['session_id']}
 

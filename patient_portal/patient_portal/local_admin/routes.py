@@ -2,7 +2,7 @@
 
 from . import local_admin
 from flask import render_template, session
-from .. import services
+from .. import services, app
 from ..core import login_required
 
 
@@ -27,15 +27,13 @@ def dashboard():
         metadata['clinicians'] = []
         metadata['components'] = ['clinicians', 'settings']
         metadata['settings'] = {
-            "forename": "Local admin",
-            "surname": "admin",
-            "email": "some.admin@admin.co.uk",
+            'user': session['user'],
             "active_account": 1,
             "stay_logged_in": 1}
 
         metadata['configurations'] = {
-            "host": "127.0.0.1",
-            "port": "5000",
+            "host": app.config['HOST'],
+            "port": app.config['PORT'],
             "namespace": "local_admin",
             "session_id": session['session_id']}
 

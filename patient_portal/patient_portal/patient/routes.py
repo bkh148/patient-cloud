@@ -2,8 +2,9 @@
 
 from . import patient
 from flask import render_template, session
-from .. import services
+from .. import services, app
 from ..core import login_required
+from flask_jwt_extended import create_access_token, create_refresh_token
 
 
 @patient.route('/', methods=['GET'])
@@ -30,17 +31,18 @@ def dashboard():
 
         # Get from session
         metadata['configurations'] = {
-            "host": "127.0.0.1",
-            "port": "5000",
+            "host": app.config['HOST'],
+            "port": app.config['PORT'],
             "namespace": "patient",
-            "session_id": session['session_id']}
+            "session_id": session['session_id'],
+            "access_token": create_access_token(identity=session['user']),
+            "refresh_token": create_refresh_token(session['user'])}
 
         # Get the following from the session when authentication is setup
         metadata['settings'] = {
             'user': session['user'],
             'care_location': services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b'),
-            'clinician': session['clinician'],
-            'days_in_care': ''
+            'clinician': session['clinician']
         }
 
         metadata['templates']['appointments_container'] = render_template(

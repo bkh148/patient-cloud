@@ -2,7 +2,7 @@
 
 from . import admin
 from flask import render_template, session, request
-from .. import services
+from .. import services, app
 from ..core import login_required
 from flask_jwt_extended import create_access_token, create_refresh_token
 
@@ -30,17 +30,11 @@ def dashboard():
         metadata['components'] = [
             'care_locations', 'data_analytics', 'settings']
 
-        metadata['settings'] = {
-            "forename": "Admin",
-            "surname": "AdminSur",
-            "email": "admin@royal.nhs.co.uk",
-            "active_account": 1,
-            "stay_logged_in": 0
-        }
+        metadata['settings'] = {'user': session['user']}
 
         metadata['configurations'] = {
-            "host": "127.0.0.1",
-            "port": "5000",
+            "host": app.config['HOST'],
+            "port": app.config['PORT'],
             "namespace": "admin",
             "session_id": session['session_id'],
             "access_token": create_access_token(identity=session['user']),
@@ -62,6 +56,7 @@ def dashboard():
         "context": metadata['components'][1],
         "icon": "fas fa-chart-line"}
 
+    #TODO
     metadata['templates']['care_locations'] = 'Hello, care locations'
     metadata['templates']['data_analytics'] = 'Hello, data analytics'
     metadata['templates']['settings'] = render_template(

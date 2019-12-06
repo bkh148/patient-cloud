@@ -1,6 +1,6 @@
 from ..interfaces import IEmailService
 from flask_mail import Message
-from flask import render_template
+from flask import render_template, current_app
 
 
 class EmailService(IEmailService):
@@ -17,8 +17,6 @@ class EmailService(IEmailService):
     def __send_admin_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_firstname):
         try:
             subject = "Admin Invitation"
-            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(
-                invite_id)
             action_title = "Join as Admin"
             message = """
             {} has invited you to join the Patient Portal platform as an administrator.
@@ -33,7 +31,7 @@ class EmailService(IEmailService):
             The Patient Portal Team""".format(sender_firstname)
 
             self.__send_message(
-                subject, "{} {}".format(recipient_first_name, recipient_last_name), [recipient_email], message, action_title, action_url)
+                invite_id, subject, "{} {}".format(recipient_first_name, recipient_last_name), [recipient_email], message, action_title)
             # Log activity: email
         except Exception as e:
             self._log_service.log_exception(e)
@@ -42,8 +40,6 @@ class EmailService(IEmailService):
     def __send_local_admin_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_firstname):
         try:
             subject = "Local Admin Invitation"
-            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(
-                invite_id)
             action_title = "Join as Local Admin"
             message = """
             {} has invited you to join the Patient Portal platform as an local administrator.
@@ -57,7 +53,7 @@ class EmailService(IEmailService):
             The Patient Portal Team""".format(sender_firstname)
 
             self.__send_message(
-                subject, "{} {}".format(recipient_first_name, recipient_last_name), [recipient_email], message, action_title, action_url)
+                invite_id, subject, "{} {}".format(recipient_first_name, recipient_last_name), [recipient_email], message, action_title)
             # Log activity: email
         except Exception as e:
             self._log_service.log_exception(e)
@@ -66,8 +62,6 @@ class EmailService(IEmailService):
     def __send_clinician_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_firstname):
         try:
             subject = "Clinician Invitation"
-            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(
-                invite_id)
             action_title = "Join as Clinician"
             message = """
             {} has invited you to join the Patient Portal as a clinician in your care location.
@@ -81,7 +75,7 @@ class EmailService(IEmailService):
             The Patient Portal Team""".format(sender_firstname)
 
             self.__send_message(
-                subject, "{} {}".format(recipient_first_name, recipient_last_name), [recipient_email], message, action_title, action_url)
+                invite_id, subject, "{} {}".format(recipient_first_name, recipient_last_name), [recipient_email], message, action_title)
 
             # Log activity: email
         except Exception as e:
@@ -91,8 +85,6 @@ class EmailService(IEmailService):
     def __send_patient_invite(self, invite_id, recipient_email, recipient_first_name, recipient_last_name, sender_lastname):
         try:
             subject = "Patient Invitation"
-            action_url = "http://127.0.0.1:5000/auth/invite/{}".format(
-                invite_id)
             action_title = "Join as Patient"
             message = """
             Dr. {} has invited you to join Patient Portal as a new patient.
@@ -106,13 +98,13 @@ class EmailService(IEmailService):
             The Patient Portal Team""".format(sender_lastname)
 
             self.__send_message(
-                subject, "{} {}".format(recipient_first_name, recipient_last_name), [recipient_email], message, action_title, action_url)
+                invite_id, subject, "{} {}".format(recipient_first_name, recipient_last_name), [recipient_email], message, action_title)
             # Log activity: email
         except Exception as e:
             self._log_service.log_exception(e)
             raise
 
-    def __send_message(self, subject, recipient_name, recipients, body, action_title, action_url):
+    def __send_message(self, invite_id, subject, recipient_name, recipients, body, action_title,):
         msg = Message(subject, sender='liamlambwebtech@gmail.com',
                       recipients=recipients)
         msg.html = render_template('email_template.html', email={
@@ -120,7 +112,9 @@ class EmailService(IEmailService):
             'body': body,
             'image_source': 'https://gallery.mailchimp.com/9014f17a146c8e9c77c04d5c0/images/e06fc039-13f0-45d5-b451-2c886a2af106.png',
             'action_title': action_title,
-            'action_url': action_url
+            'action_url': "http://{host}:{port}/auth/invite/{id}".format(host=current_app.config["HOST"],
+                                                                        port=current_app.config['PORT'],
+                                                                        id=invite_id)
         })
         self._mail_server.send(msg)
 

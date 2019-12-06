@@ -7,6 +7,5 @@ from . user_service_interface import IUserService
 from . email_service_interface import IEmailService
 from . password_service_interface import IPasswordService
 
-
 __all__ = ['IAppointmentService', 'ILogService', 'ISessionService',
            'IInviteService', 'ILocationService', 'IUserService', 'IEmailService', 'IPasswordService']
