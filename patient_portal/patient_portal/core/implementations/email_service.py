@@ -1,7 +1,7 @@
 from ..interfaces import IEmailService
 from flask_mail import Message
 from flask import render_template, current_app
-
+import os
 
 class EmailService(IEmailService):
 
@@ -106,7 +106,8 @@ class EmailService(IEmailService):
 
     def __send_message(self, invite_id, subject, recipient_name, recipients, body, action_title):
         
-        print("SEND ||| INVITE_ID: {}  | SUBJECT: {} | RECIPIENT NAME: {} | recipients: {}".format(invite_id, subject, recipient_name, recipients));
+        print("FROM ENV: {}".format(os.environ['MAIL_USERNAME']))
+        print("FROM CONF: {}".format(current_app.config['MAIL_USERNAME']))
         
         msg = Message(subject, sender=current_app.config['MAIL_USERNAME'],
                       recipients=recipients)
