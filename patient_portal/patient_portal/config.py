@@ -11,6 +11,7 @@ class Config(object):
     MAIL_USE_SSL = True,
     MAIL_USERNAME = os.environ['MAIL_USERNAME'], #liamlambwebtech@gmail.com
     MAIL_PASSWORD = os.environ['MAIL_PASSWORD'] #fglmcnthbmftkscd
+    HOST_NAME = "webtech-10.napier.ac.uk"
 
 class DevelopmentConfig(Config):
     MODE = 'Development'

@@ -32,7 +32,7 @@ def dashboard():
             "stay_logged_in": 1}
 
         metadata['configurations'] = {
-            "host": app.config['HOST'],
+            "host": app.config['HOST_NAME'],
             "port": app.config['PORT'],
             "namespace": "local_admin",
             "session_id": session['session_id']}

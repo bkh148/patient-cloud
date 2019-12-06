@@ -33,7 +33,7 @@ def dashboard():
         metadata['settings'] = {'user': session['user']}
 
         metadata['configurations'] = {
-            "host": app.config['HOST'],
+            "host": app.config['HOST_NAME'],
             "port": app.config['PORT'],
             "namespace": "admin",
             "session_id": session['session_id'],

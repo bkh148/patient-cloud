@@ -31,7 +31,7 @@ def dashboard():
 
         # Get from session
         metadata['configurations'] = {
-            "host": app.config['HOST'],
+            "host": app.config['HOST_NAME'],
             "port": app.config['PORT'],
             "namespace": "patient",
             "session_id": session['session_id'],

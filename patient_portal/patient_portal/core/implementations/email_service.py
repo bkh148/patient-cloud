@@ -112,7 +112,7 @@ class EmailService(IEmailService):
             'body': body,
             'image_source': 'https://gallery.mailchimp.com/9014f17a146c8e9c77c04d5c0/images/e06fc039-13f0-45d5-b451-2c886a2af106.png',
             'action_title': action_title,
-            'action_url': "http://{host}:{port}/auth/invite/{id}".format(host=current_app.config["HOST"],
+            'action_url': "http://{host}:{port}/auth/invite/{id}".format(host=current_app.config["HOST_NAME"],
                                                                         port=current_app.config['PORT'],
                                                                         id=invite_id)
         })
