@@ -1,5 +1,5 @@
 $(function () {
-  $('#user-dob').datetimepicker({
+  $('#user-dob-group').datetimepicker({
     format: 'DD/MM/YYYY',
     //dayViewHeaderFormat: 'dddd Do MMM YY'
   });
