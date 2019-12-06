@@ -104,8 +104,11 @@ class EmailService(IEmailService):
             self._log_service.log_exception(e)
             raise
 
-    def __send_message(self, invite_id, subject, recipient_name, recipients, body, action_title,):
-        msg = Message(subject, sender='liamlambwebtech@gmail.com',
+    def __send_message(self, invite_id, subject, recipient_name, recipients, body, action_title):
+        
+        print("APP CONFIGS: {}".format(app.config))
+        
+        msg = Message(subject, sender=current_app.config['MAIL_USERNAME'],
                       recipients=recipients)
         msg.html = render_template('email_template.html', email={
             'recipient': recipient_name,
