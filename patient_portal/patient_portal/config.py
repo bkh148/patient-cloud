@@ -5,11 +5,11 @@ from datetime import timedelta
 __all__ = ['DevelopmentConfig', 'ProductionConfig']
 
 class Config(object):
-    MAIL_SERVER = os.environ['MAIL_SERVER'], #smtp.gmail.com
-    MAIL_PORT = 465,
-    MAIL_USE_TLS = False,
-    MAIL_USE_SSL = True,
-    MAIL_USERNAME = os.environ['MAIL_USERNAME'], #liamlambwebtech@gmail.com
+    MAIL_SERVER = os.environ['MAIL_SERVER'] #smtp.gmail.com
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = os.environ['MAIL_USERNAME'] #liamlambwebtech@gmail.com
     MAIL_PASSWORD = os.environ['MAIL_PASSWORD'] #fglmcnthbmftkscd
 
 class DevelopmentConfig(Config):

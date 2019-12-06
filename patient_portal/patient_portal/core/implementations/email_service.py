@@ -106,9 +106,6 @@ class EmailService(IEmailService):
 
     def __send_message(self, invite_id, subject, recipient_name, recipients, body, action_title):
         
-        print("FROM ENV: {}".format(os.environ['MAIL_USERNAME']))
-        print("FROM CONF: {}".format(current_app.config['MAIL_USERNAME']))
-        
         msg = Message(subject, sender=current_app.config['MAIL_USERNAME'],
                       recipients=recipients)
         msg.html = render_template('email_template.html', email={
