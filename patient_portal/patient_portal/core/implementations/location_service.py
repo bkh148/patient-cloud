@@ -21,6 +21,15 @@ class LocationService(ILocationService):
         except Exception as e:
             self._log_service.log_exception(e)
 
+    def get_user_location(self, user_id):
+        """ return a location of a user """
+        try:
+            return self._location_repo.get_location_by_id(user_id)
+        except Exception as e:
+            self._log_service.log_exception(e)
+            
+        return None
+
     def get_location_by_id(self, location_id):
         """ return a given location object by its id """
         try:

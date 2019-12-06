@@ -38,7 +38,7 @@ def dashboard():
         ).get_user_role_ids([UserRole.PATIENT.value])
         metadata['settings'] = {
             'user': session['user'],
-            "care_location": services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b'),
+            "care_location": services.location_service().get_user_location(session['user']['user_id']),
             "active_account": 1,
             "stay_logged_in": 1}
 
