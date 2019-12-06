@@ -28,7 +28,7 @@ class LocationRepository(ILocationRepository):
 
     def get_user_location(self, user_id):
         """ return a location of a user """
-        self._db.get_single("""
+        return self._db.get_single("""
         SELECT location_id, location_name, location_coord_x, location_coord_y, location_postcode, location_address, location_city
         FROM user t1
         LEFT JOIN user_role_map t2 ON t1.user_role_map_id = t2.user_role_map_id
