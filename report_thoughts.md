@@ -44,6 +44,10 @@ Discussion on the use of the core, and data layers for abstractions.
 **Observer pattern around the online users :** <br />
 
 
+**Encryption of medical data :** <br />
+Discuss how we decided not to look into data encryption for now, as I would like to do this across the application.
+This could include discussions on Diffie Hellman, and the public keys exchange between two secret clients (clinician / patient)
+
 **Server Setup :** <br />
 ```
 export FLASK_ENV=...
