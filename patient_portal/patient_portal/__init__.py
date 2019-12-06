@@ -15,7 +15,7 @@ eventlet.monkey_patch(socket=True)
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig() if os.getenv(
-    'FLASK_ENV', 'development') == 'development' else ProductionConfig())
+    'FLASK_ENV', 'production') == 'development' else ProductionConfig())
 
 jwt_manager = JWTManager()
 socket_io = SocketIO()
@@ -28,7 +28,7 @@ configs = Configs.config.override(app.config)
 services = Services(config={'mail_server': mail})
 
 
-# HACK: This is a temporary solution. The application will need to know what users are online 
+# HACK: This is a temporary solution. The application will need to know what users are online
 # for various socket operations. This should eventually be moved into it's own module with various abstraction methods due to code repetition
 online_patients = {}
 online_clinicians = {}
