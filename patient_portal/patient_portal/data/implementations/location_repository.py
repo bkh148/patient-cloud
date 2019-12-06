@@ -26,14 +26,13 @@ class LocationRepository(ILocationRepository):
             DELETE FROM location
             WHERE location_id = ?""", (location_id, ))
 
-    def get_user_location(self, user_id):
+    def get_user_location(self, user_role_map_id):
         """ return a location of a user """
         return self._db.get_single("""
-        SELECT location_id, location_name, location_coord_x, location_coord_y, location_postcode, location_address, location_city
-        FROM user t1
-        LEFT JOIN user_role_map t2 ON t1.user_role_map_id = t2.user_role_map_id
-        LEFT JOIN location t3 ON t2.location_id = t3.location_id
-        WHERE user_id = ?""", (user_id, ))
+        SELECT t2.location_id, location_name, location_coord_x, location_coord_y, location_postcode, location_address, location_city
+        FROM user_role_map t1
+        LEFT JOIN location t2 ON t1.location_id = t2.location_id
+        WHERE user_role_map_id = ?""", (user_role_map_id, ))
 
     def get_locations_by_ids(self, id_list):
         """ return an array of locations """

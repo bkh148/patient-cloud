@@ -12,7 +12,7 @@ class ILocationService(metaclass=abc.ABCMeta):
         """ remove a location from the datastor """
 
     @abc.abstractmethod
-    def get_user_location(self, user_id):
+    def get_user_location(self, user_role_map_id):
         """ return a location of a user """
 
     @abc.abstractmethod
