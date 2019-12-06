@@ -123,6 +123,7 @@ class EmailService(IEmailService):
 
     def send_user_invite(self, invite):
 
+        print("INVITE: {}".format(invite))
         invite_id = invite['invite_id']
         recipient_forename = invite['invited_forename']
         recipient_surname = invite['invited_surname']
