@@ -106,7 +106,7 @@ class EmailService(IEmailService):
 
     def __send_message(self, invite_id, subject, recipient_name, recipients, body, action_title):
         
-        print("APP CONFIGS: {}".format(app.config))
+        print("APP CONFIGS: {}".format(current_app.config))
         
         msg = Message(subject, sender=current_app.config['MAIL_USERNAME'],
                       recipients=recipients)
