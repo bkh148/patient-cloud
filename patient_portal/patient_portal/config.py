@@ -11,12 +11,12 @@ class Config(object):
     MAIL_USE_SSL = True,
     MAIL_USERNAME = os.environ['MAIL_USERNAME'], #liamlambwebtech@gmail.com
     MAIL_PASSWORD = os.environ['MAIL_PASSWORD'] #fglmcnthbmftkscd
-    HOST_NAME = "webtech-10.napier.ac.uk"
 
 class DevelopmentConfig(Config):
     MODE = 'Development'
     DEBUG = True
     HOST = '127.0.0.1'
+    HOST_NAME = "127.0.0.1"
     PORT = 5000
     PERMANENT_SESSION_LIFETIME = timedelta(seconds=36000) # Session expire in 10 hours
     JWT_EXPIRATION_DELTA = timedelta(seconds=36000) # Token expire in 10 hours
@@ -27,6 +27,7 @@ class ProductionConfig(Config):
     MODE = 'Production'
     DEBUG = False
     HOST = '0.0.0.0'
+    HOST_NAME = "webtech-10.napier.ac.uk"
     PORT = 80
     PERMANENT_SESSION_LIFETIME = timedelta(seconds=3600) # Session expire in 1 hours
     JWT_EXPIRATION_DELTA = timedelta(seconds=3600) # Token expire in 1 hour
