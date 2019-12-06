@@ -105,6 +105,9 @@ class EmailService(IEmailService):
             raise
 
     def __send_message(self, invite_id, subject, recipient_name, recipients, body, action_title):
+        
+        print("SEND ||| INVITE_ID: {}  | SUBJECT: {} | RECIPIENT NAME: {} | recipients: {}".format(invite_id, subject, recipient_name, recipients));
+        
         msg = Message(subject, sender=current_app.config['MAIL_USERNAME'],
                       recipients=recipients)
         msg.html = render_template('email_template.html', email={
@@ -120,7 +123,6 @@ class EmailService(IEmailService):
 
     def send_user_invite(self, invite):
 
-        print("INVITE: {}".format(invite))
         invite_id = invite['invite_id']
         recipient_forename = invite['invited_forename']
         recipient_surname = invite['invited_surname']
@@ -129,10 +131,8 @@ class EmailService(IEmailService):
         sender_id = invite['invited_by']
 
         sender = self._user_service.get_user_by_id(sender_id)
-        print("SENDER: {}".format(sender['user_forename']))
         
         user_role = self._user_service.get_user_role(user_role)
-        print("USER ROLE: {}".format(user_role))
 
         if user_role['user_role'] == "ADMIN":
             self.__send_admin_invite(
