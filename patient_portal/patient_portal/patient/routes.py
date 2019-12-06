@@ -41,7 +41,7 @@ def dashboard():
         # Get the following from the session when authentication is setup
         metadata['settings'] = {
             'user': session['user'],
-            'care_location': services.location_service().get_location_by_id('8cb58fa5-1a6c-484b-ac9a-98cadb53064b'),
+            'care_location': services.location_service().get_user_location(session['user']['user_id']),
             'clinician': session['clinician']
         }
 
