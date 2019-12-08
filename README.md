@@ -15,7 +15,7 @@ I then sign in as a clinician to one, and as a patient of that clinician in the 
 
 1. **Logging in**
 
-Patient Portal is a closed system. This means that only users having been granted access with an invitation can join the platform. Based on their invitation access level, they will have access to different parts of the platform. In order to login, either click on "login" on the welcome page as seen below, or head to:  "```http://webtech-10.napier.ac.uk/auth/login```" and enter some credentials (either from the credentials below or some that you've created yourself).
+Patient Portal is a closed system. This means that only users having been granted access with an invitation can join the platform. Based on their invitation access level, they will have access to different parts of the platform. In order to login, either click on "login" on the welcome page as seen below, or head to:  "http://webtech-10.napier.ac.uk/auth/login" and enter some credentials (either from the credentials below or some that you've created yourself).
 
 2. **Invite a new Patient**
 
@@ -27,7 +27,7 @@ Once you've clicked on the "Add Patient" button, a bootstrap modal should appear
 
 ![alt text](./public/invitation_two.png "Invite Patient") <br />
 
-For the purpose of testing (and to avoid spamming both myself and my partner's inbox), I used the following temporary mail server: ```https://temp-mail.org/en/```. <br />
+For the purpose of testing (and to avoid spamming both myself and my partner's inbox), I used the following temporary mail server: https://temp-mail.org/en/. <br />
 
 If the invite was created successfully, you should get a green "success notification" in your browser like so: <br />
 
@@ -76,7 +76,7 @@ When clicking on "OK", the appointment should be delete on both accounts, and bo
 ![alt text](./public/delete_two.png "Delete appointment") <br />
 
 6. Testing the REST API
-The application comes with a simple REST API that can be found at: ```http://webtech-10.napier.ac.uk/api/v1.0```. The api isn't yet authenticated, but will be in a later version using JWT tokens.
+The application comes with a simple REST API that can be found at: http://webtech-10.napier.ac.uk/api/v1.0. The api isn't yet authenticated, but will be in a later version using JWT tokens.
 
 ### Credentials
 ---
