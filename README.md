@@ -44,7 +44,7 @@ Clicking on the registration link should take you to a confirmation page, where 
 
 Once your registration is validated, you'll be prompted to return to the home page in order to login with your new credentials. Note that at this point you will be logged in as a patient. Patient accounts currently do not support much functionality other than logging in and out, and receiving live appointment notifications from their clinicians.
 
-4. Create a new appointment
+4. **Create a new appointment :**
 Keeping your patient's session active, open a new browser window (making sure that your not using the same process), and login to your clinicians account. Side by side, you should see something like this: <br />
 
 ![alt text](./public/appointment_one.png "Side by Side")
@@ -63,7 +63,7 @@ Clicking on the "Appointments" tab in the sidebar should also bring you to the c
 
 ![alt text](./public/appointment_four.png "New Appointment") <br />
 
-5. Delete an upcoming appointment
+5. **Delete an upcoming appointment :**
 
 Clinicians can also delete appointments that are still upcoming. Let's demonstrate this by deleting the appointment we just created. Both the clinician and the patient will be notified of the deletion, and the appointment will be removed from both user's DOM. Note that in future versions of the patient portal app, this will only cancel appointments, not actually delete them. <br />
 
@@ -75,8 +75,13 @@ When clicking on "OK", the appointment should be delete on both accounts, and bo
 
 ![alt text](./public/delete_two.png "Delete appointment") <br />
 
-6. Testing the REST API
+6. **Testing the REST API :**
 The application comes with a simple REST API that can be found at: http://webtech-10.napier.ac.uk/api/v1.0. The api isn't yet authenticated, but will be in a later version using JWT tokens.
+
+7. **Logging out & Settings :** 
+
+Every user will have a small settings page. This page currently only holds basic information about the user and in the case of the patient also holds information about their clinician. This page will be expanded greatly in later versions of the platform in order to stick to GDPR regulations concerning notification and the sharing of various data. <br />
+![alt text](./public/settings.png "Settings") <br />
 
 ### Credentials
 ---
