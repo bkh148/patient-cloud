@@ -34,6 +34,4 @@ def on_disconnect():
 
 @socket_io.on('logout', namespace='/patient')
 def logout(message):
-    # To do: tidy up work to remove client from any necessary rooms
-    print('Socket closed through logout')
     disconnect()

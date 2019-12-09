@@ -27,9 +27,7 @@ def dashboard():
         metadata['clinicians'] = []
         metadata['components'] = ['clinicians', 'settings']
         metadata['settings'] = {
-            'user': session['user'],
-            "active_account": 1,
-            "stay_logged_in": 1}
+            'user': session['user']}
 
         metadata['configurations'] = {
             "host": app.config['HOST_NAME'],
@@ -38,8 +36,8 @@ def dashboard():
             "session_id": session['session_id']}
 
     except Exception as e:
-        # Log error
-        print('Some exception {}'.format(e))
+        services.log_service().log_exception(e)
+        raise
 
     clinicians = {
         "text": "Clinicians",

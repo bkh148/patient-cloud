@@ -7,6 +7,12 @@ class ContextManager {
 ContextManager.prototype.current_context = 'not_set'
 ContextManager.prototype.components = []
 
+
+// All user roles share the same context manager.
+// However, each role will have it's own implementation for handling:
+// - handle_data_received
+// - user_logged_in
+// - user_logged_out
 ContextManager.prototype.initialise_socket = function () {
 	try {
 		// Sets a global socket object
@@ -45,11 +51,13 @@ ContextManager.prototype.logout = function () {
 	}
 }
 
+// TODO: We should have a global utilities class for these sort of things
 ContextManager.prototype.format_name = function (name) {
 	return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 }
 
 
+// Credit to: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
 ContextManager.prototype.new_guid = function () {
 	return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
 		(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
@@ -102,6 +110,7 @@ ContextManager.prototype.update_component = function (name) {
 	}
 }
 
+// TODO: Notifications aren't necessarily best placed here... Context wise
 ContextManager.prototype.success_message = function (message, time = null) {
 	let notification = create_notification('success', 'far fa-check-circle', message, options = { delay: 3500 }, time = time);
 
@@ -121,9 +130,6 @@ ContextManager.prototype.info_message = function (message, time = null) {
 
 	$(notification).toast(options);
 	$(notification).toast('show');
-	$(notification).on('hide', function () {
-		console.log('hidden');
-	})
 }
 
 ContextManager.prototype.binary_prompt = function (id, title, message, positive_value, callback_positive, negative_value, callback_negative) {
@@ -177,6 +183,7 @@ ContextManager.prototype.binary_prompt = function (id, title, message, positive_
 	}
 }
 
+// TODO: All AJAX requests could be wrapped to avoid repeating the header logic and handing success / failure..
 ContextManager.prototype.post_activity = function (activity_type) {
 	try {
 
@@ -298,6 +305,4 @@ $(document).ready(function () {
 		context_manager.post_exception('CLIENT_EXCEPTION_CONTEXT_MANAGER', err);
 		context_manager.error_message(`An unexpected error has occurred whilst loading your dashboard, please try refreshing the page.`);
 	}
-	console.log('Context manager initialized successfully.');
-
 });

@@ -101,7 +101,6 @@ $('#confirm-login-form').submit(function (event) {
   let confirm = $(this).find('#user-confirm-password');
 
   if (validate_create_login(this, forename, surname, dob, password, confirm)) {
-    console.log("Submit")
     this.submit();
   }
 });

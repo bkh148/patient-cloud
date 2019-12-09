@@ -38,9 +38,7 @@ def dashboard():
         ).get_user_role_ids([UserRole.PATIENT.value])
         metadata['settings'] = {
             'user': session['user'],
-            "care_location": services.location_service().get_user_location(session['user']['user_role_map_id']),
-            "active_account": 1,
-            "stay_logged_in": 1}
+            "care_location": services.location_service().get_user_location(session['user']['user_role_map_id'])}
 
         metadata['configurations'] = {
             "host": app.config['HOST_NAME'],

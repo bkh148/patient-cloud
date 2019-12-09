@@ -62,6 +62,7 @@ def initialise_application():
     from .patient import patient as patient_blueprint
     from .api_v1 import api_v1 as api_v1_blueprint
 
+    # TODO: We could create a fairly nifty script to dynamically find these blueprints in the patient portal module
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
     app.register_blueprint(local_admin_blueprint, url_prefix="/local_admin")

@@ -101,8 +101,7 @@ def register(invite_id):
                                            script_paths=['js/auth.js']), 200
 
                 except Exception as e:
-
-                    print("ERROR {}".format(e))
+                    services.log_service().log_exception(e)
                     messages['authentication_error'] = "An error has occurred whilst creating your credentials."
 
                     return render_template('auth/invite_credentials.html',
@@ -137,9 +136,3 @@ def register(invite_id):
                            static_folder='static',
                            style_paths=['css/welcome.css'],
                            nav_links=[login, register])
-
-
-@auth.route('/logout', methods=['GET', 'POST'])
-def logout():
-    """Endpoint for handling user logout."""
-    return "Hello, logout!"

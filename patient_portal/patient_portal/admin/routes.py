@@ -41,8 +41,7 @@ def dashboard():
             "refresh_token": create_refresh_token(session['user'])}
 
     except Exception as e:
-        # Log error
-        print('Some exception {}'.format(e))
+        services.log_service().log_exception(e)
 
     care_locations = {
         "text": "Care Locations",

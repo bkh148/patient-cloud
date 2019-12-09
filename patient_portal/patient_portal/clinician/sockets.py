@@ -32,32 +32,9 @@ def on_disconnect():
 
 @socket_io.on('logout', namespace='/clinician')
 def logout(message):
-    # To do: tidy up work to remove client from any necessary rooms
-    print('Socket closed through logout')
     disconnect()
-
-
-@socket_io.on('notify_local_admin', namespace='/clinician')
-def notify_local_admin(message):
-    try:
-        print("Message: {}".format(e))
-    except Exception as e:
-        print("SOCKET EXCEPTION: {}".format(e))
-
-
-@socket_io.on('notify_all_patients', namespace='/clinician')
-def notify_all_patients(message):
-    try:
-        print("MESSAGE: {}".format(message))
-    except Exception as e:
-        print("SOCKET ERROR: {}".format(e))
-
 
 @socket_io.on('notify_patient', namespace='/clinician')
 def notify_patient(message):
-    try:
-        socket_io.emit(
-            'on_send', message['data'], namespace='/patient', room=message['room_id'])
-        print("MESSAGE: ", message)
-    except Exception as e:
-        print("SOCKET EXCEPTION: {}".format(e))
+    socket_io.emit(
+        'on_send', message['data'], namespace='/patient', room=message['room_id'])

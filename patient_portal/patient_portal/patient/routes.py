@@ -29,7 +29,6 @@ def dashboard():
         ).get_patient_clinician(session['user']['user_id'])
         metadata['locations'] = services.location_service().get_all_locations()
 
-        # Get from session
         metadata['configurations'] = {
             "host": app.config['HOST_NAME'],
             "port": app.config['PORT'],
@@ -55,8 +54,7 @@ def dashboard():
             'notification.html')
 
     except Exception as e:
-        # Log error
-        print("Some exception.. {}", e)
+        services.log_service().log_exception(e)
         raise
 
     appointments = {
