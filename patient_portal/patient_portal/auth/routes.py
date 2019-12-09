@@ -132,7 +132,7 @@ def register(invite_id):
                            payload={
                                "welcome_message": "Wether you’re a local admin, clininian, or a patient - patient portal allows you to manage all of your medical data in one simple, intuitive and real-time application.",
                                "logo_doctor": "/static/images/doctor_lady_single.svg",
-                               "version_number": "ver. 1.3.0"},
+                               "version_number": app.config["VERSION_NUMBER"]},
                            static_folder='static',
                            style_paths=['css/welcome.css'],
                            nav_links=[login, register])

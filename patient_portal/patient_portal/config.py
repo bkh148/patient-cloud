@@ -11,6 +11,7 @@ class Config(object):
     MAIL_USE_SSL = True
     MAIL_USERNAME = 'liamlambwebtech@gmail.com'
     MAIL_PASSWORD = 'fglmcnthbmftkscd'
+    VERSION_NUMBER = "1.0.0"
 
 class DevelopmentConfig(Config):
     MODE = 'Development'

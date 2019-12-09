@@ -32,7 +32,7 @@ def home_page():
                            payload={
                                "welcome_message": "Wether you’re a local admin, clinician, or a patient - patient portal allows you to manage all of your medical data in one simple, intuitive and real-time application.",
                                "logo_doctor": "/static/images/doctor_lady_single.svg",
-                               "version_number": "ver. 1.3.0"},
+                               "version_number": app.config["VERSION_NUMBER"]},
                            static_folder='static',
                            script_paths=['js/welcome.js'],
                            style_paths=['css/welcome.css'],
