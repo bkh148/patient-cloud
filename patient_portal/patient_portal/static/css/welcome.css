@@ -52,6 +52,10 @@ html, body {
     max-width: 300px;
 }
 
+.help-icon {
+    cursor: pointer;
+}
+
 /* Media queries */
 
 @media only screen and (max-width: 400px) {

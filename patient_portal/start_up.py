@@ -28,11 +28,14 @@ def home_page():
 
     return render_template('welcome.html',
                            title='Welcome to Patient Portal',
+                           help_text = """Patient Portal is a closed system. If you're a patient, you'll need to contact your clinician in order to be sent an invite.
+                           If you're a clinician, you'll need to contact your local administrator in order to be granted access.""",
                            payload={
-                               "welcome_message": "Wether you’re a local admin, clininian, or a patient - patient portal allows you to manage all of your medical data in one simple, intuitive and real-time application.",
+                               "welcome_message": "Wether you’re a local admin, clinician, or a patient - patient portal allows you to manage all of your medical data in one simple, intuitive and real-time application.",
                                "logo_doctor": "/static/images/doctor_lady_single.svg",
                                "version_number": "ver. 1.3.0"},
                            static_folder='static',
+                           script_paths=['js/welcome.js'],
                            style_paths=['css/welcome.css'],
                            nav_links=[login, register])
 
