@@ -7,13 +7,13 @@
 <div class="row justify-content-center">
   <form class="needs-validation" method="POST" novalidate>
     <div class="form-group">
-      <label for="input_email_username">E-mail or Username</label>
+      <label for="input_email_username">E-mail</label>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="email_group_prepend">@</span>
         </div>
         <input type="email" name="email" class="form-control" id="input_email_username"
-          aria-describedby="email_username_help" placeholder="Enter your e-mail or username" required>
+          aria-describedby="email_username_help" placeholder="Enter your e-mail or username" required autocomplete="email">
       </div>
       <small id="email_username_help" class="form-text text-muted">We'll never share your e-mail or username with
         anyone.</small>
@@ -27,7 +27,7 @@
           </span>
         </div>
         <input type="password" name="password" class="form-control" id="password_input"
-          placeholder="Enter your password" required>
+          placeholder="Enter your password" required autocomplete="current-password">
       </div>
     </div>
     <button type="submit" class="btn btn-custom btn-block">Submit</button>

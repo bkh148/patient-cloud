@@ -23,9 +23,11 @@ let validate_create_login = function (form, forename_input, surname_input, dob_i
   if (forename_input.val().match(name_pattern) != null) {
     $(forename_validator).html('Looks good!');
     $(forename_validator).attr('class', 'valid-feedback');
+    $(forename_input).attr('class', 'form-control is-valid');
   } else {
     $(forename_validator).html('Invalid name!');
     $(forename_input).attr('class', 'invalid-feedback d-block');
+    $(forename_input).attr('class', 'form-control is-invalid');
     is_valid = false;
   }
 
@@ -34,9 +36,11 @@ let validate_create_login = function (form, forename_input, surname_input, dob_i
   if (surname_input.val().match(name_pattern) != null) {
     $(surname_validator).html('Looks good!');
     $(surname_validator).attr('class', 'valid-feedback');
+    $(surname_input).attr('class', 'form-control is-valid');
   } else {
     $(surname_validator).html('Invalid name!');
     $(surname_validator).attr('class', 'invalid-feedback d-block');
+    $(surname_input).attr('class', 'form-control is-invalid');
     is_valid = false;
   }
 
@@ -44,36 +48,46 @@ let validate_create_login = function (form, forename_input, surname_input, dob_i
 
   if (dob_input.val().match(date_pattern) != null) {
     $(date_validator).html('Looks good!');
+    $(dob_input).attr('class', 'form-control datetimepicker-input is-valid');
     $(date_validator).attr('class', 'valid-feedback');
   } else {
     $(date_validator).html('Please select a valid date!');
+    $(dob_input).attr('class', 'form-control datetimepicker-input is-invalid');
     $(date_validator).attr('class', 'invalid-feedback d-block');
     is_valid = false;
   }
 
   let password_validator = $(form).find('#password-validator');
 
-  if (password_input.val().match(password_input) != null) {
+  if (password_input.val().match(password_pattern) != null) {
     $(password_validator).html('Password looks good!');
+    $(password_input).attr('class', 'form-control is-valid');
     $(password_validator).attr('class', 'valid-feedback');
   } else {
     $(password_validator).html('Your password must contain a special character and digit. Password length must be minimum 8 characters.');
+    $(password_input).attr('class', 'form-control is-invalid');
     $(password_validator).attr('class', 'invalid-feedback d-block');
     is_valid = false;
   }
 
   let confirm_validator = $(form).find('#confirm-validator');
 
-  if (password_input.val() != confirm_input.val()) {
+  if (confirm_input.val() == "") {
+    $(confirm_validator).html('Password field cannot be empty!');
+    $(confirm_input).attr('class', 'form-control is-invalid');
+    $(confirm_validator).attr('class', 'invalid-feedback d-block');
+    is_valid = false;
+  }
+  else if (password_input.val() != confirm_input.val()) {
     $(confirm_validator).html('Passwords must match!');
+    $(confirm_input).attr('class', 'form-control is-invalid');
     $(confirm_validator).attr('class', 'invalid-feedback d-block');
     is_valid = false;
   } else {
     $(confirm_validator).html('Passwords match!');
+    $(confirm_input).attr('class', 'form-control is-valid');
     $(confirm_validator).attr('class', 'valid-feedback');
   }
-
-  $(form).addClass('was-validated')
 
   return is_valid;
 }
