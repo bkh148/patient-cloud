@@ -1,7 +1,6 @@
 import os
 from flask import render_template, session, redirect, request, url_for, send_from_directory, abort
 from patient_portal import initialise_application, services, jwt_manager
-from pprint import pprint as pp
 from patient_portal.core.models import anonymous_required
 app, socket_io = initialise_application()
 
@@ -78,22 +77,22 @@ def internal_server_error(error):
 
 @socket_io.on_error('/admin')
 def admin_socket_error(error):
-    print('SOCKET ADMIN ERROR: {}'.format(error))
+    services.log_service().log_exception(e)
 
 
 @socket_io.on_error('/local_admin')
 def local_admin_socket_error(error):
-    print('SOCKET LOCAL ADMIN ERROR: {}'.format(error))
+    services.log_service().log_exception(e)
 
 
 @socket_io.on_error('/clinician')
 def clinician_socket_error(error):
-    print('SOCKET CLINICIAN ERROR: {}'.format(error))
+    services.log_service().log_exception(e)
 
 
 @socket_io.on_error('/patient')
 def patient_socket_error(error):
-    print('SOCKET PATIENT ERROR: {}'.format(error))
+    services.log_service().log_exception(e)
 
 
 @jwt_manager.user_claims_loader
